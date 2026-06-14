@@ -1,0 +1,73 @@
+name: tunipark
+description: "A new Flutter project."
+publish_to: 'none'
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.8
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg: ^2.2.3
+  cupertino_icons: ^1.0.8
+  equatable: ^2.0.8
+  flutter_bloc: ^9.1.1
+  http: ^1.6.0
+  flutter_secure_storage: ^10.0.0
+  shared_preferences: ^2.5.5
+  mapbox_maps_flutter: ^2.20.1
+  geolocator: ^14.0.2
+  intl: ^0.20.2
+  image_picker: ^1.2.1
+  file_picker: ^8.1.7
+  dio: ^5.9.2
+  url_launcher: ^6.3.2
+  app_links: ^7.0.0
+
+flutter_native_splash:
+  android: true
+  ios: true
+
+  color: "#000000"
+  image: assets/logon.png
+
+  branding_bottom_padding_ios: 35
+
+  color_dark: "#000000"
+
+  android_12:
+    color: "#000000"
+    color_dark: "#000000"
+    image: assets/logon.png
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_native_splash: ^2.4.7
+  flutter_launcher_icons: ^0.14.4
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/icon300.png
+
+  adaptive_icon_background: "#000000"
+  adaptive_icon_foreground: assets/icon300.png
+
+  remove_alpha_ios: true
+
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/vehicules/
+    - assets/onboarding/
+    - assets/icons/
+    - assets/images/
