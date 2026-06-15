@@ -17,6 +17,7 @@ class ParkingCardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final rs = context.rs;
+    final ai = parking.ai;
 
     return GestureDetector(
       onTap: () {
@@ -26,11 +27,10 @@ class ParkingCardItem extends StatelessWidget {
           arguments: parking,
         );
       },
-
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        width: rs.adaptive(mobile: 330, tablet: 380, desktop: 420),
-        height: rs.adaptive(mobile: 150, tablet: 165, desktop: 180),
+        width: rs.adaptive(mobile: 340, tablet: 390, desktop: 430),
+        height: rs.adaptive(mobile: 215, tablet: 230, desktop: 245),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(
@@ -51,7 +51,7 @@ class ParkingCardItem extends StatelessWidget {
         child: Row(
           children: [
             SizedBox(
-              width: rs.adaptive(mobile: 105, tablet: 120, desktop: 135),
+              width: rs.adaptive(mobile: 112, tablet: 125, desktop: 140),
               height: double.infinity,
               child: ClipRRect(
                 borderRadius: BorderRadius.horizontal(
@@ -78,7 +78,6 @@ class ParkingCardItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisSize: MainAxisSize.min,
                       children: [
                         const Icon(Icons.star, color: Colors.amber, size: 16),
                         const SizedBox(width: 4),
@@ -94,6 +93,8 @@ class ParkingCardItem extends StatelessWidget {
                             color: const Color(0xFF173B6C),
                           ),
                         ),
+                        const Spacer(),
+                        if (ai != null) _AiMatchBadge(ai: ai),
                       ],
                     ),
                     SizedBox(height: rs.hp(0.005)),
@@ -125,9 +126,15 @@ class ParkingCardItem extends StatelessWidget {
                         ),
                       ),
                     ),
+                    if (ai != null) ...[
+                      SizedBox(height: rs.hp(0.006)),
+                      _AiReasonLine(
+                        icon: Icons.near_me_outlined,
+                        text: '${ai.distanceLabel} • ${ai.availabilityLabel}',
+                      ),
+                    ],
                     const Spacer(),
                     Row(
-                      mainAxisSize: MainAxisSize.min,
                       children: [
                         const Icon(
                           Icons.local_parking,
@@ -135,7 +142,7 @@ class ParkingCardItem extends StatelessWidget {
                           color: Colors.grey,
                         ),
                         const SizedBox(width: 4),
-                        Flexible(
+                        Expanded(
                           child: Text(
                             '${parking.spots} places',
                             overflow: TextOverflow.ellipsis,
@@ -148,22 +155,19 @@ class ParkingCardItem extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                    SizedBox(height: rs.hp(0.004)),
-                    Text(
-                      '${parking.price.toInt()} DT/mois',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w800,
-                        fontSize: rs.adaptive(
-                          mobile: 20,
-                          tablet: 22,
-                          desktop: 24,
+                        Text(
+                          '${parking.price.toInt()} DT/mois',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: rs.adaptive(
+                              mobile: 16,
+                              tablet: 18,
+                              desktop: 20,
+                            ),
+                            color: const Color(0xFF173B6C),
+                          ),
                         ),
-                        color: const Color(0xFF173B6C),
-                      ),
+                      ],
                     ),
                   ],
                 ),
@@ -172,6 +176,70 @@ class ParkingCardItem extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _AiMatchBadge extends StatelessWidget {
+  final ParkingAiInfo ai;
+
+  const _AiMatchBadge({required this.ai});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      decoration: BoxDecoration(
+        color: const Color(0xFFEAF7F1),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: const Color(0xFF1D9E75).withValues(alpha: 0.25),
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.auto_awesome, size: 13, color: Color(0xFF1D9E75)),
+          const SizedBox(width: 4),
+          Text(
+            'AI Match ${ai.matchPercent}%',
+            style: const TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w800,
+              color: Color(0xFF1D9E75),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AiReasonLine extends StatelessWidget {
+  final IconData icon;
+  final String text;
+
+  const _AiReasonLine({required this.icon, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(icon, size: 14, color: const Color(0xFF1D9E75)),
+        const SizedBox(width: 5),
+        Expanded(
+          child: Text(
+            text,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 11.5,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF4D5B6A),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

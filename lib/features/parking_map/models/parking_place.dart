@@ -1,32 +1,76 @@
 import 'package:tunipark/core/constants/app_constants.dart';
 import 'package:tunipark/features/parking_map/models/tariff_model.dart';
 
-class ParkingAi {
+class ParkingAiInfo {
   final int views;
   final int starts;
   final int extensions;
   final double distanceKm;
-  final int score;
+  final double conversionRate;
+  final double extensionRate;
+  final double availabilityScore;
+  final double behaviorScore;
+  final double price;
+  final double score;
   final String recommendation;
+  final String source;
 
-  const ParkingAi({
+  const ParkingAiInfo({
     required this.views,
     required this.starts,
     required this.extensions,
     required this.distanceKm,
+    required this.conversionRate,
+    required this.extensionRate,
+    required this.availabilityScore,
+    required this.behaviorScore,
+    required this.price,
     required this.score,
     required this.recommendation,
+    required this.source,
   });
 
-  factory ParkingAi.fromJson(Map<String, dynamic> json) {
-    return ParkingAi(
+  factory ParkingAiInfo.fromJson(Map<String, dynamic> json) {
+    return ParkingAiInfo(
       views: int.tryParse(json['views']?.toString() ?? '') ?? 0,
       starts: int.tryParse(json['starts']?.toString() ?? '') ?? 0,
       extensions: int.tryParse(json['extensions']?.toString() ?? '') ?? 0,
       distanceKm: _toDouble(json['distanceKm']),
-      score: int.tryParse(json['score']?.toString() ?? '') ?? 0,
-      recommendation: json['recommendation']?.toString() ?? 'LOW_PRIORITY',
+      conversionRate: _toDouble(json['conversionRate']),
+      extensionRate: _toDouble(json['extensionRate']),
+      availabilityScore: _toDouble(json['availabilityScore']),
+      behaviorScore: _toDouble(json['behaviorScore']),
+      price: _toDouble(json['price']),
+      score: _toDouble(json['score']),
+      recommendation: json['recommendation']?.toString() ?? '',
+      source: json['source']?.toString() ?? '',
     );
+  }
+
+  int get matchPercent => score.clamp(0, 100).round();
+
+  bool get isRecommended {
+    return recommendation == 'HIGHLY_RECOMMENDED' ||
+        recommendation == 'RECOMMENDED' ||
+        score >= 60;
+  }
+
+  String get label {
+    if (score >= 75) return 'Recommended';
+    if (score >= 55) return 'Good match';
+    return 'Possible option';
+  }
+
+  String get distanceLabel {
+    if (distanceKm <= 1) return 'Close to your destination';
+    if (distanceKm <= 3) return 'Near your destination';
+    return 'Available option';
+  }
+
+  String get availabilityLabel {
+    if (availabilityScore >= 0.7) return 'Good availability';
+    if (availabilityScore >= 0.35) return 'Limited availability';
+    return 'Few places left';
   }
 
   static double _toDouble(dynamic value) {
@@ -50,7 +94,7 @@ class ParkingPlace {
   final List<String> pictures;
   final TariffModel? tariff;
   final List<String> vehicleTypes;
-  final ParkingAi? ai;
+  final ParkingAiInfo? ai;
 
   const ParkingPlace({
     required this.id,
@@ -71,32 +115,27 @@ class ParkingPlace {
 
   factory ParkingPlace.fromJson(Map json) {
     final location = json['location'] as Map? ?? {};
-    final rawPictures = List.from(json['pictures'] ?? []);
-    final firstPicture =
-        rawPictures.isNotEmpty ? rawPictures.first.toString() : '';
+    final pictures = List.from(json['pictures'] ?? []);
+    final firstPicture = pictures.isNotEmpty ? pictures.first : '';
 
     return ParkingPlace(
       id: json['id']?.toString() ?? '',
       title: json['title']?.toString() ?? '',
       address: location['address']?.toString() ?? '',
-      latitude: _toDouble(location['lat'] ?? location['latitude']),
-      longitude: _toDouble(location['lng'] ?? location['longitude']),
-      price: _toDouble(
-        json['pricePerDay'] ?? json['tariff']?['pricePerDay'],
-      ),
+      latitude: _toDouble(location['lat']),
+      longitude: _toDouble(location['lng']),
+      price: _toDouble(json['pricePerDay']),
       rating: _toDouble(json['rating']),
       spots: int.tryParse(json['availablePlaces']?.toString() ?? '') ?? 0,
       imageUrl: _buildImageUrl(firstPicture),
-      pictures: rawPictures.map((e) => _buildImageUrl(e.toString())).toList(),
-      characteristics:
-          List.from(json['characteristics'] ?? []).map((e) => e.toString()).toList(),
-      tariff: json['tariff'] == null
-          ? null
-          : TariffModel.fromJson(Map<String, dynamic>.from(json['tariff'])),
-      vehicleTypes:
-          List.from(json['vehicleTypes'] ?? []).map((e) => e.toString()).toList(),
+      pictures: pictures
+          .map((picture) => _buildImageUrl(picture.toString()))
+          .toList(),
+      characteristics: List<String>.from(json['characteristics'] ?? []),
+      tariff: null,
+      vehicleTypes: List<String>.from(json['vehicleTypes'] ?? []),
       ai: json['ai'] is Map
-          ? ParkingAi.fromJson(Map<String, dynamic>.from(json['ai'] as Map))
+          ? ParkingAiInfo.fromJson(Map<String, dynamic>.from(json['ai']))
           : null,
     );
   }
@@ -109,7 +148,7 @@ class ParkingPlace {
     List<String>? characteristics,
     List<String>? pictures,
     List<String>? vehicleTypes,
-    ParkingAi? ai,
+    ParkingAiInfo? ai,
   }) {
     return ParkingPlace(
       id: id,
