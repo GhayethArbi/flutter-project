@@ -11,9 +11,7 @@ class ParkingMapService {
   Future<List<ParkingPlace>> getParkings({String? zoneId}) async {
     final response = await dio.get(
       ApiEndpoints.parkings,
-      queryParameters: {
-        if (zoneId != null) 'zoneId': zoneId,
-      },
+      queryParameters: {if (zoneId != null) 'zoneId': zoneId},
     );
 
     final data = response.data as List;
@@ -36,9 +34,7 @@ class ParkingMapService {
 
   Future<TariffModel?> getTariffByParkingId(String parkingId) async {
     try {
-      final response = await dio.get(
-        ApiEndpoints.tariffByParking(parkingId),
-      );
+      final response = await dio.get(ApiEndpoints.tariffByParking(parkingId));
 
       if (response.data == null) return null;
 
@@ -47,4 +43,21 @@ class ParkingMapService {
       return null;
     }
   }
+
+  Future<List<ParkingPlace>> getRecommendedParkings({
+    required double lat,
+    required double lng,
+  }) async {
+    final response = await dio.get(
+      '/parkings/recommended',
+      queryParameters: {'lat': lat, 'lng': lng},
+    );
+
+    final data = response.data as List;
+
+    return data
+        .map((item) => ParkingPlace.fromJson(item as Map<String, dynamic>))
+        .toList();
+  }
+
 }

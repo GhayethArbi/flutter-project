@@ -15,38 +15,32 @@ class ParkingMapCubit extends Cubit<ParkingMapState> {
 
   MapboxMap? mapboxMap;
 
-Future<void> initialize({
-  required SelectedPlace selectedPlace,
-  String? zoneId,
-}) async {
-  emit(
-    state.copyWith(
-      selectedPlace: selectedPlace,
-      loading: true,
-      error: null,
-    ),
-  );
-
-  try {
-    final parkings = await parkingMapService.getParkings(zoneId: zoneId);
-
+  Future<void> initialize({
+    required SelectedPlace selectedPlace,
+    String? zoneId,
+  }) async {
     emit(
-      state.copyWith(
-        parkings: parkings,
-        selectedIndex: 0,
-        loading: false,
-        error: null,
-      ),
+      state.copyWith(selectedPlace: selectedPlace, loading: true, error: null),
     );
-  } catch (e) {
-    emit(
-      state.copyWith(
-        loading: false,
-        error: 'Failed to load parkings',
-      ),
-    );
+
+    try {
+      final parkings = await parkingMapService.getRecommendedParkings(
+        lat: selectedPlace.latitude,
+        lng: selectedPlace.longitude,
+      );
+      emit(
+        state.copyWith(
+          parkings: parkings,
+          selectedIndex: 0,
+          loading: false,
+          error: null,
+        ),
+      );
+    } catch (e) {
+      emit(state.copyWith(loading: false, error: 'Failed to load parkings'));
+    }
   }
-}
+
   Future<void> onMapCreated(MapboxMap map) async {
     mapboxMap = map;
 
@@ -120,21 +114,18 @@ Future<void> initialize({
     await moveToParking(index);
   }
 
-Future<void> selectParkingFromList(int index) async {
-  if (index < 0 || index >= state.parkings.length) return;
+  Future<void> selectParkingFromList(int index) async {
+    if (index < 0 || index >= state.parkings.length) return;
 
-  emit(state.copyWith(
-    selectedIndex: index,
-    viewMode: ParkingViewMode.map,
-  ));
+    emit(state.copyWith(selectedIndex: index, viewMode: ParkingViewMode.map));
 
-  // Wait until Mapbox widget is rebuilt
-  await Future.delayed(const Duration(milliseconds: 400));
+    // Wait until Mapbox widget is rebuilt
+    await Future.delayed(const Duration(milliseconds: 400));
 
-  if (isClosed || mapboxMap == null) return;
+    if (isClosed || mapboxMap == null) return;
 
-  await moveToParking(index);
-}
+    await moveToParking(index);
+  }
 
   Future<void> moveToCurrentLocation(BuildContext context) async {
     if (mapboxMap == null) return;

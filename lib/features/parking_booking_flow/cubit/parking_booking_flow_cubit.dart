@@ -16,13 +16,11 @@ class ParkingBookingFlowCubit extends Cubit<ParkingBookingFlowState> {
   final ParkingSessionService parkingSessionService;
   final PaymentService paymentService;
 
-  // ─── Place ───────────────────────────────────────────────────────────────────
 
   void selectPlace(String placeId) {
     emit(state.copyWith(selectedPlaceId: placeId));
   }
 
-  // ─── Vehicle ─────────────────────────────────────────────────────────────────
 
   void selectPlateType(String plateType) {
     if (plateType == 'TN') {
@@ -55,13 +53,11 @@ class ParkingBookingFlowCubit extends Cubit<ParkingBookingFlowState> {
     emit(state.copyWith(rsText: value));
   }
 
-  // ─── Payment method ──────────────────────────────────────────────────────────
 
   void selectPaymentMethod(String paymentMethodId) {
     emit(state.copyWith(selectedPaymentMethodId: paymentMethodId));
   }
 
-  // ─── Navigation ──────────────────────────────────────────────────────────────
 
   Future<void> nextStep() async {
     if (!state.canContinue) return;
@@ -150,7 +146,7 @@ class ParkingBookingFlowCubit extends Cubit<ParkingBookingFlowState> {
         serviceFee: state.serviceFee,
         totalPrice: state.totalPrice,
         tariffId: tariff?.id,
-      );
+      );  
       
       final payLink = await paymentService.initFlouciPayment(
         sessionId: sessionId,
