@@ -9,10 +9,7 @@ import 'parking_card_item.dart';
 class ParkingCardsSection extends StatelessWidget {
   final PageController pageController;
 
-  const ParkingCardsSection({
-    super.key,
-    required this.pageController,
-  });
+  const ParkingCardsSection({super.key, required this.pageController});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +18,7 @@ class ParkingCardsSection extends StatelessWidget {
     return BlocBuilder<ParkingMapCubit, ParkingMapState>(
       builder: (context, state) {
         return SizedBox(
-          height: rs.adaptive(mobile: 150, tablet: 170, desktop: 190),
+          height: rs.adaptive(mobile: 185, tablet: 200, desktop: 215),
           child: PageView.builder(
             controller: pageController,
             itemCount: state.parkings.length,
@@ -36,6 +33,7 @@ class ParkingCardsSection extends StatelessWidget {
                 child: ParkingCardItem(
                   parking: parking,
                   isSelected: index == state.selectedIndex,
+                  isBestRecommendation: index == 0,
                 ),
               );
             },

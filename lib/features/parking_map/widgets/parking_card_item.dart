@@ -7,11 +7,13 @@ import 'package:tunipark/features/parking_map/models/parking_place.dart';
 class ParkingCardItem extends StatelessWidget {
   final ParkingPlace parking;
   final bool isSelected;
+  final bool isBestRecommendation;
 
   const ParkingCardItem({
     super.key,
     required this.parking,
     required this.isSelected,
+    this.isBestRecommendation = false,
   });
 
   @override
@@ -77,6 +79,27 @@ class ParkingCardItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    if (isBestRecommendation) ...[
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFFF4D6),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Text(
+                          '⭐ Best Match',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w800,
+                            color: Color(0xFF9A6B00),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                    ],
                     Row(
                       children: [
                         const Icon(Icons.star, color: Colors.amber, size: 16),

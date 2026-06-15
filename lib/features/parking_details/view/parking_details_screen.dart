@@ -72,8 +72,6 @@ class _ParkingDetailsScreenState extends State<ParkingDetailsScreen> {
     super.dispose();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     final rs = context.rs;
@@ -250,6 +248,16 @@ class _ParkingDetailsScreenState extends State<ParkingDetailsScreen> {
                           desktop: 28,
                         ),
                       ),
+                      if (p.ai != null) ...[
+                        _WhyRecommendedSection(ai: p.ai!),
+                        SizedBox(
+                          height: rs.adaptive(
+                            mobile: 20,
+                            tablet: 24,
+                            desktop: 28,
+                          ),
+                        ),
+                      ],
                       ParkingCharacteristics(
                         characteristics: widget.parking.characteristics,
                       ),
@@ -318,4 +326,106 @@ class _ParkingDetailsScreenState extends State<ParkingDetailsScreen> {
   }
 
   final GlobalKey _reviewsKey = GlobalKey();
+  
+}
+class _WhyRecommendedSection extends StatelessWidget {
+  final ParkingAiInfo ai;
+
+  const _WhyRecommendedSection({required this.ai});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF4FBF8),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(
+          color: const Color(0xFF1D9E75).withValues(alpha: 0.20),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.auto_awesome, color: Color(0xFF1D9E75)),
+              const SizedBox(width: 8),
+              const Expanded(
+                child: Text(
+                  'Why recommended?',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 16,
+                    color: Color(0xFF173B6C),
+                  ),
+                ),
+              ),
+              Text(
+                '${ai.matchPercent}%',
+                style: const TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 18,
+                  color: Color(0xFF1D9E75),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          _AiExplanationRow(
+            icon: Icons.near_me_outlined,
+            title: 'Distance',
+            value: ai.distanceLabel,
+          ),
+          _AiExplanationRow(
+            icon: Icons.local_parking,
+            title: 'Availability',
+            value: ai.availabilityLabel,
+          ),
+          _AiExplanationRow(
+            icon: Icons.trending_up,
+            title: 'Behavior',
+            value: ai.conversionRate > 0
+                ? 'Drivers often choose this parking'
+                : 'New parking with limited history',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AiExplanationRow extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String value;
+
+  const _AiExplanationRow({
+    required this.icon,
+    required this.title,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Row(
+        children: [
+          Icon(icon, size: 18, color: const Color(0xFF1D9E75)),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              '$title: $value',
+              style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF4D5B6A),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
