@@ -18,6 +18,8 @@ class ApiEndpoints {
   // ── parkings ─────────────────────────────────────────────────────────────────
   static const parkings = '$baseUrlNest/parkings';
   static const createParking = '$baseUrlNest/parkings';
+  static const recommendedParkings = '$baseUrlNest/parkings/recommended';
+
 
   static const uploadParkingPictures = '$baseUrlNest/parkings/upload-pictures';
   static const createTariff = '$baseUrlNest/tariffs';
@@ -27,8 +29,9 @@ class ApiEndpoints {
       '$tariffs/by-parking/$parkingId';
   // ── Parking Sessions ─────────────────────────────────────────────
   static const parkingSessions = '$baseUrlNest/parking-sessions';
-
   // ── Payments ─────────────────────────────────────────────────────
   static const payments = '$baseUrlNest/payments';
   static const initFlouciPayment = '$payments/init/flouci';
+  
+  
 }

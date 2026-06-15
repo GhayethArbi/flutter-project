@@ -49,15 +49,25 @@ class ParkingMapService {
     required double lng,
   }) async {
     final response = await dio.get(
-      '/parkings/recommended',
+      ApiEndpoints.recommendedParkings,
       queryParameters: {'lat': lat, 'lng': lng},
     );
 
     final data = response.data as List;
 
-    return data
+    final parkings = data
         .map((item) => ParkingPlace.fromJson(item as Map<String, dynamic>))
         .toList();
-  }
 
+    return Future.wait(
+      parkings.map((parking) async {
+        final tariff = await getTariffByParkingId(parking.id);
+
+        return parking.copyWith(
+          tariff: tariff,
+          price: tariff?.pricePerMonth ?? parking.price,
+        );
+      }),
+    );
+  }
 }

@@ -1,6 +1,41 @@
 import 'package:tunipark/core/constants/app_constants.dart';
 import 'package:tunipark/features/parking_map/models/tariff_model.dart';
 
+class ParkingAi {
+  final int views;
+  final int starts;
+  final int extensions;
+  final double distanceKm;
+  final int score;
+  final String recommendation;
+
+  const ParkingAi({
+    required this.views,
+    required this.starts,
+    required this.extensions,
+    required this.distanceKm,
+    required this.score,
+    required this.recommendation,
+  });
+
+  factory ParkingAi.fromJson(Map<String, dynamic> json) {
+    return ParkingAi(
+      views: int.tryParse(json['views']?.toString() ?? '') ?? 0,
+      starts: int.tryParse(json['starts']?.toString() ?? '') ?? 0,
+      extensions: int.tryParse(json['extensions']?.toString() ?? '') ?? 0,
+      distanceKm: _toDouble(json['distanceKm']),
+      score: int.tryParse(json['score']?.toString() ?? '') ?? 0,
+      recommendation: json['recommendation']?.toString() ?? 'LOW_PRIORITY',
+    );
+  }
+
+  static double _toDouble(dynamic value) {
+    if (value == null) return 0;
+    if (value is num) return value.toDouble();
+    return double.tryParse(value.toString()) ?? 0;
+  }
+}
+
 class ParkingPlace {
   final String id;
   final String title;
@@ -15,6 +50,7 @@ class ParkingPlace {
   final List<String> pictures;
   final TariffModel? tariff;
   final List<String> vehicleTypes;
+  final ParkingAi? ai;
 
   const ParkingPlace({
     required this.id,
@@ -30,27 +66,38 @@ class ParkingPlace {
     required this.pictures,
     required this.vehicleTypes,
     this.tariff,
+    this.ai,
   });
 
-  factory ParkingPlace.fromJson(Map<String, dynamic> json) {
-    final location = json['location'] as Map<String, dynamic>? ?? {};
-    final pictures = List<String>.from(json['pictures'] ?? []);
-    final firstPicture = pictures.isNotEmpty ? pictures.first : '';
+  factory ParkingPlace.fromJson(Map json) {
+    final location = json['location'] as Map? ?? {};
+    final rawPictures = List.from(json['pictures'] ?? []);
+    final firstPicture =
+        rawPictures.isNotEmpty ? rawPictures.first.toString() : '';
 
     return ParkingPlace(
       id: json['id']?.toString() ?? '',
       title: json['title']?.toString() ?? '',
       address: location['address']?.toString() ?? '',
-      latitude: _toDouble(location['lat']),
-      longitude: _toDouble(location['lng']),
-      price: _toDouble(json['pricePerDay']),
+      latitude: _toDouble(location['lat'] ?? location['latitude']),
+      longitude: _toDouble(location['lng'] ?? location['longitude']),
+      price: _toDouble(
+        json['pricePerDay'] ?? json['tariff']?['pricePerDay'],
+      ),
       rating: _toDouble(json['rating']),
       spots: int.tryParse(json['availablePlaces']?.toString() ?? '') ?? 0,
       imageUrl: _buildImageUrl(firstPicture),
-      pictures: pictures.map(_buildImageUrl).toList(),
-      characteristics: List<String>.from(json['characteristics'] ?? []),
-      tariff: null,
-      vehicleTypes: List<String>.from(json['vehicleTypes'] ?? []),
+      pictures: rawPictures.map((e) => _buildImageUrl(e.toString())).toList(),
+      characteristics:
+          List.from(json['characteristics'] ?? []).map((e) => e.toString()).toList(),
+      tariff: json['tariff'] == null
+          ? null
+          : TariffModel.fromJson(Map<String, dynamic>.from(json['tariff'])),
+      vehicleTypes:
+          List.from(json['vehicleTypes'] ?? []).map((e) => e.toString()).toList(),
+      ai: json['ai'] is Map
+          ? ParkingAi.fromJson(Map<String, dynamic>.from(json['ai'] as Map))
+          : null,
     );
   }
 
@@ -62,6 +109,7 @@ class ParkingPlace {
     List<String>? characteristics,
     List<String>? pictures,
     List<String>? vehicleTypes,
+    ParkingAi? ai,
   }) {
     return ParkingPlace(
       id: id,
@@ -77,6 +125,7 @@ class ParkingPlace {
       pictures: pictures ?? this.pictures,
       tariff: tariff ?? this.tariff,
       vehicleTypes: vehicleTypes ?? this.vehicleTypes,
+      ai: ai ?? this.ai,
     );
   }
 
