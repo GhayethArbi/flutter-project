@@ -5,6 +5,7 @@ class ParkingAiInfo {
   final int views;
   final int starts;
   final int extensions;
+  final int? rank;
   final double distanceKm;
   final double conversionRate;
   final double extensionRate;
@@ -19,6 +20,7 @@ class ParkingAiInfo {
     required this.views,
     required this.starts,
     required this.extensions,
+    this.rank,
     required this.distanceKm,
     required this.conversionRate,
     required this.extensionRate,
@@ -35,6 +37,7 @@ class ParkingAiInfo {
       views: int.tryParse(json['views']?.toString() ?? '') ?? 0,
       starts: int.tryParse(json['starts']?.toString() ?? '') ?? 0,
       extensions: int.tryParse(json['extensions']?.toString() ?? '') ?? 0,
+      rank: int.tryParse(json['rank']?.toString() ?? ''),
       distanceKm: _toDouble(json['distanceKm']),
       conversionRate: _toDouble(json['conversionRate']),
       extensionRate: _toDouble(json['extensionRate']),

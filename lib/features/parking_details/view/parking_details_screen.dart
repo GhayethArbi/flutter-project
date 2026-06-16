@@ -249,7 +249,10 @@ class _ParkingDetailsScreenState extends State<ParkingDetailsScreen> {
                         ),
                       ),
                       if (p.ai != null) ...[
-                        _WhyRecommendedSection(ai: p.ai!),
+                        _WhyRecommendedSection(
+                          ai: p.ai!,
+                          availablePlaces: p.spots,
+                        ),
                         SizedBox(
                           height: rs.adaptive(
                             mobile: 20,
@@ -326,12 +329,26 @@ class _ParkingDetailsScreenState extends State<ParkingDetailsScreen> {
   }
 
   final GlobalKey _reviewsKey = GlobalKey();
-  
 }
+
 class _WhyRecommendedSection extends StatelessWidget {
   final ParkingAiInfo ai;
+  final int availablePlaces;
 
-  const _WhyRecommendedSection({required this.ai});
+  const _WhyRecommendedSection({
+    required this.ai,
+    required this.availablePlaces,
+  });
+
+  String get _distanceText {
+    if (ai.distanceKm <= 0) return 'near your destination';
+    return '${ai.distanceKm.toStringAsFixed(1)} km away';
+  }
+
+  String get _rankText {
+    if (ai.rank != null) return 'ranked #${ai.rank} by AI';
+    return 'highly ranked by AI';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -353,7 +370,7 @@ class _WhyRecommendedSection extends StatelessWidget {
               const SizedBox(width: 8),
               const Expanded(
                 child: Text(
-                  'Why recommended?',
+                  'AI Summary',
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 16,
@@ -371,7 +388,21 @@ class _WhyRecommendedSection extends StatelessWidget {
               ),
             ],
           ),
+
           const SizedBox(height: 12),
+
+          Text(
+            'This parking is $_distanceText, has $availablePlaces available places, and is $_rankText.',
+            style: const TextStyle(
+              fontSize: 14,
+              height: 1.45,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF173B6C),
+            ),
+          ),
+
+          const SizedBox(height: 14),
+
           _AiExplanationRow(
             icon: Icons.near_me_outlined,
             title: 'Distance',
