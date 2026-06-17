@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/features/parking_booking_flow/cubit/parking_booking_flow_cubit.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class OrderDetailsStep extends StatelessWidget {
   const OrderDetailsStep({super.key});
@@ -65,15 +66,15 @@ class OrderDetailsStep extends StatelessWidget {
               ),
             ),
             SizedBox(width: 8),
-            Text('Place voiture'),
+            Text(AppStrings.placeVoiture),
           ],
         ),
         const SizedBox(height: 22),
-        const Text('Validité', style: TextStyle(fontWeight: FontWeight.w700)),
+        Text(AppStrings.validite, style: TextStyle(fontWeight: FontWeight.w700)),
         const SizedBox(height: 10),
         Text(validity, style: const TextStyle(fontSize: 13)),
         const SizedBox(height: 22),
-        const Text('Tarif', style: TextStyle(fontWeight: FontWeight.w700)),
+        Text(AppStrings.tarif, style: TextStyle(fontWeight: FontWeight.w700)),
         const SizedBox(height: 10),
         Container(
           width: double.infinity,

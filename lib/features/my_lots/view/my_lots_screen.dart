@@ -14,6 +14,7 @@ import '../cubit/my_lots_state.dart';
 import '../models/my_lot_model.dart';
 import '../services/my_lots_service.dart';
 import '../widgets/my_lot_card.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class MyLotsScreen extends StatelessWidget {
   const MyLotsScreen({super.key, required this.sl});
@@ -76,14 +77,14 @@ class _MyLotsBodyState extends State<_MyLotsBody> {
       context: context,
       builder: (_) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('Archiver ce parking ?'),
+        title: Text(AppStrings.archiverCeParking),
         content: Text(
           'Le parking « ${lot.title} » sera désactivé et ne sera plus visible.',
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Annuler'),
+            child: Text(AppStrings.annuler),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
@@ -102,7 +103,7 @@ class _MyLotsBodyState extends State<_MyLotsBody> {
         cubit.removeLot(lot.id);
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Parking archivé avec succès')),
+            const SnackBar(content: Text(AppStrings.parkingArchiveAvecSucces)),
           );
         }
       } catch (e) {
@@ -182,7 +183,7 @@ class _MyLotsBodyState extends State<_MyLotsBody> {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              child: const Text('Réessayer'),
+                              child: Text(AppStrings.reessayer),
                             ),
                           ],
                         ),

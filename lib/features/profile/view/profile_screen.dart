@@ -12,6 +12,7 @@ import 'package:tunipark/features/profile/widgets/menu_item.dart';
 import 'package:tunipark/features/profile/widgets/menu_section.dart';
 import 'package:tunipark/features/profile/widgets/profile_header.dart';
 import 'package:tunipark/features/profile/widgets/section_label.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -238,14 +239,14 @@ class _ProfileView extends StatelessWidget {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Supprimer le compte'),
+        title: Text(AppStrings.supprimerLeCompte),
         content: const Text(
           'Cette action est irréversible. Voulez-vous vraiment supprimer votre compte ?',
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Annuler'),
+            child: Text(AppStrings.annuler),
           ),
           TextButton(
             onPressed: () {

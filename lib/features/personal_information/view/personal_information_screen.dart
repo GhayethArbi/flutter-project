@@ -7,6 +7,7 @@ import 'package:tunipark/features/personal_information/services/user_service.dar
 import 'package:tunipark/features/personal_information/view/personal_info_body.dart';
 import 'package:tunipark/features/profile/profile_shared_widgets.dart';
 import '../widgets/loading_skeleton.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 /// Receives its dependencies from the router — no internal construction.
 class PersonalInfoScreen extends StatelessWidget {
@@ -64,7 +65,7 @@ class _PersonalInfoView extends StatelessWidget {
         ..hideCurrentSnackBar()
         ..showSnackBar(
           const SnackBar(
-            content: Text('Informations mises à jour'),
+            content: Text(AppStrings.informationsMisesAJour),
             backgroundColor: AppTokens.limeDark,
           ),
         );

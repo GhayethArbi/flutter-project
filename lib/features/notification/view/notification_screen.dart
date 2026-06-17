@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/features/notification/cubit/notification_cubit.dart';
 import 'package:tunipark/features/notification/cubit/notification_state.dart';
 import 'package:tunipark/features/notification/widgets/notification_card.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
@@ -36,7 +37,7 @@ class _NotificationView extends StatelessWidget {
 
                   if (state.items.isEmpty) {
                     return const Center(
-                      child: Text('Aucune notification'),
+                      child: Text(AppStrings.aucuneNotification),
                     );
                   }
 

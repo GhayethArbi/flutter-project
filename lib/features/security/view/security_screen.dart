@@ -6,6 +6,7 @@ import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/features/profile/profile_shared_widgets.dart';
 import 'package:tunipark/features/security/cubit/security_cubit.dart';
 import 'package:tunipark/features/security/cubit/security_state.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class SecurityScreen extends StatelessWidget {
   const SecurityScreen({super.key});
@@ -31,7 +32,7 @@ class _SecurityView extends StatelessWidget {
         if (state.status == SecurityStatus.success) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Appareils déconnectés avec succès'),
+              content: Text(AppStrings.appareilsDeconnectesAvecSucces),
               backgroundColor: AppTokens.limeDark,
             ),
           );

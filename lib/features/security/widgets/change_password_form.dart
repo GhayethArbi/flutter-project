@@ -6,6 +6,7 @@ import 'package:tunipark/features/profile/profile_shared_widgets.dart';
 import 'package:tunipark/features/security/cubit/change_password_cubit.dart';
 import 'package:tunipark/features/security/widgets/password_checklist.dart';
 import 'package:tunipark/features/security/widgets/strength_bar.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class ChangePasswordForm extends StatefulWidget {
   const ChangePasswordForm();
@@ -37,7 +38,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
         if (state.isSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Mot de passe modifié avec succès'),
+              content: Text(AppStrings.motDePasseModifieAvecSucces),
               backgroundColor: AppTokens.limeDark,
             ),
           );

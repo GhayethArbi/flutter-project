@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/vehicles_cubit.dart';
 import '../cubit/vehicles_state.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class VehiclesScreen extends StatelessWidget {
   const VehiclesScreen({super.key});
@@ -57,7 +58,7 @@ class _VehiclesView extends StatelessWidget {
                             children: const [
                               Icon(Icons.add),
                               SizedBox(width: 10),
-                              Text('Ajouter un véhicule'),
+                              Text(AppStrings.ajouterUnVehicule),
                             ],
                           ),
                         ),

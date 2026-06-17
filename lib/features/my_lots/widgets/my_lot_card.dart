@@ -3,6 +3,7 @@ import 'package:tunipark/core/constants/app_constants.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
 import '../models/my_lot_model.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class MyLotCard extends StatelessWidget {
   const MyLotCard({
@@ -130,7 +131,7 @@ class MyLotCard extends StatelessWidget {
                       child: OutlinedButton.icon(
                         onPressed: onEdit,
                         icon: const Icon(Icons.edit_outlined, size: 16),
-                        label: const Text('Modifier'),
+                        label: Text(AppStrings.modifier),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: AppColors.textPrimary,
                           side: const BorderSide(color: AppColors.border),
@@ -149,7 +150,7 @@ class MyLotCard extends StatelessWidget {
                     OutlinedButton.icon(
                       onPressed: onArchive,
                       icon: const Icon(Icons.delete_outline, size: 16),
-                      label: const Text('Archiver'),
+                      label: Text(AppStrings.archiver),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: AppColors.danger,
                         side: BorderSide(

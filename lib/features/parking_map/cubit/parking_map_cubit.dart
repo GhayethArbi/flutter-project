@@ -7,6 +7,7 @@ import 'package:geolocator/geolocator.dart' as geo;
 import 'package:tunipark/features/parking_map/services/parking_map_service.dart';
 
 import 'parking_map_state.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class ParkingMapCubit extends Cubit<ParkingMapState> {
   final ParkingMapService parkingMapService;
@@ -134,7 +135,7 @@ class ParkingMapCubit extends Cubit<ParkingMapState> {
     if (!serviceEnabled) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('GPS is disabled. Please enable location.'),
+          content: Text(AppStrings.gpsIsDisabledPleaseEnableLocation),
         ),
       );
       await geo.Geolocator.openLocationSettings();
@@ -148,7 +149,7 @@ class ParkingMapCubit extends Cubit<ParkingMapState> {
 
       if (permission == geo.LocationPermission.denied) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Location permission denied.')),
+          const SnackBar(content: Text(AppStrings.locationPermissionDenied)),
         );
         return;
       }

@@ -4,6 +4,7 @@ import 'package:tunipark/core/theme/app_colors.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
 
 import '../models/booking_model.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class BookingCard extends StatelessWidget {
   const BookingCard({
@@ -206,11 +207,11 @@ class _DesktopActions extends StatelessWidget {
     final ok = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Cancel reservation?'),
-        content: const Text('Are you sure you want to cancel this reservation?'),
+        title: Text(AppStrings.cancelReservation),
+        content: Text(AppStrings.areYouSureYouWantTo),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('No')),
-          TextButton(onPressed: () => Navigator.pop(context, true), child: const Text('Yes')),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(AppStrings.no)),
+          TextButton(onPressed: () => Navigator.pop(context, true), child: Text(AppStrings.yes)),
         ],
       ),
     );

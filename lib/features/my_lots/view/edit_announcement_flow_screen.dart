@@ -8,6 +8,7 @@ import 'package:tunipark/features/my_lots/cubit/edit_announcement/edit_announcem
 import 'package:tunipark/features/my_lots/cubit/edit_announcement/edit_announcement_state.dart';
 import 'package:tunipark/features/my_lots/models/my_lot_model.dart';
 import 'package:tunipark/features/my_lots/services/my_lots_service.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -39,7 +40,7 @@ class EditAnnouncementFlowScreen extends StatelessWidget {
           if (state.status == EditAnnouncementStatus.success) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('Parking mis à jour avec succès'),
+                content: Text(AppStrings.parkingMisAJourAvecSucces),
                 backgroundColor: AppColors.limeDark,
               ),
             );
@@ -466,7 +467,7 @@ class _EditStepInfoState extends State<_EditStepInfo> {
                     const SizedBox(height: 20),
 
                     // Title
-                    const Text('Titre',
+                    Text(AppStrings.titre,
                         style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
@@ -484,7 +485,7 @@ class _EditStepInfoState extends State<_EditStepInfo> {
                     const SizedBox(height: 16),
 
                     // Description
-                    const Text('Description',
+                    Text(AppStrings.description,
                         style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
@@ -504,7 +505,7 @@ class _EditStepInfoState extends State<_EditStepInfo> {
                     const SizedBox(height: 20),
 
                     // Characteristics
-                    const Text('Caractéristiques',
+                    Text(AppStrings.caracteristiques,
                         style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
@@ -564,7 +565,7 @@ class _EditStepInfoState extends State<_EditStepInfo> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                       ),
-                      child: const Text('Retour'),
+                      child: Text(AppStrings.retour),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -755,7 +756,7 @@ class _EditStepPricingState extends State<_EditStepPricing> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                       ),
-                      child: const Text('Retour'),
+                      child: Text(AppStrings.retour),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -895,7 +896,7 @@ class _EditStepLocationState extends State<_EditStepLocation> {
                           fontSize: 13, color: AppColors.textSecondary),
                     ),
                     const SizedBox(height: 20),
-                    const Text('Adresse',
+                    Text(AppStrings.adresse,
                         style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
@@ -988,7 +989,7 @@ class _EditStepLocationState extends State<_EditStepLocation> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                     ),
-                    child: const Text('Retour'),
+                    child: Text(AppStrings.retour),
                   ),
                 ],
               ),

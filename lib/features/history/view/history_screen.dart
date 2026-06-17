@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/features/history/cubit/history_cubit.dart';
 import 'package:tunipark/features/history/cubit/history_state.dart';
 import 'package:tunipark/features/history/widgets/history_card.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
@@ -56,7 +57,7 @@ class _HistoryView extends StatelessWidget {
                               onPressed: () {
                                 context.read<HistoryCubit>().loadHistory();
                               },
-                              child: const Text('Réessayer'),
+                              child: Text(AppStrings.reessayer),
                             ),
                           ],
                         ),

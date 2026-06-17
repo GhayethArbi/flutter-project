@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
 import 'package:tunipark/core/theme/app_tokens.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 
 class AppScreenHeader extends StatelessWidget {
@@ -641,7 +642,7 @@ Future<bool?> showAppConfirmDialog(
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context, false),
-          child: const Text('Annuler',
+          child: Text(AppStrings.annuler,
               style: TextStyle(color: AppTokens.textSecondary)),
         ),
         TextButton(

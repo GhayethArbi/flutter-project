@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class TrustpilotItem extends StatelessWidget {
   const TrustpilotItem();
@@ -9,7 +10,7 @@ class TrustpilotItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Trustpilot', style: TextStyle(fontSize: 13, color: Color(0xFF173B6C))),
+          Text(AppStrings.trustpilot, style: TextStyle(fontSize: 13, color: Color(0xFF173B6C))),
           const SizedBox(height: 4),
           Row(
             children: List.generate(5, (i) {
