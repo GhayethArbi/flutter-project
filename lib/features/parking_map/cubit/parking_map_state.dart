@@ -1,6 +1,7 @@
 import 'package:tunipark/features/parking_map/models/parking_place.dart';
 import 'package:tunipark/features/parking_map/models/parking_view_mode.dart';
 import 'package:tunipark/features/parking_map/models/selected_place.dart';
+
 class ParkingMapState {
   final SelectedPlace? selectedPlace;
   final List<ParkingPlace> parkings;
@@ -32,7 +33,7 @@ class ParkingMapState {
       selectedIndex: selectedIndex ?? this.selectedIndex,
       viewMode: viewMode ?? this.viewMode,
       loading: loading ?? this.loading,
-      error: error,
+      error: error ?? this.error,
     );
   }
 
@@ -48,7 +49,9 @@ class ParkingMapState {
   }
 
   ParkingPlace? get selectedParking {
-    if (parkings.isEmpty || selectedIndex < 0 || selectedIndex >= parkings.length) {
+    if (parkings.isEmpty ||
+        selectedIndex < 0 ||
+        selectedIndex >= parkings.length) {
       return null;
     }
     return parkings[selectedIndex];

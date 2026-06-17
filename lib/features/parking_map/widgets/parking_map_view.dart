@@ -22,11 +22,25 @@ class _ParkingMapViewState extends State<ParkingMapView> {
   final Map<String, Uint8List> _normalMarkerBytesByPrice = {};
   final Map<String, Uint8List> _selectedMarkerBytesByPrice = {};
   final Map<String, int> _indexByAnnotationId = {};
+
   bool _styleLoaded = false;
   bool _markersReady = false;
   int? _lastSelectedIndex;
   bool _listenerAdded = false;
   bool _isRenderingMarkers = false;
+
+  // Tracks how many parkings we last built markers for.
+  // Used to detect when parkings first arrive after style loaded.
+  int _lastRenderedParkingCount = 0;
+
+  Future<void> _pendingUpdate = Future.value();
+
+  Future<void> _enqueue(Future<void> Function() task) {
+    final result = _pendingUpdate.then((_) => task());
+    _pendingUpdate = result.catchError((_) {});
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ParkingMapCubit, ParkingMapState>(
@@ -34,20 +48,21 @@ class _ParkingMapViewState extends State<ParkingMapView> {
           previous.selectedIndex != current.selectedIndex ||
           previous.parkings != current.parkings,
       listener: (context, state) async {
+        // --- Case 1: Parkings just arrived and markers not built yet ---
+        final parkingsJustLoaded =
+            state.parkings.isNotEmpty &&
+            _lastRenderedParkingCount != state.parkings.length;
+
+        if (parkingsJustLoaded) {
+          // Try to set up markers now (style may already be loaded)
+          await _enqueue(() => _setupMarkers(state));
+          return;
+        }
+
+        // --- Case 2: Only selection changed ---
         if (!_markersReady) return;
 
-        await _enqueue(() async {
-          final parkingsChanged =
-              state.parkings.length != _annotationsByIndex.length;
-
-          if (parkingsChanged) {
-            await _renderMarkers(state);
-          } else {
-            await _updateSelectedMarkers(state);
-          }
-
-          _lastSelectedIndex = state.selectedIndex;
-        });
+        await _enqueue(() => _updateSelectedMarkers(state));
       },
       builder: (context, state) {
         return MapWidget(
@@ -70,73 +85,40 @@ class _ParkingMapViewState extends State<ParkingMapView> {
           },
           onStyleLoadedListener: (_) async {
             _styleLoaded = true;
-            await _setupMarkers();
+            // Read latest state — parkings may already be loaded
+            final state = context.read<ParkingMapCubit>().state;
+            await _enqueue(() => _setupMarkers(state));
           },
         );
       },
     );
   }
 
-  Future<void> _updateSelectedMarkers(ParkingMapState state) async {
-    if (_pointAnnotationManager == null) return;
-
-    final oldIndex = _lastSelectedIndex;
-    final newIndex = state.selectedIndex;
-    if (oldIndex == newIndex) return;
-
-    if (oldIndex != null && oldIndex >= 0 && oldIndex < state.parkings.length) {
-      await _updateMarkerImage(state, oldIndex, selected: false);
-    }
-    if (newIndex != null && newIndex >= 0 && newIndex < state.parkings.length) {
-      await _updateMarkerImage(state, newIndex, selected: true);
-    }
-
-    _lastSelectedIndex = newIndex;
-  }
-
-  Future<void> _updateMarkerImage(
-    ParkingMapState state,
-    int index, {
-    required bool selected,
-  }) async {
-    final annotation = _annotationsByIndex[index];
-    if (annotation == null) return;
-
-    final parking = state.parkings[index];
-    final priceKey = parking.price.toInt().toString();
-    final image = selected
-        ? _selectedMarkerBytesByPrice[priceKey]
-        : _normalMarkerBytesByPrice[priceKey];
-    if (image == null) return;
-
-    annotation.image = image;
-    await _pointAnnotationManager!.update(annotation);
-  }
-
-  Future<void> _setupMarkers() async {
+  /// Sets up the annotation manager, pre-renders all marker images,
+  /// and calls _renderMarkers. Safe to call multiple times — guards
+  /// against running before both map style and parkings are ready.
+  Future<void> _setupMarkers(ParkingMapState state) async {
     if (_mapboxMap == null || !_styleLoaded) return;
-
-    final state = context.read<ParkingMapCubit>().state;
     if (state.parkings.isEmpty) return;
+
+    // Already built for this exact set of parkings — nothing to do.
+    if (_markersReady && _lastRenderedParkingCount == state.parkings.length)
+      return;
 
     final rs = context.rs;
 
     final markerWidth = rs
         .adaptive(mobile: 70, tablet: 76, desktop: 82)
         .toInt();
-
     final markerHeight = rs
         .adaptive(mobile: 36, tablet: 40, desktop: 44)
         .toInt();
-
     final markerRadius = rs.adaptive(mobile: 18, tablet: 20, desktop: 22);
 
     _normalMarkerBytesByPrice.clear();
     _selectedMarkerBytesByPrice.clear();
 
-    final uniquePrices = state.parkings
-        .map((parking) => parking.price.toInt())
-        .toSet();
+    final uniquePrices = state.parkings.map((p) => p.price.toInt()).toSet();
 
     for (final price in uniquePrices) {
       final key = price.toString();
@@ -161,11 +143,9 @@ class _ParkingMapViewState extends State<ParkingMapView> {
         price: price.toDouble(),
       );
     }
+
     _pointAnnotationManager ??= await _mapboxMap!.annotations
         .createPointAnnotationManager();
-
-    await _pointAnnotationManager!.deleteAll();
-    _annotationsByIndex.clear();
 
     if (!_listenerAdded) {
       _pointAnnotationManager!.addOnPointAnnotationClickListener(
@@ -174,58 +154,48 @@ class _ParkingMapViewState extends State<ParkingMapView> {
             if (_isRenderingMarkers) return true;
 
             final index = _indexByAnnotationId[annotation.id];
-            debugPrint(
-              'Tapped annotation ${annotation.id} -> resolved index: $index',
-            );
-
             if (index != null && mounted) {
               await context.read<ParkingMapCubit>().selectParkingFromMarker(
                 index,
               );
             }
-
             return true;
           },
         ),
       );
-
       _listenerAdded = true;
     }
+
     await _renderMarkers(state);
     _markersReady = true;
   }
 
-  Future<void> _pendingUpdate = Future.value();
-
-  Future<void> _enqueue(Future<void> Function() task) {
-    final result = _pendingUpdate.then((_) => task());
-    _pendingUpdate = result.catchError(
-      (_) {},
-    ); // don't let one failure jam the queue
-    return result;
-  }
-
   Future<void> _renderMarkers(ParkingMapState state) async {
     if (_pointAnnotationManager == null) return;
+
     _isRenderingMarkers = true;
 
     await _pointAnnotationManager!.deleteAll();
     _annotationsByIndex.clear();
-    _indexByAnnotationId.clear(); // ✅ add this
+    _indexByAnnotationId.clear();
+    _lastSelectedIndex = null;
 
     for (int i = 0; i < state.parkings.length; i++) {
       final parking = state.parkings[i];
-
       final priceKey = parking.price.toInt().toString();
+
+      final imageBytes = i == state.selectedIndex
+          ? _selectedMarkerBytesByPrice[priceKey]
+          : _normalMarkerBytesByPrice[priceKey];
+
+      if (imageBytes == null) continue; // safety guard
 
       final annotation = await _pointAnnotationManager!.create(
         PointAnnotationOptions(
           geometry: Point(
             coordinates: Position(parking.longitude, parking.latitude),
           ),
-          image: i == state.selectedIndex
-              ? _selectedMarkerBytesByPrice[priceKey]!
-              : _normalMarkerBytesByPrice[priceKey]!,
+          image: imageBytes,
           iconAnchor: IconAnchor.BOTTOM,
         ),
       );
@@ -233,8 +203,66 @@ class _ParkingMapViewState extends State<ParkingMapView> {
       _annotationsByIndex[i] = annotation;
       _indexByAnnotationId[annotation.id] = i;
     }
+
     _lastSelectedIndex = state.selectedIndex;
+    _lastRenderedParkingCount = state.parkings.length;
     _isRenderingMarkers = false;
+  }
+
+  Future<void> _updateSelectedMarkers(ParkingMapState state) async {
+    if (_pointAnnotationManager == null) return;
+
+    final oldIndex = _lastSelectedIndex;
+    final newIndex = state.selectedIndex;
+
+    if (oldIndex == newIndex) return;
+
+    // Deselect previous marker
+    if (oldIndex != null && oldIndex >= 0 && oldIndex < state.parkings.length) {
+      await _updateMarkerImage(state, oldIndex, selected: false);
+    }
+
+    // Select new marker
+    if (newIndex >= 0 && newIndex < state.parkings.length) {
+      await _updateMarkerImage(state, newIndex, selected: true);
+    }
+
+    _lastSelectedIndex = newIndex;
+  }
+
+  Future<void> _updateMarkerImage(
+    ParkingMapState state,
+    int index, {
+    required bool selected,
+  }) async {
+    final oldAnnotation = _annotationsByIndex[index];
+    if (oldAnnotation == null) return;
+
+    final parking = state.parkings[index];
+    final priceKey = parking.price.toInt().toString();
+    final image = selected
+        ? _selectedMarkerBytesByPrice[priceKey]
+        : _normalMarkerBytesByPrice[priceKey];
+    if (image == null) return;
+
+    // Delete old annotation
+    await _pointAnnotationManager!.delete(oldAnnotation);
+    _indexByAnnotationId.remove(oldAnnotation.id);
+
+    // Create new annotation with updated image
+    final newAnnotation = await _pointAnnotationManager!.create(
+      PointAnnotationOptions(
+        geometry: Point(
+          coordinates: Position(parking.longitude, parking.latitude),
+        ),
+        image: image,
+        iconAnchor: IconAnchor.BOTTOM,
+      ),
+    );
+
+    // Update our maps with the new annotation
+    _annotationsByIndex[index] = newAnnotation;
+    _indexByAnnotationId[newAnnotation.id] = index;
   }
 
   Future<Uint8List> _createMarkerBytes({
@@ -247,13 +275,11 @@ class _ParkingMapViewState extends State<ParkingMapView> {
     required double price,
   }) async {
     final dpr = MediaQuery.of(context).devicePixelRatio;
-
     final pixelWidth = (logicalWidth * dpr).round();
     final pixelHeight = (logicalHeight * dpr).round();
 
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder);
-
     canvas.scale(dpr, dpr);
 
     final rect = Rect.fromLTWH(
@@ -262,16 +288,8 @@ class _ParkingMapViewState extends State<ParkingMapView> {
       logicalWidth.toDouble(),
       logicalHeight.toDouble(),
     );
-
-    final paint = Paint()..color = backgroundColor;
-    // final shadowPaint = Paint()
-    //   ..color = Colors.black.withAlpha(35)
-    //   ..maskFilter = const ui.MaskFilter.blur(ui.BlurStyle.normal, 12);
-
     final rrect = RRect.fromRectAndRadius(rect, Radius.circular(radius));
-
-    //canvas.drawRRect(rrect.shift(const Offset(0, 4)), shadowPaint);
-    canvas.drawRRect(rrect, paint);
+    canvas.drawRRect(rrect, Paint()..color = backgroundColor);
 
     final textPainter = TextPainter(
       text: TextSpan(
@@ -286,17 +304,17 @@ class _ParkingMapViewState extends State<ParkingMapView> {
       textAlign: TextAlign.center,
     )..layout();
 
-    final textOffset = Offset(
-      (logicalWidth - textPainter.width) / 2,
-      (logicalHeight - textPainter.height) / 2,
+    textPainter.paint(
+      canvas,
+      Offset(
+        (logicalWidth - textPainter.width) / 2,
+        (logicalHeight - textPainter.height) / 2,
+      ),
     );
-
-    textPainter.paint(canvas, textOffset);
 
     final picture = recorder.endRecording();
     final image = await picture.toImage(pixelWidth, pixelHeight);
     final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-
     return byteData!.buffer.asUint8List();
   }
 
