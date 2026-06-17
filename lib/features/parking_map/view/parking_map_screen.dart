@@ -28,6 +28,7 @@ class ParkingMapScreen extends StatefulWidget {
 
 class _ParkingMapScreenState extends State<ParkingMapScreen> {
   late final PageController _pageController;
+  bool _isProgrammaticPageChange = false; // 👈 new
 
   @override
   void initState() {
@@ -58,11 +59,16 @@ class _ParkingMapScreenState extends State<ParkingMapScreen> {
                 previous.selectedIndex != current.selectedIndex,
             listener: (context, state) async {
               if (_pageController.hasClients && state.isMapMode) {
+                final currentPage = _pageController.page?.round();
+                if (currentPage == state.selectedIndex) return;
+
+                _isProgrammaticPageChange = true;
                 await _pageController.animateToPage(
                   state.selectedIndex,
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut,
                 );
+                _isProgrammaticPageChange = false;
               }
             },
             builder: (context, state) {
@@ -116,7 +122,7 @@ class _ParkingMapScreenState extends State<ParkingMapScreen> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          ParkingCardsSection(pageController: _pageController),
+                          ParkingCardsSection(pageController: _pageController, isProgrammaticPageChange: () => _isProgrammaticPageChange,),
                           SizedBox(height: rs.hp(0.012)),
                           const ParkingBottomActions(),
                           SizedBox(

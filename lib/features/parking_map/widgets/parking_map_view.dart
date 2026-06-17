@@ -19,11 +19,14 @@ class _ParkingMapViewState extends State<ParkingMapView> {
   PointAnnotationManager? _pointAnnotationManager;
 
   final Map<int, PointAnnotation> _annotationsByIndex = {};
-  final Map<int, Uint8List> _normalMarkerBytesByIndex = {};
-  final Map<int, Uint8List> _selectedMarkerBytesByIndex = {};
+  final Map<String, Uint8List> _normalMarkerBytesByPrice = {};
+  final Map<String, Uint8List> _selectedMarkerBytesByPrice = {};
+  final Map<String, int> _indexByAnnotationId = {};
   bool _styleLoaded = false;
   bool _markersReady = false;
-
+  int? _lastSelectedIndex;
+  bool _listenerAdded = false;
+  bool _isRenderingMarkers = false;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ParkingMapCubit, ParkingMapState>(
@@ -32,7 +35,19 @@ class _ParkingMapViewState extends State<ParkingMapView> {
           previous.parkings != current.parkings,
       listener: (context, state) async {
         if (!_markersReady) return;
-        await _renderMarkers(state);
+
+        await _enqueue(() async {
+          final parkingsChanged =
+              state.parkings.length != _annotationsByIndex.length;
+
+          if (parkingsChanged) {
+            await _renderMarkers(state);
+          } else {
+            await _updateSelectedMarkers(state);
+          }
+
+          _lastSelectedIndex = state.selectedIndex;
+        });
       },
       builder: (context, state) {
         return MapWidget(
@@ -62,6 +77,42 @@ class _ParkingMapViewState extends State<ParkingMapView> {
     );
   }
 
+  Future<void> _updateSelectedMarkers(ParkingMapState state) async {
+    if (_pointAnnotationManager == null) return;
+
+    final oldIndex = _lastSelectedIndex;
+    final newIndex = state.selectedIndex;
+    if (oldIndex == newIndex) return;
+
+    if (oldIndex != null && oldIndex >= 0 && oldIndex < state.parkings.length) {
+      await _updateMarkerImage(state, oldIndex, selected: false);
+    }
+    if (newIndex != null && newIndex >= 0 && newIndex < state.parkings.length) {
+      await _updateMarkerImage(state, newIndex, selected: true);
+    }
+
+    _lastSelectedIndex = newIndex;
+  }
+
+  Future<void> _updateMarkerImage(
+    ParkingMapState state,
+    int index, {
+    required bool selected,
+  }) async {
+    final annotation = _annotationsByIndex[index];
+    if (annotation == null) return;
+
+    final parking = state.parkings[index];
+    final priceKey = parking.price.toInt().toString();
+    final image = selected
+        ? _selectedMarkerBytesByPrice[priceKey]
+        : _normalMarkerBytesByPrice[priceKey];
+    if (image == null) return;
+
+    annotation.image = image;
+    await _pointAnnotationManager!.update(annotation);
+  }
+
   Future<void> _setupMarkers() async {
     if (_mapboxMap == null || !_styleLoaded) return;
 
@@ -80,68 +131,92 @@ class _ParkingMapViewState extends State<ParkingMapView> {
 
     final markerRadius = rs.adaptive(mobile: 18, tablet: 20, desktop: 22);
 
-    _normalMarkerBytesByIndex.clear();
-    _selectedMarkerBytesByIndex.clear();
+    _normalMarkerBytesByPrice.clear();
+    _selectedMarkerBytesByPrice.clear();
 
-    for (int i = 0; i < state.parkings.length; i++) {
-      final parking = state.parkings[i];
+    final uniquePrices = state.parkings
+        .map((parking) => parking.price.toInt())
+        .toSet();
 
-      _normalMarkerBytesByIndex[i] = await _createMarkerBytes(
+    for (final price in uniquePrices) {
+      final key = price.toString();
+
+      _normalMarkerBytesByPrice[key] = await _createMarkerBytes(
         context: context,
         backgroundColor: Colors.white,
         textColor: Colors.black87,
         logicalWidth: markerWidth,
         logicalHeight: markerHeight,
         radius: markerRadius,
-        price: parking.price,
+        price: price.toDouble(),
       );
 
-      _selectedMarkerBytesByIndex[i] = await _createMarkerBytes(
+      _selectedMarkerBytesByPrice[key] = await _createMarkerBytes(
         context: context,
         backgroundColor: const Color(0xFF173B6C),
         textColor: Colors.white,
         logicalWidth: markerWidth,
         logicalHeight: markerHeight,
         radius: markerRadius,
-        price: parking.price,
+        price: price.toDouble(),
       );
     }
-
     _pointAnnotationManager ??= await _mapboxMap!.annotations
         .createPointAnnotationManager();
 
     await _pointAnnotationManager!.deleteAll();
     _annotationsByIndex.clear();
 
-    _pointAnnotationManager!.addOnPointAnnotationClickListener(
-      _ParkingMarkerClickListener(
-        onClicked: (annotation) async {
-          final entry = _annotationsByIndex.entries
-              .where((e) => e.value.id == annotation.id)
-              .firstOrNull;
+    if (!_listenerAdded) {
+      _pointAnnotationManager!.addOnPointAnnotationClickListener(
+        _ParkingMarkerClickListener(
+          onClicked: (annotation) async {
+            if (_isRenderingMarkers) return true;
 
-          if (entry != null) {
-            await context.read<ParkingMapCubit>().selectParkingFromMarker(
-              entry.key,
+            final index = _indexByAnnotationId[annotation.id];
+            debugPrint(
+              'Tapped annotation ${annotation.id} -> resolved index: $index',
             );
-          }
-          return true;
-        },
-      ),
-    );
 
+            if (index != null && mounted) {
+              await context.read<ParkingMapCubit>().selectParkingFromMarker(
+                index,
+              );
+            }
+
+            return true;
+          },
+        ),
+      );
+
+      _listenerAdded = true;
+    }
     await _renderMarkers(state);
     _markersReady = true;
   }
 
+  Future<void> _pendingUpdate = Future.value();
+
+  Future<void> _enqueue(Future<void> Function() task) {
+    final result = _pendingUpdate.then((_) => task());
+    _pendingUpdate = result.catchError(
+      (_) {},
+    ); // don't let one failure jam the queue
+    return result;
+  }
+
   Future<void> _renderMarkers(ParkingMapState state) async {
     if (_pointAnnotationManager == null) return;
+    _isRenderingMarkers = true;
 
     await _pointAnnotationManager!.deleteAll();
     _annotationsByIndex.clear();
+    _indexByAnnotationId.clear(); // ✅ add this
 
     for (int i = 0; i < state.parkings.length; i++) {
       final parking = state.parkings[i];
+
+      final priceKey = parking.price.toInt().toString();
 
       final annotation = await _pointAnnotationManager!.create(
         PointAnnotationOptions(
@@ -149,14 +224,17 @@ class _ParkingMapViewState extends State<ParkingMapView> {
             coordinates: Position(parking.longitude, parking.latitude),
           ),
           image: i == state.selectedIndex
-              ? _selectedMarkerBytesByIndex[i]!
-              : _normalMarkerBytesByIndex[i]!,
+              ? _selectedMarkerBytesByPrice[priceKey]!
+              : _normalMarkerBytesByPrice[priceKey]!,
           iconAnchor: IconAnchor.BOTTOM,
         ),
       );
 
       _annotationsByIndex[i] = annotation;
+      _indexByAnnotationId[annotation.id] = i;
     }
+    _lastSelectedIndex = state.selectedIndex;
+    _isRenderingMarkers = false;
   }
 
   Future<Uint8List> _createMarkerBytes({
@@ -186,13 +264,13 @@ class _ParkingMapViewState extends State<ParkingMapView> {
     );
 
     final paint = Paint()..color = backgroundColor;
-    final shadowPaint = Paint()
-      ..color = Colors.black.withAlpha(35)
-      ..maskFilter = const ui.MaskFilter.blur(ui.BlurStyle.normal, 12);
+    // final shadowPaint = Paint()
+    //   ..color = Colors.black.withAlpha(35)
+    //   ..maskFilter = const ui.MaskFilter.blur(ui.BlurStyle.normal, 12);
 
     final rrect = RRect.fromRectAndRadius(rect, Radius.circular(radius));
 
-    canvas.drawRRect(rrect.shift(const Offset(0, 4)), shadowPaint);
+    //canvas.drawRRect(rrect.shift(const Offset(0, 4)), shadowPaint);
     canvas.drawRRect(rrect, paint);
 
     final textPainter = TextPainter(
@@ -238,8 +316,4 @@ class _ParkingMarkerClickListener extends OnPointAnnotationClickListener {
   void onPointAnnotationClick(PointAnnotation annotation) {
     onClicked(annotation);
   }
-}
-
-extension<T> on Iterable<T> {
-  T? get firstOrNull => isEmpty ? null : first;
 }

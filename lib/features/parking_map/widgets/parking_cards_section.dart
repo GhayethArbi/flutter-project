@@ -8,8 +8,13 @@ import 'parking_card_item.dart';
 
 class ParkingCardsSection extends StatelessWidget {
   final PageController pageController;
+  final bool Function() isProgrammaticPageChange; // 👈 new
 
-  const ParkingCardsSection({super.key, required this.pageController});
+  const ParkingCardsSection({
+    super.key,
+    required this.pageController,
+    required this.isProgrammaticPageChange,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +28,8 @@ class ParkingCardsSection extends StatelessWidget {
             controller: pageController,
             itemCount: state.parkings.length,
             onPageChanged: (index) {
+              if (isProgrammaticPageChange()) return; // 👈 ignore feedback loop
+
               context.read<ParkingMapCubit>().selectParkingFromCard(index);
             },
             itemBuilder: (context, index) {
