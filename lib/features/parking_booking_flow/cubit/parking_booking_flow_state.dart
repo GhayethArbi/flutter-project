@@ -76,6 +76,10 @@ class ParkingBookingFlowState extends Equatable {
   });
 
   factory ParkingBookingFlowState.initial(ParkingPlace parking) {
+    final now = DateTime.now();
+    final end = now.add(const Duration(days: 30));
+    final monthlyPrice = parking.tariff?.pricePerMonth ?? parking.price;
+
     return ParkingBookingFlowState(
       parking: parking,
       step: ParkingBookingStep.choosePlace,
@@ -85,17 +89,16 @@ class ParkingBookingFlowState extends Equatable {
       plateCenterText: 'تونس',
       plateRightNumber: '1',
       rsText: 'ن ت',
-      startDate: DateTime(2026, 4, 1),
-      endDate: DateTime(2026, 4, 30),
-      monthlyPrice: parking.price,
+      startDate: now,
+      endDate: end,
+      monthlyPrice: monthlyPrice,
       serviceFee: 10,
       selectedPaymentMethodId: null,
       paymentLoading: false,
       paymentError: null,
-      awaitingDeepLink: false, // NEW
+      awaitingDeepLink: false,
     );
   }
-
   double get totalPrice => monthlyPrice + serviceFee;
 
   bool get canContinue {

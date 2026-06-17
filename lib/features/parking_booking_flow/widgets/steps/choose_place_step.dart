@@ -10,6 +10,11 @@ class ChoosePlaceStep extends StatelessWidget {
   Widget build(BuildContext context) {
     final rs = context.rs;
     final state = context.watch<ParkingBookingFlowCubit>().state;
+    final parking = state.parking;
+    final tariff = parking.tariff;
+    final availableSpots = parking.spots;
+    final isAvailable = availableSpots > 0;
+    final monthlyPrice = tariff?.pricePerMonth ?? parking.price;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,20 +30,24 @@ class ChoosePlaceStep extends StatelessWidget {
         _PlaceCard(
           icon: Icons.directions_car_outlined,
           title: 'Place voiture',
-          subtitle: '2 places uniquement !',
-          price: '100DT\npar mois',
+          subtitle: isAvailable
+              ? '$availableSpots place${availableSpots > 1 ? 's' : ''} disponible${availableSpots > 1 ? 's' : ''}'
+              : 'Complet',
+          price: '${monthlyPrice.toStringAsFixed(3)}DT\npar mois',
           isSelected: state.selectedPlaceId == 'car',
-          onTap: () => context.read<ParkingBookingFlowCubit>().selectPlace('car'),
+          onTap: isAvailable
+              ? () => context.read<ParkingBookingFlowCubit>().selectPlace('car')
+              : () {},
         ),
-        const SizedBox(height: 12),
-        _PlaceCard(
-          icon: Icons.two_wheeler_outlined,
-          title: 'Place moto',
-          subtitle: 'Complet',
-          price: '55DT\npar mois',
-          isSelected: state.selectedPlaceId == 'moto',
-          onTap: () => context.read<ParkingBookingFlowCubit>().selectPlace('moto'),
-        ),
+        // const SizedBox(height: 12),
+        // _PlaceCard(
+        //   icon: Icons.two_wheeler_outlined,
+        //   title: 'Place moto',
+        //   subtitle: 'Complet',
+        //   price: '55DT\npar mois',
+        //   isSelected: state.selectedPlaceId == 'moto',
+        //   onTap: () => context.read<ParkingBookingFlowCubit>().selectPlace('moto'),
+        // ),
       ],
     );
   }
@@ -63,8 +72,9 @@ class _PlaceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderColor =
-        isSelected ? const Color(0xFFB7F000) : const Color(0xFFDDE7A5);
+    final borderColor = isSelected
+        ? const Color(0xFFB7F000)
+        : const Color(0xFFDDE7A5);
 
     return InkWell(
       borderRadius: BorderRadius.circular(10),
@@ -99,10 +109,7 @@ class _PlaceCard extends StatelessWidget {
             Text(
               price,
               textAlign: TextAlign.right,
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 12,
-              ),
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
             ),
           ],
         ),
