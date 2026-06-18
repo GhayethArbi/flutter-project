@@ -10,6 +10,8 @@ import 'package:tunipark/features/parking_details/widgets/parking_compatibility.
 import 'package:tunipark/features/parking_details/widgets/parking_dimensions.dart';
 import 'package:tunipark/features/parking_details/widgets/parking_extra_info.dart';
 import 'package:tunipark/features/parking_map/models/parking_place.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class ParkingDetailsScreen extends StatefulWidget {
   final ParkingPlace parking;
@@ -368,9 +370,8 @@ class _WhyRecommendedSection extends StatelessWidget {
             children: [
               const Icon(Icons.auto_awesome, color: Color(0xFF1D9E75)),
               const SizedBox(width: 8),
-              const Expanded(
-                child: Text(
-                  'AI Summary',
+              Expanded(
+                child: Text(AppStrings.aiSummary,
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 16,
@@ -405,17 +406,17 @@ class _WhyRecommendedSection extends StatelessWidget {
 
           _AiExplanationRow(
             icon: Icons.near_me_outlined,
-            title: 'Distance',
+            title: AppStrings2.distance,
             value: ai.distanceLabel,
           ),
           _AiExplanationRow(
             icon: Icons.local_parking,
-            title: 'Availability',
+            title: AppStrings2.availability,
             value: ai.availabilityLabel,
           ),
           _AiExplanationRow(
             icon: Icons.trending_up,
-            title: 'Behavior',
+            title: AppStrings2.behavior,
             value: ai.conversionRate > 0
                 ? 'Drivers often choose this parking'
                 : 'New parking with limited history',

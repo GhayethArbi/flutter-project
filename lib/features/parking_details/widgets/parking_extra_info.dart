@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class ParkingExtraInfo extends StatelessWidget {
   const ParkingExtraInfo({super.key});
@@ -10,11 +11,11 @@ class ParkingExtraInfo extends StatelessWidget {
       children: [
         // Paiement sécurisé
         Row(
-          children: const [
+          children: [
             Icon(Icons.lock_outline, size: 18, color: Colors.black87),
             SizedBox(width: 8),
             Text(
-              "Paiement sécurisé via l'application",
+              AppStrings.paiementSecuriseViaLApplication,
               style: TextStyle(fontSize: 13.5, color: Colors.black87),
             ),
           ],
@@ -23,11 +24,11 @@ class ParkingExtraInfo extends StatelessWidget {
 
         // Réservation 100% digitale
         Row(
-          children: const [
+          children: [
             Icon(Icons.phone_android_outlined, size: 18, color: Colors.black87),
             SizedBox(width: 8),
             Text(
-              'Réservation 100% digitale',
+              AppStrings.reservation100Digitale,
               style: TextStyle(fontSize: 13.5, color: Colors.black87),
             ),
           ],
@@ -45,9 +46,9 @@ class ParkingExtraInfo extends StatelessWidget {
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               Text(
-                "Option carte d'accès",
+                AppStrings.optionCarteDAcces,
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 14,
@@ -56,7 +57,7 @@ class ParkingExtraInfo extends StatelessWidget {
               ),
               SizedBox(height: 8),
               Text(
-                "Entrez et sortez de votre parking sans devoir utiliser l'application Tunipark",
+                AppStrings.entrezEtSortezDeVotreParking,
                 style: TextStyle(
                   fontSize: 13,
                   color: Colors.black54,
@@ -65,7 +66,7 @@ class ParkingExtraInfo extends StatelessWidget {
               ),
               SizedBox(height: 12),
               Text(
-                '5DT / mois',
+                AppStrings.text5dtmois,
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 14,

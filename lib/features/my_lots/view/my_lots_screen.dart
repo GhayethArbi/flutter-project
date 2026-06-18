@@ -15,6 +15,7 @@ import '../models/my_lot_model.dart';
 import '../services/my_lots_service.dart';
 import '../widgets/my_lot_card.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class MyLotsScreen extends StatelessWidget {
   const MyLotsScreen({super.key, required this.sl});
@@ -88,8 +89,7 @@ class _MyLotsBodyState extends State<_MyLotsBody> {
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text(
-              'Archiver',
+            child: Text(AppStrings.archiver,
               style: TextStyle(color: AppColors.danger),
             ),
           ),
@@ -103,7 +103,7 @@ class _MyLotsBodyState extends State<_MyLotsBody> {
         cubit.removeLot(lot.id);
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text(AppStrings.parkingArchiveAvecSucces)),
+            SnackBar(content: Text(AppStrings.parkingArchiveAvecSucces)),
           );
         }
       } catch (e) {
@@ -210,9 +210,8 @@ class _MyLotsBodyState extends State<_MyLotsBody> {
                           ),
                           child: Row(
                             children: [
-                              const Expanded(
-                                child: Text(
-                                  'Mes annonces',
+                              Expanded(
+                                child: Text(AppStrings.mesAnnonces,
                                   style: TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w700,
@@ -231,7 +230,7 @@ class _MyLotsBodyState extends State<_MyLotsBody> {
                                     color: AppColors.colorBtn,
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child: const Row(
+                                  child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Icon(
@@ -240,8 +239,7 @@ class _MyLotsBodyState extends State<_MyLotsBody> {
                                         color: AppColors.textPrimary,
                                       ),
                                       SizedBox(width: 4),
-                                      Text(
-                                        'Ajouter',
+                                      Text(AppStrings.ajouter,
                                         style: TextStyle(
                                           fontSize: 13,
                                           fontWeight: FontWeight.w600,
@@ -377,7 +375,7 @@ class _StatsBanner extends StatelessWidget {
                   iconBg: const Color(0xFFEEF2FF),
                   iconColor: const Color(0xFF4F6FD8),
                   value: '$availablePlaces/$totalPlaces',
-                  label: 'Places libres',
+                  label: AppStrings2.placesLibres,
                 ),
               ),
               SizedBox(width: rs.adaptive(mobile: 10.0, tablet: 12.0)),
@@ -390,7 +388,7 @@ class _StatsBanner extends StatelessWidget {
                   value: avgPrice != null
                       ? '${avgPrice.toStringAsFixed(0)} DT/j'
                       : '—',
-                  label: 'Prix moy. / jour',
+                  label: AppStrings2.prixMoyJour,
                   wide: true,
                 ),
               ),

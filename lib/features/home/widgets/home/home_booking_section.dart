@@ -7,6 +7,7 @@ import '../../cubit/home_state.dart';
 import '../datetime_picker_bottom_sheet.dart';
 import '../home_datetime_field.dart';
 import '../home_duration_chip.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class HomeBookingSection extends StatelessWidget {
   const HomeBookingSection({super.key});
@@ -30,7 +31,7 @@ class HomeBookingSection extends StatelessWidget {
             SizedBox(height: rs.adaptive(mobile: 16, tablet: 18, desktop: 22)),
 
             HomeDateTimeField(
-              label: 'Start',
+              label: AppStrings2.start,
               value: state.startDateTime,
               onTap: () async {
                 final picked = await showModalBottomSheet<DateTime>(
@@ -39,7 +40,7 @@ class HomeBookingSection extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   builder: (_) => DateTimePickerBottomSheet(
                     initialValue: state.startDateTime ?? DateTime.now(),
-                    title: 'Select start',
+                    title: AppStrings2.selectStart,
                   ),
                 );
 
@@ -52,7 +53,7 @@ class HomeBookingSection extends StatelessWidget {
             SizedBox(height: rs.adaptive(mobile: 12, tablet: 14, desktop: 16)),
 
             HomeDateTimeField(
-              label: 'End',
+              label: AppStrings2.end,
               value: state.endDateTime,
               onTap: () async {
                 final base = state.startDateTime ?? DateTime.now();
@@ -65,7 +66,7 @@ class HomeBookingSection extends StatelessWidget {
                     initialValue:
                         state.endDateTime ?? base.add(const Duration(hours: 2)),
                     minimumDate: base,
-                    title: 'Select end',
+                    title: AppStrings2.selectEnd,
                   ),
                 );
 

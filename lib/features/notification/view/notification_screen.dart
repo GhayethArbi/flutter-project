@@ -36,7 +36,7 @@ class _NotificationView extends StatelessWidget {
                   }
 
                   if (state.items.isEmpty) {
-                    return const Center(
+                    return Center(
                       child: Text(AppStrings.aucuneNotification),
                     );
                   }
@@ -106,8 +106,7 @@ class _Header extends StatelessWidget {
                  Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text(
-                      'Notifications',
+                    Text(AppStrings.notifications,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,

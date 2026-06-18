@@ -8,6 +8,7 @@ import 'package:tunipark/features/bookings/widgets/booking_filter_tabs.dart';
 import '../cubit/bookings_cubit.dart';
 import '../cubit/bookings_state.dart';
 import '../services/booking_service.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 
 class BookingsScreen extends StatelessWidget {
@@ -47,8 +48,7 @@ class _BookingsView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Mes réservations',
+                Text(AppStrings.mesReservations,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w800,
@@ -117,9 +117,8 @@ class _EmptyBookings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'No reservations found',
+    return Center(
+      child: Text(AppStrings.noReservationsFound,
         style: TextStyle(
           color: AppColors.textSecondary,
           fontWeight: FontWeight.w600,

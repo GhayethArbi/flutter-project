@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class LoginButton extends StatelessWidget {
   final bool isLoading;
@@ -51,8 +52,7 @@ class LoginButton extends StatelessWidget {
                   color: Colors.black,
                 ),
               )
-            : Text(
-                'Se Connecter',
+            : Text(AppStrings.seConnecter,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: rs.adaptive(mobile: 15, tablet: 16, desktop: 17),

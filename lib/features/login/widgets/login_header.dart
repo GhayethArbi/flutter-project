@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tunipark/core/theme/app_assets.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 
 class LoginHeader extends StatelessWidget {
@@ -28,8 +29,7 @@ class LoginHeader extends StatelessWidget {
         ),
       
         const SizedBox(height: 10),
-        Text(
-          'Se connecter',
+        Text(AppStrings.seConnecter2,
           style: TextStyle(
             color: colorScheme.onSurface,
             fontSize: _titleFontSize,
@@ -37,8 +37,7 @@ class LoginHeader extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
-        Text(
-          'Connectez-vous pour accéder à votre compte.',
+        Text(AppStrings.connectezVousPourAccederAVotre,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: colorScheme.onSurfaceVariant,

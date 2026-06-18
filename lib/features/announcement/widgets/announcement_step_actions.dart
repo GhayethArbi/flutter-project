@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class AnnouncementStepActions extends StatelessWidget {
   final VoidCallback onBack;
@@ -42,8 +43,7 @@ class AnnouncementStepActions extends StatelessWidget {
                   horizontal: rs.adaptive(mobile: 12, tablet: 16, desktop: 18),
                 ),
               ),
-              child: Text(
-                'Retour',
+              child: Text(AppStrings.retour,
                 style: TextStyle(
                   fontSize: fontSize,
                   fontWeight: FontWeight.w600,
@@ -70,8 +70,7 @@ class AnnouncementStepActions extends StatelessWidget {
                   horizontal: rs.adaptive(mobile: 12, tablet: 16, desktop: 18),
                 ),
               ),
-              child: Text(
-                'Suivant',
+              child: Text(AppStrings.suivant,
                 style: TextStyle(
                   fontSize: fontSize,
                   fontWeight: FontWeight.w700,

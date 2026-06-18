@@ -13,6 +13,7 @@ import 'package:tunipark/features/profile/widgets/menu_section.dart';
 import 'package:tunipark/features/profile/widgets/profile_header.dart';
 import 'package:tunipark/features/profile/widgets/section_label.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -68,48 +69,48 @@ class _ProfileView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SectionLabel(label: 'Compte'),
+                              SectionLabel(label: AppStrings2.compte),
                               MenuSection(
                                 items: [
                                   MenuItem(
                                     icon: Icons.person_outline,
-                                    label: 'Informations personnelles',
+                                    label: AppStrings2.informationsPersonnelles,
                                     onTap: () => Navigator.pushNamed(
                                       context, AppRoutes.personalInfo),
                                   ),
                                   // MenuItem(
                                   //   icon: Icons.notifications_none_outlined,
-                                  //   label: 'Notifications',
+                                  //   label: AppStrings2.notifications,
                                   //   onTap: () => Navigator.pushNamed(
                                   //     context, AppRoutes.notifications),
                                   // ),
                                   MenuItem(
                                     icon: Icons.directions_car_outlined,
-                                    label: 'Mes véhicules',
+                                    label: AppStrings2.mesVehicules,
                                     onTap: () => Navigator.pushNamed(
                                       context, AppRoutes.myVehicles),
                                   ),
                                   MenuItem(
                                     icon: Icons.credit_card_outlined,
-                                    label: 'Mes paiements',
+                                    label: AppStrings2.mesPaiements,
                                     onTap: () => Navigator.pushNamed(
                                       context, AppRoutes.payments),
                                   ),
                                   // MenuItem(
                                   //   icon: Icons.business_center_outlined,
-                                  //   label: 'Gérer mes places',
+                                  //   label: AppStrings2.gererMesPlaces,
                                   //   onTap: () => Navigator.pushNamed(
                                   //     context, AppRoutes.parkingProfessionals),
                                   // ),
                                   MenuItem(
                                     icon: Icons.shield_outlined,
-                                    label: 'Sécurité',
+                                    label: AppStrings2.securite,
                                     onTap: () => Navigator.pushNamed(
                                       context, AppRoutes.security),
                                   ),
                                   MenuItem(
                                     icon: Icons.delete_outline,
-                                    label: 'Supprimer le compte',
+                                    label: AppStrings2.supprimerLeCompte,
                                     labelColor: const Color(0xFFE24B4A),
                                     iconColor: const Color(0xFFE24B4A),
                                     iconBackground: const Color(0xFFFFF0F0),
@@ -120,12 +121,12 @@ class _ProfileView extends StatelessWidget {
                               ),
 
                               // ── Paramètres de l'app ─────────────────────
-                              SectionLabel(label: "Paramètres de l'app"),
+                              SectionLabel(label: AppStrings2.parametresDeLApp),
                               MenuSection(
                                 items: [
                                   MenuItem(
                                     icon: Icons.brightness_2_outlined,
-                                    label: 'Mode',
+                                    label: AppStrings2.mode,
                                     trailing: Text(
                                       state.themeMode == AppThemeMode.day ? 'Jour' : 'Nuit',
                                       style: const TextStyle(
@@ -145,9 +146,8 @@ class _ProfileView extends StatelessWidget {
                                   ),
                                   MenuItem(
                                     icon: Icons.language_outlined,
-                                    label: 'Langue',
-                                    trailing: const Text(
-                                      'Français',
+                                    label: AppStrings2.langue,
+                                    trailing: Text(AppStrings.francais,
                                       style: TextStyle(
                                         fontSize: 13,
                                         color: Colors.black45,
@@ -161,30 +161,30 @@ class _ProfileView extends StatelessWidget {
                               ),
 
                               // ── Aide & support ───────────────────────────
-                              SectionLabel(label: 'Aide & support'),
+                              SectionLabel(label: AppStrings2.aideSupport),
                               MenuSection(
                                 items: [
                                   MenuItem(
                                     icon: Icons.help_outline,
-                                    label: "FAQ & Centre d'aide",
+                                    label: AppStrings2.faqCentreDAide,
                                     onTap: () => Navigator.pushNamed(
                                       context, AppRoutes.helpCenter),
                                   ),
                                   MenuItem(
                                     icon: Icons.privacy_tip_outlined,
-                                    label: 'Politique de confidentialité',
+                                    label: AppStrings2.politiqueDeConfidentialite,
                                     onTap: () => Navigator.pushNamed(
                                       context, AppRoutes.privacyPolicy),
                                   ),
                                   MenuItem(
                                     icon: Icons.description_outlined,
-                                    label: "Conditions d'utilisation",
+                                    label: AppStrings2.conditionsDUtilisation,
                                     onTap: () => Navigator.pushNamed(
                                       context, AppRoutes.termsOfUse),
                                   ),
                                   MenuItem(
                                     icon: Icons.groups_2_outlined,
-                                    label: 'Devenir partenaire',
+                                    label: AppStrings2.devenirPartenaire,
                                     iconColor: const Color(0xFF3B6D11),
                                     iconBackground: const Color(0xFFF0FFF0),
                                     labelColor: const Color(0xFF3B6D11),
@@ -206,9 +206,8 @@ class _ProfileView extends StatelessWidget {
 
                               // Version
                               const SizedBox(height: 16),
-                              const Center(
-                                child: Text(
-                                  'Tunipark v1.0.0',
+                              Center(
+                                child: Text(AppStrings.tuniparkV100,
                                   style: TextStyle(
                                     fontSize: 11,
                                     color: Colors.black26,
@@ -240,8 +239,7 @@ class _ProfileView extends StatelessWidget {
       context: context,
       builder: (_) => AlertDialog(
         title: Text(AppStrings.supprimerLeCompte),
-        content: const Text(
-          'Cette action est irréversible. Voulez-vous vraiment supprimer votre compte ?',
+        content: Text(AppStrings.cetteActionEstIrreversibleVoulezVous,
         ),
         actions: [
           TextButton(
@@ -253,8 +251,7 @@ class _ProfileView extends StatelessWidget {
               Navigator.pop(context);
               // cubit.deleteAccount(); // à implémenter
             },
-            child: const Text(
-              'Supprimer',
+            child: Text(AppStrings.supprimer,
               style: TextStyle(color: Color(0xFFE24B4A)),
             ),
           ),

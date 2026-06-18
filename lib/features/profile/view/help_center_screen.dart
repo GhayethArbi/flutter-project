@@ -4,6 +4,7 @@ import 'package:tunipark/core/theme/app_tokens.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/features/profile/cubit/help_center_cubit.dart';
 import 'package:tunipark/features/profile/profile_shared_widgets.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class HelpCenterScreen extends StatelessWidget {
   const HelpCenterScreen({super.key});
@@ -180,8 +181,7 @@ class _HelpCenterViewState extends State<_HelpCenterView> {
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Signaler un problème',
+            Text(AppStrings.signalerUnProbleme,
               style: TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.w700,
@@ -396,15 +396,14 @@ class _ContactCard extends StatelessWidget {
 class _EmptySearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 32),
         child: Column(
           children: [
             Icon(Icons.search_off, size: 40, color: Colors.black26),
             SizedBox(height: 12),
-            Text(
-              'Aucun résultat trouvé',
+            Text(AppStrings.aucunResultatTrouve,
               style: TextStyle(fontSize: 14, color: Colors.black38),
             ),
           ],

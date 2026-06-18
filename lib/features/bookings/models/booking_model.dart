@@ -1,3 +1,4 @@
+import 'package:tunipark/core/constants/app_strings2.dart';
 // lib/features/bookings/models/booking_model.dart
 
 enum BookingStatus { active, expired, cancelled }
@@ -92,7 +93,7 @@ class BookingModel {
       sessionId: json['id'] as String,
       parking: parkingJson != null
           ? BookingParking.fromJson(parkingJson)
-          : BookingParking(id: '', title: 'Parking', address: ''),
+          : BookingParking(id: '', title: AppStrings2.parking, address: ''),
       vehiclePlate: json['vehiclePlate'] as String? ?? '',
       vehicleBrand: json['vehicleBrand'] as String? ?? '',
       vehicleModel: json['vehicleModel'] as String? ?? '',

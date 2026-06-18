@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tunipark/core/models/Vehicules_option.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class ParkingCompatibility extends StatelessWidget {
   final List<VehicleOption> vehicles;
@@ -17,8 +18,7 @@ class ParkingCompatibility extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Compatible avec',
+        Text(AppStrings.compatibleAvec,
           style: TextStyle(
             fontSize: rs.adaptive(mobile: 16, tablet: 18, desktop: 20),
             fontWeight: FontWeight.w700,

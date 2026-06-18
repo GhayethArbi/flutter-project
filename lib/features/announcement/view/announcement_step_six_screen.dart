@@ -6,6 +6,8 @@ import '../cubit/announcement_flow_cubit.dart';
 import '../cubit/announcement_flow_state.dart';
 import '../widgets/announcement_fixed_bottom_actions.dart';
 import '../widgets/announcement_flow_header.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class AnnouncementStepSixScreen extends StatelessWidget {
   const AnnouncementStepSixScreen({super.key});
@@ -51,8 +53,7 @@ class AnnouncementStepSixScreen extends StatelessWidget {
 
                                 SizedBox(height: rs.adaptive(mobile: 18, tablet: 24, desktop: 28)),
 
-                                Text(
-                                  'Fixer vos tarifs',
+                                Text(AppStrings.fixerVosTarifs,
                                   style: TextStyle(
                                     fontSize: rs.adaptive(mobile: 20, tablet: 22, desktop: 24),
                                     fontWeight: FontWeight.w700,
@@ -62,8 +63,7 @@ class AnnouncementStepSixScreen extends StatelessWidget {
 
                                 SizedBox(height: rs.adaptive(mobile: 8, tablet: 10, desktop: 12)),
 
-                                Text(
-                                  'Définissez vos prix. Vous pourrez les modifier à tout moment.',
+                                Text(AppStrings.definissezVosPrixVousPourrezLes,
                                   style: TextStyle(
                                     fontSize: rs.adaptive(mobile: 14, tablet: 15, desktop: 16),
                                     height: 1.45,
@@ -75,31 +75,31 @@ class AnnouncementStepSixScreen extends StatelessWidget {
                                 SizedBox(height: rs.adaptive(mobile: 32, tablet: 40, desktop: 48)),
 
                                 // ── Prix par jour ──────────────────
-                                _PriceLabel(text: 'Prix par jour'),
+                                _PriceLabel(text: AppStrings2.prixParJour),
                                 SizedBox(height: rs.adaptive(mobile: 10, tablet: 12, desktop: 14)),
                                 _PriceFieldStateful(
                                   initialValue: state.pricePerDay,
                                   onChanged: cubit.updatePricePerDay,
                                 ),
                                 SizedBox(height: rs.adaptive(mobile: 6, tablet: 8, desktop: 10)),
-                                _HelperText(text: 'Pour les visiteurs et les déplacements'),
+                                _HelperText(text: AppStrings2.pourLesVisiteursEtLesDeplacements),
 
                                 SizedBox(height: rs.adaptive(mobile: 22, tablet: 28, desktop: 32)),
 
                                 // ── Prix par mois ──────────────────
-                                _PriceLabel(text: 'Prix par mois'),
+                                _PriceLabel(text: AppStrings2.prixParMois),
                                 SizedBox(height: rs.adaptive(mobile: 10, tablet: 12, desktop: 14)),
                                 _PriceFieldStateful(
                                   initialValue: state.pricePerMonth,
                                   onChanged: cubit.updatePricePerMonth,
                                 ),
                                 SizedBox(height: rs.adaptive(mobile: 6, tablet: 8, desktop: 10)),
-                                _HelperText(text: 'Abonnement longue durée'),
+                                _HelperText(text: AppStrings2.abonnementLongueDuree),
 
                                 SizedBox(height: rs.adaptive(mobile: 22, tablet: 28, desktop: 32)),
 
                                 // ── Prix par heure (optional, NEW) ─
-                                _PriceLabel(text: 'Prix par heure (optionnel)'),
+                                _PriceLabel(text: AppStrings2.prixParHeureOptionnel),
                                 SizedBox(height: rs.adaptive(mobile: 10, tablet: 12, desktop: 14)),
                                 _PriceFieldStateful(
                                   initialValue: state.pricePerUnit ?? 0,
@@ -107,7 +107,7 @@ class AnnouncementStepSixScreen extends StatelessWidget {
                                   allowZero: true,
                                 ),
                                 SizedBox(height: rs.adaptive(mobile: 6, tablet: 8, desktop: 10)),
-                                _HelperText(text: 'Laissez à 0 pour ne pas proposer de tarif horaire'),
+                                _HelperText(text: AppStrings2.laissezA0PourNePasProposer),
 
                                 // ── Error banner ───────────────────
                                 if (state.errorMessage.isNotEmpty) ...[
@@ -129,7 +129,7 @@ class AnnouncementStepSixScreen extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: _BottomButton(
-                                  text: 'Retour',
+                                  text: AppStrings2.retour,
                                   isPrimary: false,
                                   onPressed: state.isLoading ? null : () => cubit.goToStep(6),
                                 ),
@@ -137,7 +137,7 @@ class AnnouncementStepSixScreen extends StatelessWidget {
                               SizedBox(width: rs.adaptive(mobile: 14, tablet: 18, desktop: 20)),
                               Expanded(
                                 child: _BottomButton(
-                                  text: 'Publier',
+                                  text: AppStrings2.publier,
                                   isPrimary: true,
                                   onPressed: state.isLoading
                                       ? null
@@ -201,8 +201,7 @@ class _LoadingOverlay extends StatelessWidget {
                 ),
               ),
               SizedBox(height: rs.adaptive(mobile: 18, tablet: 20, desktop: 22)),
-              Text(
-                'Publication en cours…',
+              Text(AppStrings.publicationEnCours,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: rs.adaptive(mobile: 14, tablet: 15, desktop: 16),
@@ -211,8 +210,7 @@ class _LoadingOverlay extends StatelessWidget {
                 ),
               ),
               SizedBox(height: rs.adaptive(mobile: 6, tablet: 7, desktop: 8)),
-              Text(
-                'Veuillez patienter',
+              Text(AppStrings.veuillezPatienter,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: rs.adaptive(mobile: 12, tablet: 13, desktop: 14),
@@ -260,8 +258,7 @@ class _ErrorBanner extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Échec de la publication',
+                Text(AppStrings.echecDeLaPublication,
                   style: TextStyle(
                     fontSize: rs.adaptive(mobile: 13, tablet: 14, desktop: 15),
                     fontWeight: FontWeight.w700,
@@ -369,8 +366,7 @@ class _PriceFieldStatefulState extends State<_PriceFieldStateful> {
           suffixIcon: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                'DT',
+              Text(AppStrings.dt,
                 style: TextStyle(
                   fontSize: rs.adaptive(mobile: 14, tablet: 15, desktop: 16),
                   fontWeight: FontWeight.w700,

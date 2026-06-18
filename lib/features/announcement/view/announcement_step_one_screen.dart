@@ -9,6 +9,7 @@ import '../widgets/announcement_fixed_bottom_actions.dart';
 import '../widgets/announcement_flow_header.dart';
 import '../widgets/announcement_step_actions.dart';
 import '../widgets/parking_type_option_card.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class AnnouncementStepOneScreen extends StatelessWidget {
   const AnnouncementStepOneScreen({super.key});
@@ -55,8 +56,7 @@ class AnnouncementStepOneScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Quel type d\'emplacement\nproposez-vous ?',
+                            Text(AppStrings2.quelTypeDEmplacementProposezVous,
                               style: TextStyle(
                                 fontSize: rs.adaptive(mobile: 20, tablet: 22, desktop: 24),
                                 fontWeight: FontWeight.w700,
@@ -69,8 +69,8 @@ class AnnouncementStepOneScreen extends StatelessWidget {
                             // COVERED (new)
                             ParkingTypeOptionCard(
                               icon: Icons.roofing_rounded,
-                              title: 'Parking couvert',
-                              subtitle: 'Emplacement protégé par une toiture ou une structure',
+                              title: AppStrings2.parkingCouvert,
+                              subtitle: AppStrings2.emplacementProtegeParUneToitureOuUne,
                               isSelected: state.parkingType == ParkingSpotType.covered,
                               onTap: () => context
                                   .read<AnnouncementFlowCubit>()
@@ -80,8 +80,8 @@ class AnnouncementStepOneScreen extends StatelessWidget {
 
                             ParkingTypeOptionCard(
                               icon: Icons.apartment_rounded,
-                              title: 'Sous-sol d\'immeuble',
-                              subtitle: 'Place dans un parking souterrain d\'immeuble résidentiel',
+                              title: AppStrings2.sousSolDImmeuble,
+                              subtitle: AppStrings2.placeDansUnParkingSouterrainDImmeuble,
                               isSelected: state.parkingType == ParkingSpotType.underground,
                               onTap: () => context
                                   .read<AnnouncementFlowCubit>()
@@ -91,8 +91,8 @@ class AnnouncementStepOneScreen extends StatelessWidget {
 
                             ParkingTypeOptionCard(
                               icon: Icons.home_rounded,
-                              title: 'Garage de maison',
-                              subtitle: 'Garage individuel attenant ou séparé d\'une maison',
+                              title: AppStrings2.garageDeMaison,
+                              subtitle: AppStrings2.garageIndividuelAttenantOuSepareDUne,
                               isSelected: state.parkingType == ParkingSpotType.garage,
                               onTap: () => context
                                   .read<AnnouncementFlowCubit>()
@@ -102,8 +102,8 @@ class AnnouncementStepOneScreen extends StatelessWidget {
 
                             ParkingTypeOptionCard(
                               icon: Icons.local_parking_rounded,
-                              title: 'Parking extérieur',
-                              subtitle: 'Emplacement en plein air, dans une cour ou sur un terrain ouvert',
+                              title: AppStrings2.parkingExterieur,
+                              subtitle: AppStrings2.emplacementEnPleinAirDansUneCour,
                               isSelected: state.parkingType == ParkingSpotType.outdoor,
                               onTap: () => context
                                   .read<AnnouncementFlowCubit>()

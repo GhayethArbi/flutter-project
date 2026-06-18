@@ -7,6 +7,7 @@ import 'package:tunipark/core/utils/responsive_extension.dart';
 import '../../cubit/home_cubit.dart';
 import '../../cubit/home_state.dart';
 import '../../models/vehicle_option.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class HomeVehicleDropdown extends StatelessWidget {
   const HomeVehicleDropdown({super.key});
@@ -24,8 +25,7 @@ class HomeVehicleDropdown extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Type de véhicule',
+            Text(AppStrings.typeDeVehicule,
               style: TextStyle(
                 fontSize: labelFontSize,
                 fontWeight: FontWeight.w500,
@@ -228,8 +228,7 @@ class _ElectricHeader extends StatelessWidget {
         Icon(Icons.bolt, size: iconSize, color: Colors.black),
         SizedBox(width: rs.adaptive(mobile: 10, tablet: 12, desktop: 14)),
         Expanded(
-          child: Text(
-            'Véhicule électrique',
+          child: Text(AppStrings.vehiculeElectrique,
             style: TextStyle(
               fontSize: titleFontSize,
               fontWeight: FontWeight.w700,

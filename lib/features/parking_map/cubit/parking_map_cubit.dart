@@ -134,7 +134,7 @@ class ParkingMapCubit extends Cubit<ParkingMapState> {
     final serviceEnabled = await geo.Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(AppStrings.gpsIsDisabledPleaseEnableLocation),
         ),
       );
@@ -149,7 +149,7 @@ class ParkingMapCubit extends Cubit<ParkingMapState> {
 
       if (permission == geo.LocationPermission.denied) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppStrings.locationPermissionDenied)),
+          SnackBar(content: Text(AppStrings.locationPermissionDenied)),
         );
         return;
       }
@@ -157,9 +157,8 @@ class ParkingMapCubit extends Cubit<ParkingMapState> {
 
     if (permission == geo.LocationPermission.deniedForever) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'Location permission permanently denied. Open app settings.',
+        SnackBar(
+          content: Text(AppStrings.locationPermissionPermanentlyDeniedOpenApp,
           ),
         ),
       );

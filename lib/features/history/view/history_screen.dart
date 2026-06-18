@@ -66,9 +66,8 @@ class _HistoryView extends StatelessWidget {
                   }
 
                   if (state.items.isEmpty) {
-                    return const Center(
-                      child: Text(
-                        'Aucun historique disponible.',
+                    return Center(
+                      child: Text(AppStrings.aucunHistoriqueDisponible,
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
@@ -120,8 +119,7 @@ class _HistoryHeader extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-           const Text(
-              'Historique',
+           Text(AppStrings.historique,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,

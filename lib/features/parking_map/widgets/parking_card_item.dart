@@ -3,6 +3,7 @@ import 'package:tunipark/core/router/app_routes.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/features/parking_map/models/parking_place.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class ParkingCardItem extends StatelessWidget {
   final ParkingPlace parking;
@@ -89,8 +90,7 @@ class ParkingCardItem extends StatelessWidget {
                           color: const Color(0xFFFFF4D6),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: const Text(
-                          '⭐ Best Match',
+                        child: Text(AppStrings.bestMatch,
                           style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w800,

@@ -33,6 +33,7 @@ import 'package:tunipark/features/signup/screens/sign_up_screen.dart';
 import 'package:tunipark/features/splash/cubit/splash_cubit.dart';
 import 'package:tunipark/features/splash/splash_screen.dart';
 import 'package:tunipark/features/vehicles/view/vehicles_screen.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 /// Pure routing — no dependency construction here.
 /// All services come from [ServiceLocator] passed in the constructor.
@@ -51,16 +52,15 @@ class AppRouter {
       context: context,
       barrierDismissible: false,
       builder: (_) => AlertDialog(
-        title: const Text('Session Expired'),
-        content: const Text('Your session has expired. Please log in again.'),
+        title: Text(AppStrings2.sessionExpired),
+        content: Text(AppStrings2.yourSessionHasExpiredPleaseLogIn),
         actions: [
           TextButton(
             onPressed: () => navigatorKey.currentState?.pushNamedAndRemoveUntil(
               AppRoutes.login,
               (route) => false,
             ),
-            child: const Text(
-              'Log In',
+            child: Text(AppStrings2.logIn,
               style: TextStyle(color: AppColors.greentext),
             ),
           ),

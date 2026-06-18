@@ -12,6 +12,7 @@ import 'package:tunipark/features/parking_map/widgets/parking_cards_section.dart
 import 'package:tunipark/features/parking_map/widgets/parking_list_section.dart';
 import 'package:tunipark/features/parking_map/widgets/parking_map_view.dart';
 import 'package:tunipark/features/parking_map/widgets/parking_search_bar.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class ParkingMapScreen extends StatefulWidget {
   final SelectedPlace place;
@@ -93,7 +94,7 @@ class _ParkingMapScreenState extends State<ParkingMapScreen> {
                     right: rs.wp(0.04),
                     child: ParkingSearchBar(
                       title: state.selectedPlace?.label ?? '',
-                      subtitle: 'Monthly',
+                      subtitle: AppStrings2.monthly,
                       onTap: () {
                         Navigator.of(context).pop();
                       },

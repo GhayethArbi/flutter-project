@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class ParkingCharacteristics extends StatelessWidget {
   final List<String> characteristics;
@@ -14,8 +15,7 @@ class ParkingCharacteristics extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Caractéristiques',
+        Text(AppStrings.caracteristiques,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700,

@@ -55,7 +55,7 @@ class _VehiclesView extends StatelessWidget {
                             cubit.addVehicle('999 تونس 9999');
                           },
                           child: Row(
-                            children: const [
+                            children: [
                               Icon(Icons.add),
                               SizedBox(width: 10),
                               Text(AppStrings.ajouterUnVehicule),
@@ -76,8 +76,7 @@ class _VehiclesView extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(28),
                               ),
                             ),
-                            child: const Text(
-                              'Confirmer',
+                            child: Text(AppStrings.confirmer,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w700,
@@ -117,8 +116,7 @@ class _Header extends StatelessWidget {
               icon: const Icon(Icons.arrow_back),
             ),
           ),
-          const Text(
-            'Mes véhicules',
+          Text(AppStrings.mesVehicules,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
           ),
         ],

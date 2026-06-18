@@ -52,6 +52,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/features/parking_booking_flow/cubit/parking_booking_flow_cubit.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class PaymentSuccessStep extends StatelessWidget {
   const PaymentSuccessStep({super.key});
@@ -86,8 +87,7 @@ class PaymentSuccessStep extends StatelessWidget {
 
           SizedBox(height: rs.adaptive(mobile: 28, tablet: 32, desktop: 36)),
 
-          Text(
-            'Paiement réussi !',
+          Text(AppStrings.paiementReussi,
             style: TextStyle(
               fontSize: rs.adaptive(mobile: 22, tablet: 24, desktop: 26),
               fontWeight: FontWeight.w700,

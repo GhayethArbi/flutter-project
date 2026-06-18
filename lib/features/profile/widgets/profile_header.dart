@@ -1,6 +1,7 @@
 // ── Header ────────────────────────────────────────────────────────────────────
 
 import 'package:flutter/material.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 import 'package:tunipark/core/router/app_routes.dart';
 import 'package:tunipark/features/profile/cubit/profile_state.dart';
 
@@ -52,10 +53,7 @@ class ProfileHeader extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Bonjour 👋',
-                  style: TextStyle(fontSize: 12),
-                ),
+                Text(AppStrings.bonjour, style: TextStyle(fontSize: 12)),
 
                 Text(
                   user?.fullName ?? '',
@@ -67,10 +65,7 @@ class ProfileHeader extends StatelessWidget {
 
                 Text(
                   user?.email ?? user?.phoneNumber ?? '',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.black54,
-                  ),
+                  style: const TextStyle(fontSize: 12, color: Colors.black54),
                 ),
               ],
             ),
@@ -82,7 +77,7 @@ class ProfileHeader extends StatelessWidget {
               Navigator.pushNamed(context, AppRoutes.personalInfo);
             },
             icon: const Icon(Icons.edit, size: 18),
-          )
+          ),
         ],
       ),
     );

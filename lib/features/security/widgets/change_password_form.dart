@@ -37,7 +37,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
       listener: (context, state) {
         if (state.isSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+             SnackBar(
               content: Text(AppStrings.motDePasseModifieAvecSucces),
               backgroundColor: AppTokens.limeDark,
             ),

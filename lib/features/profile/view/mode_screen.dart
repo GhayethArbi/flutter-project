@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/features/profile/cubit/profile_cubit.dart';
 import 'package:tunipark/features/profile/cubit/profile_state.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class ModeScreen extends StatelessWidget {
   const ModeScreen({super.key});
@@ -21,7 +23,7 @@ class ModeScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       _ModeOptionTile(
-                        title: 'Jour',
+                        title: AppStrings2.jour,
                         isSelected: state.themeMode == AppThemeMode.day,
                         onTap: () {
                           context.read<ProfileCubit>().setThemeMode(
@@ -31,7 +33,7 @@ class ModeScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       _ModeOptionTile(
-                        title: 'Nuit',
+                        title: AppStrings2.nuit,
                         isSelected: state.themeMode == AppThemeMode.night,
                         onTap: () {
                           context.read<ProfileCubit>().setThemeMode(
@@ -74,8 +76,7 @@ class _ModeHeader extends StatelessWidget {
                 ),
               ),
             ),
-            const Text(
-              'Mode',
+            Text(AppStrings.mode,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,

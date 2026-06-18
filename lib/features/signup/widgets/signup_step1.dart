@@ -6,6 +6,8 @@ import 'package:tunipark/features/signup/widgets/signup_text_field.dart';
 import 'package:tunipark/features/signup/cubit/signup_cubit.dart';
 import 'package:tunipark/features/signup/widgets/signup_button.dart';
 import 'package:tunipark/features/signup/widgets/signup_header.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class SignUpStep1 extends StatefulWidget {
   const SignUpStep1({super.key});
@@ -130,7 +132,7 @@ class _SignUpStep1State extends State<SignUpStep1> {
               SizedBox(height: rs.clampSize(0.09, 36, 56)),
 
               SignUpButton(
-                label: 'Suivant',
+                label: AppStrings2.suivant,
                 isLoading: false,
                 onTap: cubit.nextStep,
               ),
@@ -140,8 +142,7 @@ class _SignUpStep1State extends State<SignUpStep1> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Vous avez un compte ? ',
+                  Text(AppStrings2.vousAvezUnCompte,
                     style: TextStyle(
                       color: theme.colorScheme.onSurfaceVariant,
                       fontSize: rs.clampSize(0.035, 13, 15),
@@ -149,8 +150,7 @@ class _SignUpStep1State extends State<SignUpStep1> {
                   ),
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
-                    child: Text(
-                      'Se connecter',
+                    child: Text(AppStrings.seConnecter2,
                       style: TextStyle(
                         color: AppColors.colorBtn,
                         fontSize: rs.clampSize(0.035, 13, 15),

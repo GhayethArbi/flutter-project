@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tunipark/features/parking_details/widgets/features_item.dart';
 import 'package:tunipark/features/parking_details/widgets/trustpilot_item.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class FeaturesGrid extends StatelessWidget {
   final dynamic rs;
@@ -19,16 +20,16 @@ class FeaturesGrid extends StatelessWidget {
         children: [
           Row(
             children: [
-              FeatureItem(icon: Icons.shield_outlined, label: 'Secure private\nparking'),
+              FeatureItem(icon: Icons.shield_outlined, label: AppStrings2.securePrivateParking),
               const SizedBox(width: 12),
-              FeatureItem(icon: Icons.lock_open_outlined, label: 'No\ncommitment'),
+              FeatureItem(icon: Icons.lock_open_outlined, label: AppStrings2.noCommitment),
             ],
           ),
           const SizedBox(height: 12),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FeatureItem(icon: Icons.local_parking, label: 'Your\ndedicated\nspace'),
+              FeatureItem(icon: Icons.local_parking, label: AppStrings2.yourDedicatedSpace),
               const SizedBox(width: 12),
               TrustpilotItem(),
             ],

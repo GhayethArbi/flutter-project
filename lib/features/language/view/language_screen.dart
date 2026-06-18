@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/features/language/cubit/language_cubit.dart';
 import 'package:tunipark/features/language/cubit/language_state.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class LanguageScreen extends StatelessWidget {
   const LanguageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => LanguageCubit(),
-      child: const _LanguageView(),
-    );
+    return const _LanguageView();
   }
 }
 
@@ -33,25 +32,30 @@ class _LanguageView extends StatelessWidget {
                   child: Column(
                     children: [
                       _LanguageOptionTile(
-                        title: 'Français',
+                        title: AppStrings2.francais,
                         isSelected:
                             state.selectedLanguage == AppLanguage.french,
-                        onTap: () {
-                          context.read<LanguageCubit>().selectLanguage(
-                                AppLanguage.french,
-                              );
-                        },
+                        onTap: () => context
+                            .read<LanguageCubit>()
+                            .selectLanguage(AppLanguage.french),
                       ),
                       const SizedBox(height: 16),
                       _LanguageOptionTile(
-                        title: 'Arabe',
+                        title: AppStrings2.english,
+                        isSelected:
+                            state.selectedLanguage == AppLanguage.english,
+                        onTap: () => context
+                            .read<LanguageCubit>()
+                            .selectLanguage(AppLanguage.english),
+                      ),
+                      const SizedBox(height: 16),
+                      _LanguageOptionTile(
+                        title: AppStrings2.text,
                         isSelected:
                             state.selectedLanguage == AppLanguage.arabic,
-                        onTap: () {
-                          context.read<LanguageCubit>().selectLanguage(
-                                AppLanguage.arabic,
-                              );
-                        },
+                        onTap: () => context
+                            .read<LanguageCubit>()
+                            .selectLanguage(AppLanguage.arabic),
                       ),
                     ],
                   ),
@@ -82,8 +86,7 @@ class _Header extends StatelessWidget {
               icon: const Icon(Icons.arrow_back),
             ),
           ),
-          const Text(
-            'Langue',
+          Text(AppStrings.langue,
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w700,
@@ -128,10 +131,7 @@ class _LanguageOptionTile extends StatelessWidget {
             height: 18,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(
-                color: const Color(0xFFB7F000),
-                width: 1.8,
-              ),
+              border: Border.all(color: const Color(0xFFB7F000), width: 1.8),
               color: Colors.transparent,
             ),
             child: isSelected

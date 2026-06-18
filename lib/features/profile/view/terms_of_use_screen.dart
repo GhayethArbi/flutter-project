@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class TermsOfUseScreen extends StatefulWidget {
   const TermsOfUseScreen({super.key});
@@ -119,8 +120,9 @@ class _TermsOfUseScreenState extends State<TermsOfUseScreen> {
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Color(0xFFB7F000),
-                borderRadius:
-                    BorderRadius.only(bottomRight: Radius.circular(40)),
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(40),
+                ),
               ),
               padding: const EdgeInsets.fromLTRB(8, 8, 22, 16),
               child: Column(
@@ -130,12 +132,15 @@ class _TermsOfUseScreenState extends State<TermsOfUseScreen> {
                     children: [
                       IconButton(
                         onPressed: () => Navigator.pop(context),
-                        icon: const Icon(Icons.arrow_back,
-                            color: Colors.black, size: 22),
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.black,
+                          size: 22,
+                        ),
                       ),
                       const SizedBox(width: 4),
-                      const Text(
-                        "Conditions d'utilisation",
+                      Text(
+                        AppStrings.conditionsDUtilisation,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
@@ -185,21 +190,28 @@ class _TermsOfUseScreenState extends State<TermsOfUseScreen> {
                       children: [
                         Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 5),
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
                           decoration: BoxDecoration(
                             color: const Color(0xFFEAF3CF),
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(
-                                color: const Color(0xFFB7F000), width: 0.5),
+                              color: const Color(0xFFB7F000),
+                              width: 0.5,
+                            ),
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
-                            children: const [
-                              Icon(Icons.update,
-                                  size: 13, color: Color(0xFF3B6D11)),
+                            children: [
+                              Icon(
+                                Icons.update,
+                                size: 13,
+                                color: Color(0xFF3B6D11),
+                              ),
                               SizedBox(width: 5),
                               Text(
-                                'Version 1.0 — 1er janvier 2025',
+                                AppStrings.version101erJanvier2025,
                                 style: TextStyle(
                                   fontSize: 11,
                                   color: Color(0xFF3B6D11),
@@ -227,17 +239,22 @@ class _TermsOfUseScreenState extends State<TermsOfUseScreen> {
                         color: const Color(0xFFF5FFD6),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                            color: const Color(0xFFB7F000), width: 0.5),
+                          color: const Color(0xFFB7F000),
+                          width: 0.5,
+                        ),
                       ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Icon(Icons.check_circle_outline,
-                              size: 18, color: Color(0xFF3B6D11)),
+                        children: [
+                          Icon(
+                            Icons.check_circle_outline,
+                            size: 18,
+                            color: Color(0xFF3B6D11),
+                          ),
                           SizedBox(width: 10),
                           Expanded(
                             child: Text(
-                              'En utilisant Tunipark, vous confirmez avoir lu et accepté ces conditions dans leur intégralité.',
+                              AppStrings.enUtilisantTuniparkVousConfirmezAvoir,
                               style: TextStyle(
                                 fontSize: 13,
                                 color: Color(0xFF3B6D11),
@@ -308,8 +325,9 @@ class _TermSectionCardState extends State<_TermSectionCard> {
                     child: Icon(
                       Icons.keyboard_arrow_down,
                       size: 20,
-                      color:
-                          _expanded ? const Color(0xFF3B6D11) : Colors.black26,
+                      color: _expanded
+                          ? const Color(0xFF3B6D11)
+                          : Colors.black26,
                     ),
                   ),
                 ],

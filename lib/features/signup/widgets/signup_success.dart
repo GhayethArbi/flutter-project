@@ -4,6 +4,7 @@ import 'package:tunipark/core/theme/app_spacing.dart';
 import 'package:tunipark/core/theme/app_text_scale.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/core/widgets/app_page_container.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class SignUpSuccess extends StatelessWidget {
   const SignUpSuccess({super.key});
@@ -26,8 +27,7 @@ class SignUpSuccess extends StatelessWidget {
               height: iconSize,
             ),
             SizedBox(height: AppSpacing.sectionGap(context)),
-            Text(
-              'Inscription réussie !',
+            Text(AppStrings.inscriptionReussie,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: theme.colorScheme.onSurface,
@@ -36,8 +36,7 @@ class SignUpSuccess extends StatelessWidget {
               ),
             ),
             SizedBox(height: AppSpacing.itemGap(context)),
-            Text(
-              'Votre compte a été créé avec succès.\nVous pouvez maintenant commencer à utiliser TuniPark.',
+            Text(AppStrings.votreCompteAEteCreeAvec,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: theme.colorScheme.onSurfaceVariant,

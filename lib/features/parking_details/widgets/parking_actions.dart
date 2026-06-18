@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class ParkingActions extends StatelessWidget {
   const ParkingActions({super.key});
@@ -21,8 +22,7 @@ class ParkingActions extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 14),
             ),
             onPressed: () {},
-            child: const Text(
-              'Itinéraire',
+            child: Text(AppStrings.itineraire,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 14,
@@ -43,8 +43,7 @@ class ParkingActions extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 14),
             ),
             onPressed: () {},
-            child: const Text(
-              'Partager',
+            child: Text(AppStrings.partager,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 14,

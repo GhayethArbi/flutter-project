@@ -9,6 +9,8 @@ import '../cubit/announcement_flow_cubit.dart';
 import '../cubit/announcement_flow_state.dart';
 import '../widgets/announcement_fixed_bottom_actions.dart';
 import '../widgets/announcement_flow_header.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class AnnouncementStepFiveScreen extends StatelessWidget {
   const AnnouncementStepFiveScreen({super.key});
@@ -79,8 +81,7 @@ class AnnouncementStepFiveScreen extends StatelessWidget {
 
                             SizedBox(height: rs.adaptive(mobile: 18, tablet: 24, desktop: 28)),
 
-                            Text(
-                              'Documents légaux',
+                            Text(AppStrings.documentsLegaux,
                               style: TextStyle(
                                 fontSize: rs.adaptive(
                                   mobile: 20,
@@ -94,8 +95,7 @@ class AnnouncementStepFiveScreen extends StatelessWidget {
 
                             SizedBox(height: rs.adaptive(mobile: 12, tablet: 14, desktop: 16)),
 
-                            Text(
-                              'Téléchargez les documents légalisés de la\nmunicipalité pour valider votre emplacement',
+                            Text(AppStrings.telechargezLesDocumentsLegalisesDeLa,
                               style: TextStyle(
                                 fontSize: rs.adaptive(
                                   mobile: 15,
@@ -122,11 +122,7 @@ class AnnouncementStepFiveScreen extends StatelessWidget {
                                   rs.adaptive(mobile: 8, tablet: 10, desktop: 12),
                                 ),
                               ),
-                              child: Text(
-                                '• Autorisation de la municipalité\n'
-                                '• Titre de propriété ou bail\n'
-                                '• Attestation d’assurance\n'
-                                '• Certificat de conformité (si terrain)',
+                              child: Text(AppStrings.autorisationDeLaMunicipalite,
                                 style: TextStyle(
                                   fontSize: rs.adaptive(
                                     mobile: 12,
@@ -181,8 +177,7 @@ class AnnouncementStepFiveScreen extends StatelessWidget {
                                       color: const Color(0xFF555555),
                                     ),
                                     SizedBox(height: rs.adaptive(mobile: 8, tablet: 10, desktop: 12)),
-                                    Text(
-                                      'Téléchargez un document',
+                                    Text(AppStrings.telechargezUnDocument,
                                       style: TextStyle(
                                         fontSize: rs.adaptive(
                                           mobile: 13,
@@ -227,7 +222,7 @@ class AnnouncementStepFiveScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: _BottomButton(
-                              text: 'Retour',
+                              text: AppStrings2.retour,
                               isPrimary: false,
                               onPressed: () => cubit.goToStep(4),
                             ),
@@ -235,7 +230,7 @@ class AnnouncementStepFiveScreen extends StatelessWidget {
                           SizedBox(width: rs.adaptive(mobile: 14, tablet: 18, desktop: 20)),
                           Expanded(
                             child: _BottomButton(
-                              text: 'Suivant',
+                              text: AppStrings2.suivant,
                               isPrimary: true,
                               onPressed: state.legalDocuments.isEmpty
                                   ? null

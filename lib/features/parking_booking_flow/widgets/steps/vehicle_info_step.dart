@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/features/parking_booking_flow/cubit/parking_booking_flow_cubit.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class VehicleInfoStep extends StatelessWidget {
   const VehicleInfoStep({super.key});
@@ -14,8 +15,7 @@ class VehicleInfoStep extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Selectionnez votre plaque d’immatriculation',
+        Text(AppStrings2.selectionnezVotrePlaqueDimmatriculation,
           style: TextStyle(
             fontSize: rs.adaptive(mobile: 15, tablet: 16, desktop: 17),
             fontWeight: FontWeight.w600,
@@ -121,8 +121,7 @@ class VehicleInfoStep extends StatelessWidget {
           children: [
             const Icon(Icons.add, size: 18),
             const SizedBox(width: 10),
-            Text(
-              'Ajouter une plaque d’immatriculation',
+            Text(AppStrings2.ajouterUnePlaqueDimmatriculation,
               style: TextStyle(
                 fontSize: rs.adaptive(mobile: 13, tablet: 14, desktop: 15),
               ),

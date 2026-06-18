@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
 import '../cubit/payments_cubit.dart';
 import '../cubit/payments_state.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class PaymentsScreen extends StatelessWidget {
   const PaymentsScreen({super.key});
@@ -65,8 +66,7 @@ class _Header extends StatelessWidget {
               icon: const Icon(Icons.arrow_back),
             ),
           ),
-          const Text(
-            'Mes paiements',
+          Text(AppStrings.mesPaiements,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
           ),
         ],
@@ -89,8 +89,7 @@ class _EmptyState extends StatelessWidget {
             width: 200,
           ),
           const SizedBox(height: 20),
-          const Text(
-            'Aucun paiement effectué pour le moment',
+          Text(AppStrings.aucunPaiementEffectuePourLeMoment,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 15,

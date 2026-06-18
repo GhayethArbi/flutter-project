@@ -9,6 +9,7 @@ import 'package:tunipark/features/login/widgets/login_button.dart';
 import 'package:tunipark/features/login/widgets/login_footer.dart';
 import 'package:tunipark/features/login/widgets/login_text_field.dart';
 import 'package:tunipark/features/login/widgets/social_svg_button.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -86,8 +87,7 @@ class _LoginFormState extends State<LoginForm> {
               context,
               MaterialPageRoute(builder: (_) => const ForgotPasswordScreen()),
             ),
-            child: Text(
-              'Mot de passe oublié ?',
+            child: Text(AppStrings.motDePasseOublie,
               style: TextStyle(
                 fontSize: rs.adaptive(mobile: 13, tablet: 14, desktop: 15),
                 fontWeight: FontWeight.w700,
@@ -145,8 +145,7 @@ class _SocialLoginSection extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: rs.adaptive(mobile: 12, tablet: 16, desktop: 18),
               ),
-              child: Text(
-                'Ou',
+              child: Text(AppStrings.ou,
                 style: TextStyle(
                   fontSize: rs.adaptive(mobile: 14, tablet: 15, desktop: 16),
                   fontWeight: FontWeight.w600,

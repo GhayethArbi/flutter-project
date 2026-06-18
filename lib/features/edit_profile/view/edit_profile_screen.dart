@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/features/edit_profile/cubit/edit_profile_cubit.dart';
 import 'package:tunipark/features/edit_profile/cubit/edit_profile_state.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
@@ -66,26 +68,26 @@ class _EditProfileView extends StatelessWidget {
                                 ),
 
                                 _Field(
-                                  label: 'Nom',
+                                  label: AppStrings2.nom,
                                   hint: 'Nom',
                                   onChanged: cubit.updateFirstName,
                                 ),
 
                                 _Field(
-                                  label: 'Prénom',
+                                  label: AppStrings2.prenom,
                                   hint: 'Prénom',
                                   onChanged: cubit.updateLastName,
                                 ),
 
                                 _Field(
-                                  label: 'Adresse mail',
+                                  label: AppStrings2.adresseMail,
                                   hint: 'E-mail',
                                   keyboardType: TextInputType.emailAddress,
                                   onChanged: cubit.updateEmail,
                                 ),
 
                                 _Field(
-                                  label: 'Numéro de téléphone',
+                                  label: AppStrings2.numeroDeTelephone,
                                   hint: 'Numéro de téléphone',
                                   keyboardType: TextInputType.phone,
                                   onChanged: cubit.updatePhone,
@@ -100,7 +102,7 @@ class _EditProfileView extends StatelessWidget {
                                 ),
 
                                 _Field(
-                                  label: 'Mot de passe',
+                                  label: AppStrings2.motDePasse,
                                   hint: 'Mot de passe actuel',
                                   onChanged: cubit.updateCurrentPassword,
                                   obscure: true,
@@ -187,8 +189,7 @@ class _EditProfileView extends StatelessWidget {
                                               BorderRadius.circular(28),
                                         ),
                                       ),
-                                      child: Text(
-                                        'Confirmer',
+                                      child: Text(AppStrings.confirmer,
                                         style: TextStyle(
                                           fontSize: rs.adaptive(
                                             mobile: 16,
@@ -265,8 +266,7 @@ class _Header extends StatelessWidget {
               ),
             ),
           ),
-          Text(
-            'Editer le profil',
+          Text(AppStrings.editerLeProfil,
             style: TextStyle(
               fontSize: rs.adaptive(
                 mobile: 20,

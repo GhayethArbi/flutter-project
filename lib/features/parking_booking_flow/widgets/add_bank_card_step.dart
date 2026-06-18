@@ -1,3 +1,4 @@
+import 'package:tunipark/core/constants/app_strings2.dart';
 // import 'package:flutter/material.dart';
 // import 'package:tunipark/core/utils/responsive_extension.dart';
 
@@ -20,7 +21,7 @@
 //         ),
 //         const SizedBox(height: 8),
 //         _CardInputField(
-//           hintText: 'Numéro de carte',
+//           Text(AppStrings2.numeroDeCarte,
 //           prefixIcon: Icons.credit_card,
 //         ),
 //         const SizedBox(height: 18),
@@ -28,15 +29,15 @@
 //           children: const [
 //             Expanded(
 //               child: _LabeledField(
-//                 label: 'Expiration',
-//                 hintText: 'Expiration',
+//                 label: AppStrings2.expiration,
+//                 Text(AppStrings2.expiration,
 //               ),
 //             ),
 //             SizedBox(width: 12),
 //             Expanded(
 //               child: _LabeledField(
-//                 label: 'Cryptogramme',
-//                 hintText: 'Cryptogramme',
+//                 label: AppStrings2.cryptogramme,
+//                 Text(AppStrings2.cryptogramme,
 //               ),
 //             ),
 //           ],

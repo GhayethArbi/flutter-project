@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
   const PrivacyPolicyScreen({super.key});
@@ -63,20 +64,25 @@ class PrivacyPolicyScreen extends StatelessWidget {
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Color(0xFFB7F000),
-                borderRadius: BorderRadius.only(bottomRight: Radius.circular(40)),
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(40),
+                ),
               ),
               padding: const EdgeInsets.fromLTRB(8, 8, 22, 20),
               child: Row(
                 children: [
                   IconButton(
                     onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.arrow_back,
-                        color: Colors.black, size: 22),
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.black,
+                      size: 22,
+                    ),
                   ),
                   const SizedBox(width: 4),
-                  const Expanded(
+                  Expanded(
                     child: Text(
-                      'Politique de confidentialité',
+                      AppStrings.politiqueDeConfidentialite,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
@@ -96,21 +102,29 @@ class PrivacyPolicyScreen extends StatelessWidget {
                   children: [
                     // Last updated chip
                     Container(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: const Color(0xFFEAF3CF),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                            color: const Color(0xFFB7F000), width: 0.5),
+                          color: const Color(0xFFB7F000),
+                          width: 0.5,
+                        ),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
-                        children: const [
-                          Icon(Icons.update, size: 14, color: Color(0xFF3B6D11)),
+                        children: [
+                          Icon(
+                            Icons.update,
+                            size: 14,
+                            color: Color(0xFF3B6D11),
+                          ),
                           SizedBox(width: 6),
                           Text(
-                            'Dernière mise à jour : 1er janvier 2025',
+                            AppStrings.derniereMiseAJour1erJanvier,
                             style: TextStyle(
                               fontSize: 12,
                               color: Color(0xFF3B6D11),
@@ -129,7 +143,9 @@ class PrivacyPolicyScreen extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(14),
                         border: Border.all(
-                            color: const Color(0xFFE8E8E8), width: 0.5),
+                          color: const Color(0xFFE8E8E8),
+                          width: 0.5,
+                        ),
                       ),
                       child: const Text(
                         'Chez Tunipark, la protection de vos données personnelles est une priorité. Cette politique explique comment nous collectons, utilisons et protégeons vos informations lorsque vous utilisez notre application.',
@@ -152,10 +168,13 @@ class PrivacyPolicyScreen extends StatelessWidget {
                       height: 50,
                       child: OutlinedButton.icon(
                         onPressed: () {},
-                        icon: const Icon(Icons.email_outlined,
-                            size: 18, color: Color(0xFF3B6D11)),
-                        label: const Text(
-                          'Nous contacter pour vos droits',
+                        icon: const Icon(
+                          Icons.email_outlined,
+                          size: 18,
+                          color: Color(0xFF3B6D11),
+                        ),
+                        label: Text(
+                          AppStrings.nousContacterPourVosDroits,
                           style: TextStyle(
                             fontSize: 14,
                             color: Color(0xFF3B6D11),
@@ -164,7 +183,9 @@ class PrivacyPolicyScreen extends StatelessWidget {
                         ),
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(
-                              color: Color(0xFFB7F000), width: 1.5),
+                            color: Color(0xFFB7F000),
+                            width: 1.5,
+                          ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),

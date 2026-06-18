@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tunipark/core/theme/core.dart';
+import 'package:tunipark/core/theme/app_colors.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class DateTimePickerBottomSheet extends StatefulWidget {
   final DateTime initialValue;
@@ -137,9 +138,8 @@ class _DateTimePickerBottomSheetState extends State<DateTimePickerBottomSheet> {
     if (widget.minimumDate != null &&
         selectedDateTime.isBefore(widget.minimumDate!)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'La date sélectionnée doit être postérieure à la date minimale.',
+        SnackBar(
+          content: Text(AppStrings.laDateSelectionneeDoitEtrePosterieure,
           ),
         ),
       );
@@ -284,8 +284,7 @@ class _DateTimePickerBottomSheetState extends State<DateTimePickerBottomSheet> {
                     borderRadius: BorderRadius.circular(16),
                   ),
                 ),
-                child: Text(
-                  'Confirmer',
+                child: Text(AppStrings.confirmer,
                   style: TextStyle(
                     fontSize: rs.adaptive(mobile: 15, tablet: 16, desktop: 17),
                     fontWeight: FontWeight.w600,

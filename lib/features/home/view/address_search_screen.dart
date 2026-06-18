@@ -7,6 +7,8 @@ import '../cubit/address_search/address_search_cubit.dart';
 import '../cubit/address_search/address_search_state.dart';
 import '../../parking_map/models/selected_place.dart';
 import '../services/location_search_service.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class AddressSearchScreen extends StatelessWidget {
   const AddressSearchScreen({super.key});
@@ -125,7 +127,7 @@ class _AddressSearchViewState extends State<_AddressSearchView> {
                               color: const Color(0xFF000000),
                             ),
                             decoration: InputDecoration(
-                              hintText: 'Rechercher',
+                              labelText: AppStrings2.rechercher,
                               hintStyle: TextStyle(
                                 color: const Color(0xFF8B8B8B),
                                 fontSize: textFontSize,
@@ -148,8 +150,7 @@ class _AddressSearchViewState extends State<_AddressSearchView> {
                       ),
                       GestureDetector(
                         onTap: () => Navigator.pop(context),
-                        child: Text(
-                          'Annuler',
+                        child: Text(AppStrings.annuler,
                           style: TextStyle(
                             fontSize: rs.adaptive(
                               mobile: 15,
@@ -211,8 +212,7 @@ class _AddressSearchViewState extends State<_AddressSearchView> {
                         if (state.query.trim().length < 3) {
                           if (state.recentPlaces.isEmpty) {
                             return Center(
-                              child: Text(
-                                'Commencez à saisir une adresse',
+                              child: Text(AppStrings.commencezASaisirUneAdresse,
                                 style: TextStyle(
                                   fontSize: rs.adaptive(
                                     mobile: 14,
@@ -247,8 +247,7 @@ class _AddressSearchViewState extends State<_AddressSearchView> {
 
                         if (state.status == AddressSearchStatus.empty) {
                           return Center(
-                            child: Text(
-                              'Aucun lieu trouvé',
+                            child: Text(AppStrings.aucunLieuTrouve,
                               style: TextStyle(
                                 fontSize: rs.adaptive(
                                   mobile: 15,

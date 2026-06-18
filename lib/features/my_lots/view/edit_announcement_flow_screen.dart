@@ -39,7 +39,7 @@ class EditAnnouncementFlowScreen extends StatelessWidget {
         listener: (context, state) {
           if (state.status == EditAnnouncementStatus.success) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
+               SnackBar(
                 content: Text(AppStrings.parkingMisAJourAvecSucces),
                 backgroundColor: AppColors.limeDark,
               ),

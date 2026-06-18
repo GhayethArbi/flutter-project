@@ -9,6 +9,8 @@ import '../cubit/announcement_flow_cubit.dart';
 import '../cubit/announcement_flow_state.dart';
 import '../widgets/announcement_fixed_bottom_actions.dart';
 import '../widgets/announcement_flow_header.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class AnnouncementStepFourScreen extends StatelessWidget {
   const AnnouncementStepFourScreen({super.key});
@@ -78,8 +80,7 @@ class AnnouncementStepFourScreen extends StatelessWidget {
 
                             SizedBox(height: rs.adaptive(mobile: 18, tablet: 24, desktop: 28)),
 
-                            Text(
-                              'Ajoutez des photos',
+                            Text(AppStrings.ajoutezDesPhotos,
                               style: TextStyle(
                                 fontSize: rs.adaptive(
                                   mobile: 20,
@@ -93,8 +94,7 @@ class AnnouncementStepFourScreen extends StatelessWidget {
 
                             SizedBox(height: rs.adaptive(mobile: 12, tablet: 14, desktop: 16)),
 
-                            Text(
-                              'Ajoutez au moins 3 photos pour mettre en\nvaleur votre emplacement',
+                            Text(AppStrings.ajoutezAuMoins3PhotosPour,
                               style: TextStyle(
                                 fontSize: rs.adaptive(
                                   mobile: 15,
@@ -145,9 +145,7 @@ class AnnouncementStepFourScreen extends StatelessWidget {
                                   color: const Color(0xFFD6EA74),
                                 ),
                               ),
-                              child: Text(
-                                'Prenez des photos claires montrant l’emplacement, l’accès et les environs. '
-                                'Des photos de qualité augmentent vos chance de location de 60%',
+                              child: Text(AppStrings.prenezDesPhotosClairesMontrantLemplacement,
                                 style: TextStyle(
                                   fontSize: rs.adaptive(
                                     mobile: 13,
@@ -171,7 +169,7 @@ class AnnouncementStepFourScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: _BottomButton(
-                              text: 'Retour',
+                              text: AppStrings2.retour,
                               isPrimary: false,
                               onPressed: () => cubit.goToStep(3),
                             ),
@@ -179,7 +177,7 @@ class AnnouncementStepFourScreen extends StatelessWidget {
                           SizedBox(width: rs.adaptive(mobile: 14, tablet: 18, desktop: 20)),
                           Expanded(
                             child: _BottomButton(
-                              text: 'Suivant',
+                              text: AppStrings2.suivant,
                               isPrimary: true,
                               onPressed: state.photos.length < 3
                                   ? null
@@ -234,8 +232,7 @@ class _AddPhotoBox extends StatelessWidget {
               color: const Color(0xFF4A4A4A),
             ),
             SizedBox(height: rs.adaptive(mobile: 8, tablet: 10, desktop: 12)),
-            Text(
-              'Ajouter',
+            Text(AppStrings.ajouter,
               style: TextStyle(
                 fontSize: rs.adaptive(mobile: 12, tablet: 13, desktop: 14),
                 fontWeight: FontWeight.w600,

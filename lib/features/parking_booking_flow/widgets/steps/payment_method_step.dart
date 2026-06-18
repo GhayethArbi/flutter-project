@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/features/parking_booking_flow/cubit/parking_booking_flow_cubit.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class PaymentMethodStep extends StatelessWidget {
   const PaymentMethodStep({super.key});
@@ -14,8 +16,7 @@ class PaymentMethodStep extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Paiement 100% sécurisé',
+        Text(AppStrings.paiement100Securise,
           style: TextStyle(
             fontSize: rs.adaptive(mobile: 15, tablet: 16, desktop: 17),
             fontWeight: FontWeight.w600,
@@ -23,7 +24,7 @@ class PaymentMethodStep extends StatelessWidget {
         ),
         SizedBox(height: rs.adaptive(mobile: 18, tablet: 20, desktop: 22)),
         _PaymentMethodCard(
-          title: 'Flouci',
+          title: AppStrings2.flouci,
           trailing: ClipRRect(
             borderRadius: BorderRadius.circular(4),
             child: Image.asset(
@@ -42,7 +43,7 @@ class PaymentMethodStep extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         _PaymentMethodCard(
-          title: 'Carte bancaire',
+          title: AppStrings2.carteBancaire,
           trailing: Image.asset(
             'assets/mastercard.png',
             width: 42,
@@ -64,15 +65,14 @@ class PaymentMethodStep extends StatelessWidget {
           ),
 
         if (state.awaitingDeepLink && !state.paymentLoading)
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(top: 16),
             child: Center(
               child: Column(
                 children: [
                   CircularProgressIndicator(),
                   SizedBox(height: 10),
-                  Text(
-                    'En attente de confirmation du paiement…',
+                  Text(AppStrings.enAttenteDeConfirmationDuPaiement,
                     style: TextStyle(color: Colors.black54, fontSize: 13),
                   ),
                 ],
@@ -119,8 +119,7 @@ class PaymentMethodStep extends StatelessWidget {
           children: [
             const Icon(Icons.add, size: 18),
             const SizedBox(width: 10),
-            Text(
-              'Ajouter une carte bancaire',
+            Text(AppStrings.ajouterUneCarteBancaire,
               style: TextStyle(
                 fontSize: rs.adaptive(mobile: 13, tablet: 14, desktop: 15),
               ),

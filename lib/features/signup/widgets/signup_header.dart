@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tunipark/core/theme/app_assets.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class SignUpHeader extends StatelessWidget {
   const SignUpHeader({super.key});
@@ -22,8 +23,7 @@ class SignUpHeader extends StatelessWidget {
         ),
       
         const SizedBox(height: 36),
-        Text(
-          'Créer un compte',
+        Text(AppStrings.creerUnCompte,
           style: TextStyle(
             color: theme.colorScheme.onSurface,
             fontSize: 22,
@@ -31,8 +31,7 @@ class SignUpHeader extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
-        Text(
-          'Inscrivez-vous pour accéder à votre compte.',
+        Text(AppStrings.inscrivezVousPourAccederAVotre,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: theme.colorScheme.onSurfaceVariant,

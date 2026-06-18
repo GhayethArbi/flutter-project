@@ -4,6 +4,7 @@ import 'package:tunipark/core/theme/app_colors.dart';
 
 import '../cubit/bookings_cubit.dart';
 import '../cubit/bookings_state.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class BookingFilterTabs extends StatelessWidget {
   const BookingFilterTabs({super.key});
@@ -16,13 +17,13 @@ class BookingFilterTabs extends StatelessWidget {
         return Row(
           children: [
             _TabItem(
-              label: 'Active',
+              label: AppStrings2.active,
               selected: state.filter == BookingsFilter.active,
               onTap: () => context.read<BookingsCubit>().setFilter(BookingsFilter.active),
             ),
           
             _TabItem(
-              label: 'Past',
+              label: AppStrings2.past,
               selected: state.filter == BookingsFilter.past,
               onTap: () => context.read<BookingsCubit>().setFilter(BookingsFilter.past),
             ),

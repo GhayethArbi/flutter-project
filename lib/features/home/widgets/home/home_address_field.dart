@@ -7,6 +7,7 @@ import 'package:tunipark/core/utils/responsive_extension.dart';
 import '../../cubit/home_cubit.dart';
 import '../../cubit/home_state.dart';
 import '../../../parking_map/models/selected_place.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class HomeAddressField extends StatelessWidget {
   const HomeAddressField({super.key});
@@ -59,8 +60,7 @@ class HomeAddressField extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Adresse',
+            Text(AppStrings.adresse,
               style: TextStyle(
                 fontSize: labelFontSize,
                 fontWeight: FontWeight.w500,

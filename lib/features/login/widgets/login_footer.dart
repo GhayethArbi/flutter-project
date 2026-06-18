@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tunipark/core/router/app_routes.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class LoginFooter extends StatelessWidget {
   const LoginFooter({super.key});
@@ -14,8 +16,7 @@ class LoginFooter extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          "Vous n'avez pas de compte ? ",
+        Text(AppStrings2.vousNAvezPasDeCompte,
           style: TextStyle(
             color: colorScheme.onSurfaceVariant,
             fontSize: rs.adaptive(mobile: 13, tablet: 14, desktop: 15),
@@ -23,8 +24,7 @@ class LoginFooter extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () => Navigator.pushNamed(context, AppRoutes.signup),
-          child: Text(
-            'Créer un compte',
+          child: Text(AppStrings.creerUnCompte,
             style: TextStyle(
               color: AppColors.colorBtn,
               fontSize: rs.adaptive(mobile: 13, tablet: 14, desktop: 15),

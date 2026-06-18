@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tunipark/core/router/app_routes.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
 import 'package:tunipark/features/parking_map/models/parking_place.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class BottomBar extends StatelessWidget {
   final ParkingPlace parking;
@@ -44,7 +46,7 @@ class BottomBar extends StatelessWidget {
                       ),
                     ),
                     TextSpan(
-                      text: ' / month',
+                      text: AppStrings2.month,
                       style: TextStyle(
                         fontSize: rs.adaptive(
                           mobile: 14.0,
@@ -89,8 +91,7 @@ class BottomBar extends StatelessWidget {
               ),
               elevation: 0,
             ),
-            child: Text(
-              'Voir la disponibilité',
+            child: Text(AppStrings.voirLaDisponibilite,
               style: TextStyle(
                 fontSize: rs.adaptive(
                   mobile: 15.0,

@@ -7,6 +7,8 @@ import '../cubit/announcement_flow_cubit.dart';
 import '../cubit/announcement_flow_state.dart';
 import '../widgets/announcement_fixed_bottom_actions.dart';
 import '../widgets/announcement_flow_header.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class AnnouncementStepThreeBScreen extends StatelessWidget {
   const AnnouncementStepThreeBScreen({super.key});
@@ -57,8 +59,7 @@ class AnnouncementStepThreeBScreen extends StatelessWidget {
 
                             SizedBox(height: rs.adaptive(mobile: 18, tablet: 24, desktop: 28)),
 
-                            Text(
-                              'Capacité & horaires',
+                            Text(AppStrings.capaciteHoraires,
                               style: TextStyle(
                                 fontSize: rs.adaptive(mobile: 20, tablet: 22, desktop: 24),
                                 fontWeight: FontWeight.w700,
@@ -68,8 +69,7 @@ class AnnouncementStepThreeBScreen extends StatelessWidget {
 
                             SizedBox(height: rs.adaptive(mobile: 6, tablet: 8, desktop: 10)),
 
-                            Text(
-                              'Indiquez combien de places vous proposez, vos horaires et les véhicules acceptés.',
+                            Text(AppStrings.indiquezCombienDePlacesVousProposez,
                               style: TextStyle(
                                 fontSize: rs.adaptive(mobile: 14, tablet: 15, desktop: 16),
                                 height: 1.45,
@@ -81,7 +81,7 @@ class AnnouncementStepThreeBScreen extends StatelessWidget {
                             SizedBox(height: rs.adaptive(mobile: 28, tablet: 32, desktop: 38)),
 
                             // ── MAX PLACES ───────────────────────
-                            _SectionLabel(text: 'Nombre de places'),
+                            _SectionLabel(text: AppStrings2.nombreDePlaces),
                             SizedBox(height: rs.adaptive(mobile: 12, tablet: 14, desktop: 16)),
                             _PlacesCounter(
                               value: state.maxPlaces,
@@ -97,13 +97,13 @@ class AnnouncementStepThreeBScreen extends StatelessWidget {
                             SizedBox(height: rs.adaptive(mobile: 28, tablet: 32, desktop: 38)),
 
                             // ── OPENING HOURS ────────────────────
-                            _SectionLabel(text: 'Horaires d\'accès'),
+                            _SectionLabel(text: AppStrings2.horairesDAcces),
                             SizedBox(height: rs.adaptive(mobile: 12, tablet: 14, desktop: 16)),
                             Row(
                               children: [
                                 Expanded(
                                   child: _TimePickerTile(
-                                    label: 'Ouverture',
+                                    label: AppStrings2.ouverture,
                                     value: state.openingTime,
                                     onChanged: cubit.updateOpeningTime,
                                     context: context,
@@ -114,7 +114,7 @@ class AnnouncementStepThreeBScreen extends StatelessWidget {
                                 ),
                                 Expanded(
                                   child: _TimePickerTile(
-                                    label: 'Fermeture',
+                                    label: AppStrings2.fermeture,
                                     value: state.closingTime,
                                     onChanged: cubit.updateClosingTime,
                                     context: context,
@@ -126,10 +126,9 @@ class AnnouncementStepThreeBScreen extends StatelessWidget {
                             SizedBox(height: rs.adaptive(mobile: 28, tablet: 32, desktop: 38)),
 
                             // ── VEHICLE TYPES ────────────────────
-                            _SectionLabel(text: 'Véhicules acceptés'),
+                            _SectionLabel(text: AppStrings2.vehiculesAcceptes),
                             SizedBox(height: rs.adaptive(mobile: 6, tablet: 8, desktop: 10)),
-                            Text(
-                              'Sélectionnez au moins un type de véhicule',
+                            Text(AppStrings.selectionnezAuMoinsUnTypeDe,
                               style: TextStyle(
                                 fontSize: rs.adaptive(mobile: 13, tablet: 14, desktop: 14),
                                 color: const Color(0xFF888888),
@@ -163,7 +162,7 @@ class AnnouncementStepThreeBScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: _BottomButton(
-                              text: 'Retour',
+                              text: AppStrings2.retour,
                               isPrimary: false,
                               onPressed: () => cubit.goToStep(3),
                             ),
@@ -173,7 +172,7 @@ class AnnouncementStepThreeBScreen extends StatelessWidget {
                           ),
                           Expanded(
                             child: _BottomButton(
-                              text: 'Suivant',
+                              text: AppStrings2.suivant,
                               isPrimary: true,
                               onPressed: _isValid(state)
                                   ? () => cubit.goToStep(5)
@@ -246,8 +245,7 @@ class _PlacesCounter extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            'Places disponibles',
+          Text(AppStrings.placesDisponibles,
             style: TextStyle(
               fontSize: rs.adaptive(mobile: 14, tablet: 15, desktop: 16),
               fontWeight: FontWeight.w500,

@@ -5,6 +5,7 @@ import 'package:tunipark/core/utils/responsive_extension.dart';
 
 import '../../cubit/home_cubit.dart';
 import '../../cubit/home_state.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class HomeSearchButton extends StatelessWidget {
   const HomeSearchButton({super.key});
@@ -66,8 +67,7 @@ class HomeSearchButton extends StatelessWidget {
                     height: rs.adaptive(mobile: 20, tablet: 22, desktop: 24),
                     child: const CircularProgressIndicator(strokeWidth: 2),
                   )
-                : Text(
-                    'Rechercher',
+                : Text(AppStrings.rechercher,
                     style: TextStyle(
                       fontSize: fontSize,
                       fontWeight: FontWeight.w600,

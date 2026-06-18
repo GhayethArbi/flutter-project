@@ -64,7 +64,7 @@ class _PersonalInfoView extends StatelessWidget {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(AppStrings.informationsMisesAJour),
             backgroundColor: AppTokens.limeDark,
           ),

@@ -8,6 +8,7 @@ import 'forgot_password_button.dart';
 import 'forgot_password_input.dart';
 import 'otp_code_field.dart';
 import 'success_badge.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class ForgotPasswordContent extends StatelessWidget {
   const ForgotPasswordContent({super.key});
@@ -125,8 +126,7 @@ class _VerifyCodeStep extends StatelessWidget {
             ),
             GestureDetector(
               onTap: cubit.resendCode,
-              child: Text(
-                'Renvoyer le code',
+              child: Text(AppStrings.renvoyerLeCode,
                 style: TextStyle(
                   fontSize: rs.adaptive(mobile: 12, tablet: 13, desktop: 14),
                   fontWeight: FontWeight.w700,
@@ -210,8 +210,7 @@ class _SuccessStep extends StatelessWidget {
 
           SizedBox(height: rs.adaptive(mobile: 54, tablet: 62, desktop: 68)),
 
-          Text(
-            'Mot de passe réinitialisé !',
+          Text(AppStrings.motDePasseReinitialise,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: rs.adaptive(mobile: 20, tablet: 24, desktop: 26),
@@ -222,10 +221,7 @@ class _SuccessStep extends StatelessWidget {
 
           SizedBox(height: rs.adaptive(mobile: 22, tablet: 26, desktop: 28)),
 
-          Text(
-            'Votre mot de passe a été modifié\n'
-            'avec succès. Vous pouvez maintenant\n'
-            'vous connecter',
+          Text(AppStrings.votreMotDePasseAEte,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: rs.adaptive(mobile: 16, tablet: 18, desktop: 18),

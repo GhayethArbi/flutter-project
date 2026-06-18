@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class HeroImage extends StatelessWidget {
   final String imageUrl;
@@ -33,11 +34,10 @@ class HeroImage extends StatelessWidget {
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
-                children: const [
+                children: [
                   Icon(Icons.remove_red_eye_outlined, size: 16, color: Colors.black87),
                   SizedBox(width: 6),
-                  Text(
-                    'Voir les autres photos',
+                  Text(AppStrings.voirLesAutresPhotos,
                     style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.black87),
                   ),
                 ],

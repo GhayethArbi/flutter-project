@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:tunipark/core/theme/app_tokens.dart';
 import 'package:tunipark/features/security/cubit/change_password_cubit.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class PasswordChecklist extends StatelessWidget {
   const PasswordChecklist({required this.state});
@@ -11,9 +12,9 @@ class PasswordChecklist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final checks = [
-      (label: '8 caractères minimum', met: state.hasMinLength),
-      (label: 'Une lettre majuscule', met: state.hasUppercase),
-      (label: 'Un chiffre', met: state.hasDigit),
+      (label: AppStrings2.text8caracteresminimum, met: state.hasMinLength),
+      (label: AppStrings2.uneLettreMajuscule, met: state.hasUppercase),
+      (label: AppStrings2.unChiffre, met: state.hasDigit),
       (label: 'Un caractère spécial (!@#\$...)', met: state.hasSpecial),
     ];
 

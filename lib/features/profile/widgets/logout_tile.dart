@@ -1,6 +1,5 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class LogoutTile extends StatelessWidget {
   final bool isLoading;
@@ -29,12 +28,16 @@ class LogoutTile extends StatelessWidget {
                   color: const Color(0xFFFFF0F0),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.logout, size: 17, color: Color(0xFFE24B4A)),
+                child: const Icon(
+                  Icons.logout,
+                  size: 17,
+                  color: Color(0xFFE24B4A),
+                ),
               ),
               const SizedBox(width: 12),
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'Se déconnecter',
+                  AppStrings.seDeconnecter,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,

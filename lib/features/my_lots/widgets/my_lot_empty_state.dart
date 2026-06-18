@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class MyLotsEmptyState extends StatelessWidget {
   const MyLotsEmptyState({super.key, required this.onAddPressed});
@@ -31,8 +33,7 @@ class MyLotsEmptyState extends StatelessWidget {
             const SizedBox(height: 24),
 
             // ── Headline ─────────────────────────────────────────────
-            const Text(
-              'Vous n\'avez aucun parking',
+            Text(AppStrings2.vousNAvezAucunParking,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20,
@@ -44,8 +45,7 @@ class MyLotsEmptyState extends StatelessWidget {
             const SizedBox(height: 10),
 
             // ── Sub-text ─────────────────────────────────────────────
-            const Text(
-              'Devenez partenaire TuniPark et commencez à\nrentabiliser votre garage, sous-sol ou espace privé.',
+            Text(AppStrings.devenezPartenaireTuniparkEtCommencezA,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14,
@@ -62,8 +62,7 @@ class MyLotsEmptyState extends StatelessWidget {
               child: ElevatedButton.icon(
                 onPressed: onAddPressed,
                 icon: const Icon(Icons.add_rounded, size: 20),
-                label: const Text(
-                  'Publier mon premier parking',
+                label: Text(AppStrings.publierMonPremierParking,
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,

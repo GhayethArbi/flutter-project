@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
-
+import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class AnnouncementSuccessScreen extends StatelessWidget {
   const AnnouncementSuccessScreen({super.key, required this.onFinish});
@@ -69,7 +70,7 @@ class AnnouncementSuccessScreen extends StatelessWidget {
                   ),
 
                   Text(
-                    'Annonce publiée !',
+                    AppStrings.annoncePubliee,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: titleSize,
@@ -83,9 +84,7 @@ class AnnouncementSuccessScreen extends StatelessWidget {
                   ),
 
                   Text(
-                    'Votre espace est désormais visible par\n'
-                    'les conducteurs. Vous serez notifié dès\n'
-                    'qu’une réservation est effectuée.',
+                    AppStrings.votreEspaceEstDesormaisVisiblePar,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: descSize,
@@ -112,8 +111,7 @@ class AnnouncementSuccessScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(buttonHeight / 2),
                         ),
                       ),
-                      child: Text(
-                        'Retour à l’accueil',
+                      child: Text(AppStrings2.retourALaccueil,
                         style: TextStyle(
                           fontSize: rs.adaptive(
                             mobile: 16,

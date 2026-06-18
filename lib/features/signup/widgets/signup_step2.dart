@@ -7,6 +7,8 @@ import 'package:tunipark/features/signup/cubit/signup_cubit.dart';
 import 'package:tunipark/features/signup/cubit/signup_state.dart';
 import 'package:tunipark/features/signup/widgets/signup_button.dart';
 import 'package:tunipark/features/signup/widgets/signup_header.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class SignUpStep2 extends StatefulWidget {
   const SignUpStep2({super.key});
@@ -106,7 +108,7 @@ class _SignUpStep2State extends State<SignUpStep2> {
               SizedBox(height: rs.clampSize(0.09, 36, 56)),
 
               SignUpButton(
-                label: 'Confirmer',
+                label: AppStrings2.confirmer,
                 isLoading: state.status == SignUpStatus.loading,
                 onTap: cubit.submit,
               ),
@@ -124,8 +126,7 @@ class _SignUpStep2State extends State<SignUpStep2> {
                       size: rs.clampSize(0.05, 18, 22),
                     ),
                     const SizedBox(width: 6),
-                    Text(
-                      'Retour',
+                    Text(AppStrings.retour,
                       style: TextStyle(
                         color: AppColors.colorBtn,
                         fontSize: rs.clampSize(0.045, 16, 20),

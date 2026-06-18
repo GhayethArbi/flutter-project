@@ -5,6 +5,7 @@ import 'package:tunipark/core/utils/responsive_extension.dart';
 
 import '../models/booking_model.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
+import 'package:tunipark/core/constants/app_strings2.dart';
 
 class BookingCard extends StatelessWidget {
   const BookingCard({
@@ -46,11 +47,11 @@ class BookingCard extends StatelessWidget {
             spacing: 22,
             runSpacing: 10,
             children: [
-              _Info(label: 'Duration', value: _durationText()),
-              _Info(label: 'From', value: _date(booking.startedAt)),
-              _Info(label: 'Until', value: _date(booking.endedAt)),
+              _Info(label: AppStrings2.duration, value: _durationText()),
+              _Info(label: AppStrings2.from, value: _date(booking.startedAt)),
+              _Info(label: AppStrings2.until, value: _date(booking.endedAt)),
               _Info(
-                label: 'Paid',
+                label: AppStrings2.paid,
                 value: '${(booking.paymentAmount ?? 0).toStringAsFixed(0)} DT',
                 valueColor: AppColors.limeDark,
               ),
@@ -189,16 +190,16 @@ class _DesktopActions extends StatelessWidget {
     switch (booking.status) {
       case BookingStatus.active:
         return [
-          _PrimaryButton(label: 'View session', onTap: () {}),
-          _OutlineButton(label: 'Extend', onTap: () {}),
-          _OutlineButton(label: 'Navigate', onTap: () {}),
+          _PrimaryButton(label: AppStrings2.viewSession, onTap: () {}),
+          _OutlineButton(label: AppStrings2.extend, onTap: () {}),
+          _OutlineButton(label: AppStrings2.navigate, onTap: () {}),
         ];
       
       case BookingStatus.expired:
       case BookingStatus.cancelled:
         return [
-          _OutlineButton(label: 'View receipt', onTap: () {}),
-          _OutlineButton(label: 'Book again', onTap: () {}),
+          _OutlineButton(label: AppStrings2.viewReceipt, onTap: () {}),
+          _OutlineButton(label: AppStrings2.bookAgain, onTap: () {}),
         ];
     }
   }

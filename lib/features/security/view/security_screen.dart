@@ -31,7 +31,7 @@ class _SecurityView extends StatelessWidget {
       listener: (context, state) {
         if (state.status == SecurityStatus.success) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text(AppStrings.appareilsDeconnectesAvecSucces),
               backgroundColor: AppTokens.limeDark,
             ),
@@ -63,7 +63,10 @@ class _SecurityView extends StatelessWidget {
                     child: Center(
                       child: ConstrainedBox(
                         constraints: BoxConstraints(
-                          maxWidth: rs.adaptive(mobile: double.infinity, tablet: 560),
+                          maxWidth: rs.adaptive(
+                            mobile: double.infinity,
+                            tablet: 560,
+                          ),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,8 +136,7 @@ class _SecurityView extends StatelessWidget {
                                   onTap: state.isLoading
                                       ? null
                                       : () async {
-                                          final confirmed =
-                                              await showAppConfirmDialog(
+                                          final confirmed = await showAppConfirmDialog(
                                             context,
                                             title:
                                                 'Déconnecter tous les appareils',
