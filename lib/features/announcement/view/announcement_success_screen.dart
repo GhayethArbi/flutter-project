@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class AnnouncementSuccessScreen extends StatelessWidget {
   const AnnouncementSuccessScreen({super.key, required this.onFinish});
@@ -111,7 +111,7 @@ class AnnouncementSuccessScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(buttonHeight / 2),
                         ),
                       ),
-                      child: Text(AppStrings2.retourALaccueil,
+                      child: Text(AppStrings.retourALaccueil,
                         style: TextStyle(
                           fontSize: rs.adaptive(
                             mobile: 16,

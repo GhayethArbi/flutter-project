@@ -15,7 +15,7 @@ import '../widgets/announcement_fixed_bottom_actions.dart';
 import '../widgets/announcement_flow_header.dart';
 import '../widgets/announcement_single_action_button.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class AnnouncementStepTwoScreen extends StatefulWidget {
   const AnnouncementStepTwoScreen({super.key});
@@ -340,7 +340,7 @@ class _AnnouncementStepTwoScreenState extends State<AnnouncementStepTwoScreen> {
                     AnnouncementFixedBottomActions(
                       child: Center(
                         child: AnnouncementSingleActionButton(
-                          text: AppStrings2.suivant,
+                          text: AppStrings.suivant,
                           onPressed: state.address.trim().isEmpty
                               ? null
                               : () {

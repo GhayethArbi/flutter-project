@@ -7,7 +7,7 @@ import '../cubit/announcement_flow_state.dart';
 import '../widgets/announcement_fixed_bottom_actions.dart';
 import '../widgets/announcement_flow_header.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class AnnouncementStepThreeScreen extends StatelessWidget {
   const AnnouncementStepThreeScreen({super.key});
@@ -71,7 +71,7 @@ class AnnouncementStepThreeScreen extends StatelessWidget {
 
                             SizedBox(height: rs.adaptive(mobile: 28, tablet: 32, desktop: 36)),
 
-                            _Label(text: AppStrings2.titreDeLAnnonce),
+                            _Label(text: AppStrings.titreDeLAnnonce),
                             SizedBox(height: rs.adaptive(mobile: 10, tablet: 12, desktop: 14)),
                             _InputField(
                               hint: 'Ex : place sécurisée dans un sous-sol',
@@ -81,7 +81,7 @@ class AnnouncementStepThreeScreen extends StatelessWidget {
 
                             SizedBox(height: rs.adaptive(mobile: 18, tablet: 22, desktop: 26)),
 
-                            _Label(text: AppStrings2.description),
+                            _Label(text: AppStrings.description),
                             SizedBox(height: rs.adaptive(mobile: 10, tablet: 12, desktop: 14)),
                             _InputField(
                               hint: 'Décrivez votre emplacement, ses avantages, l\'accès…',
@@ -92,7 +92,7 @@ class AnnouncementStepThreeScreen extends StatelessWidget {
 
                             SizedBox(height: rs.adaptive(mobile: 18, tablet: 22, desktop: 26)),
 
-                            _Label(text: AppStrings2.caracteristiques),
+                            _Label(text: AppStrings.caracteristiques),
                             SizedBox(height: rs.adaptive(mobile: 12, tablet: 14, desktop: 16)),
 
                             Wrap(
@@ -143,7 +143,7 @@ class AnnouncementStepThreeScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: _BottomButton(
-                              text: AppStrings2.retour,
+                              text: AppStrings.retour,
                               isPrimary: false,
                               onPressed: () => cubit.goToStep(2),
                             ),
@@ -151,7 +151,7 @@ class AnnouncementStepThreeScreen extends StatelessWidget {
                           SizedBox(width: rs.adaptive(mobile: 14, tablet: 18, desktop: 20)),
                           Expanded(
                             child: _BottomButton(
-                              text: AppStrings2.suivant,
+                              text: AppStrings.suivant,
                               isPrimary: true,
                               // next → step 4 (capacity screen)
                               onPressed: state.title.trim().isEmpty ||

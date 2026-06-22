@@ -13,7 +13,7 @@ import 'package:tunipark/features/profile/widgets/menu_section.dart';
 import 'package:tunipark/features/profile/widgets/profile_header.dart';
 import 'package:tunipark/features/profile/widgets/section_label.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -69,48 +69,48 @@ class _ProfileView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SectionLabel(label: AppStrings2.compte),
+                              SectionLabel(label: AppStrings.compte),
                               MenuSection(
                                 items: [
                                   MenuItem(
                                     icon: Icons.person_outline,
-                                    label: AppStrings2.informationsPersonnelles,
+                                    label: AppStrings.informationsPersonnelles,
                                     onTap: () => Navigator.pushNamed(
                                       context, AppRoutes.personalInfo),
                                   ),
                                   // MenuItem(
                                   //   icon: Icons.notifications_none_outlined,
-                                  //   label: AppStrings2.notifications,
+                                  //   label: AppStrings.notifications,
                                   //   onTap: () => Navigator.pushNamed(
                                   //     context, AppRoutes.notifications),
                                   // ),
                                   MenuItem(
                                     icon: Icons.directions_car_outlined,
-                                    label: AppStrings2.mesVehicules,
+                                    label: AppStrings.mesVehicules,
                                     onTap: () => Navigator.pushNamed(
                                       context, AppRoutes.myVehicles),
                                   ),
                                   MenuItem(
                                     icon: Icons.credit_card_outlined,
-                                    label: AppStrings2.mesPaiements,
+                                    label: AppStrings.mesPaiements,
                                     onTap: () => Navigator.pushNamed(
                                       context, AppRoutes.payments),
                                   ),
                                   // MenuItem(
                                   //   icon: Icons.business_center_outlined,
-                                  //   label: AppStrings2.gererMesPlaces,
+                                  //   label: AppStrings.gererMesPlaces,
                                   //   onTap: () => Navigator.pushNamed(
                                   //     context, AppRoutes.parkingProfessionals),
                                   // ),
                                   MenuItem(
                                     icon: Icons.shield_outlined,
-                                    label: AppStrings2.securite,
+                                    label: AppStrings.securite,
                                     onTap: () => Navigator.pushNamed(
                                       context, AppRoutes.security),
                                   ),
                                   MenuItem(
                                     icon: Icons.delete_outline,
-                                    label: AppStrings2.supprimerLeCompte,
+                                    label: AppStrings.supprimerLeCompte,
                                     labelColor: const Color(0xFFE24B4A),
                                     iconColor: const Color(0xFFE24B4A),
                                     iconBackground: const Color(0xFFFFF0F0),
@@ -121,12 +121,12 @@ class _ProfileView extends StatelessWidget {
                               ),
 
                               // ── Paramètres de l'app ─────────────────────
-                              SectionLabel(label: AppStrings2.parametresDeLApp),
+                              SectionLabel(label: AppStrings.parametresDeLApp),
                               MenuSection(
                                 items: [
                                   MenuItem(
                                     icon: Icons.brightness_2_outlined,
-                                    label: AppStrings2.mode,
+                                    label: AppStrings.mode,
                                     trailing: Text(
                                       state.themeMode == AppThemeMode.day ? 'Jour' : 'Nuit',
                                       style: const TextStyle(
@@ -146,7 +146,7 @@ class _ProfileView extends StatelessWidget {
                                   ),
                                   MenuItem(
                                     icon: Icons.language_outlined,
-                                    label: AppStrings2.langue,
+                                    label: AppStrings.langue,
                                     trailing: Text(AppStrings.francais,
                                       style: TextStyle(
                                         fontSize: 13,
@@ -161,30 +161,30 @@ class _ProfileView extends StatelessWidget {
                               ),
 
                               // ── Aide & support ───────────────────────────
-                              SectionLabel(label: AppStrings2.aideSupport),
+                              SectionLabel(label: AppStrings.aideSupport),
                               MenuSection(
                                 items: [
                                   MenuItem(
                                     icon: Icons.help_outline,
-                                    label: AppStrings2.faqCentreDAide,
+                                    label: AppStrings.faqCentreDAide,
                                     onTap: () => Navigator.pushNamed(
                                       context, AppRoutes.helpCenter),
                                   ),
                                   MenuItem(
                                     icon: Icons.privacy_tip_outlined,
-                                    label: AppStrings2.politiqueDeConfidentialite,
+                                    label: AppStrings.politiqueDeConfidentialite,
                                     onTap: () => Navigator.pushNamed(
                                       context, AppRoutes.privacyPolicy),
                                   ),
                                   MenuItem(
                                     icon: Icons.description_outlined,
-                                    label: AppStrings2.conditionsDUtilisation,
+                                    label: AppStrings.conditionsDUtilisation,
                                     onTap: () => Navigator.pushNamed(
                                       context, AppRoutes.termsOfUse),
                                   ),
                                   MenuItem(
                                     icon: Icons.groups_2_outlined,
-                                    label: AppStrings2.devenirPartenaire,
+                                    label: AppStrings.devenirPartenaire,
                                     iconColor: const Color(0xFF3B6D11),
                                     iconBackground: const Color(0xFFF0FFF0),
                                     labelColor: const Color(0xFF3B6D11),

@@ -8,7 +8,7 @@ import '../cubit/announcement_flow_state.dart';
 import '../widgets/announcement_fixed_bottom_actions.dart';
 import '../widgets/announcement_flow_header.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class AnnouncementStepThreeBScreen extends StatelessWidget {
   const AnnouncementStepThreeBScreen({super.key});
@@ -81,7 +81,7 @@ class AnnouncementStepThreeBScreen extends StatelessWidget {
                             SizedBox(height: rs.adaptive(mobile: 28, tablet: 32, desktop: 38)),
 
                             // ── MAX PLACES ───────────────────────
-                            _SectionLabel(text: AppStrings2.nombreDePlaces),
+                            _SectionLabel(text: AppStrings.nombreDePlaces),
                             SizedBox(height: rs.adaptive(mobile: 12, tablet: 14, desktop: 16)),
                             _PlacesCounter(
                               value: state.maxPlaces,
@@ -97,13 +97,13 @@ class AnnouncementStepThreeBScreen extends StatelessWidget {
                             SizedBox(height: rs.adaptive(mobile: 28, tablet: 32, desktop: 38)),
 
                             // ── OPENING HOURS ────────────────────
-                            _SectionLabel(text: AppStrings2.horairesDAcces),
+                            _SectionLabel(text: AppStrings.horairesDAcces),
                             SizedBox(height: rs.adaptive(mobile: 12, tablet: 14, desktop: 16)),
                             Row(
                               children: [
                                 Expanded(
                                   child: _TimePickerTile(
-                                    label: AppStrings2.ouverture,
+                                    label: AppStrings.ouverture,
                                     value: state.openingTime,
                                     onChanged: cubit.updateOpeningTime,
                                     context: context,
@@ -114,7 +114,7 @@ class AnnouncementStepThreeBScreen extends StatelessWidget {
                                 ),
                                 Expanded(
                                   child: _TimePickerTile(
-                                    label: AppStrings2.fermeture,
+                                    label: AppStrings.fermeture,
                                     value: state.closingTime,
                                     onChanged: cubit.updateClosingTime,
                                     context: context,
@@ -126,7 +126,7 @@ class AnnouncementStepThreeBScreen extends StatelessWidget {
                             SizedBox(height: rs.adaptive(mobile: 28, tablet: 32, desktop: 38)),
 
                             // ── VEHICLE TYPES ────────────────────
-                            _SectionLabel(text: AppStrings2.vehiculesAcceptes),
+                            _SectionLabel(text: AppStrings.vehiculesAcceptes),
                             SizedBox(height: rs.adaptive(mobile: 6, tablet: 8, desktop: 10)),
                             Text(AppStrings.selectionnezAuMoinsUnTypeDe,
                               style: TextStyle(
@@ -162,7 +162,7 @@ class AnnouncementStepThreeBScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: _BottomButton(
-                              text: AppStrings2.retour,
+                              text: AppStrings.retour,
                               isPrimary: false,
                               onPressed: () => cubit.goToStep(3),
                             ),
@@ -172,7 +172,7 @@ class AnnouncementStepThreeBScreen extends StatelessWidget {
                           ),
                           Expanded(
                             child: _BottomButton(
-                              text: AppStrings2.suivant,
+                              text: AppStrings.suivant,
                               isPrimary: true,
                               onPressed: _isValid(state)
                                   ? () => cubit.goToStep(5)

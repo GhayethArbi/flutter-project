@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/features/parking_booking_flow/cubit/parking_booking_flow_cubit.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class ChoosePlaceStep extends StatelessWidget {
   const ChoosePlaceStep({super.key});
@@ -30,7 +30,7 @@ class ChoosePlaceStep extends StatelessWidget {
         SizedBox(height: rs.adaptive(mobile: 16, tablet: 18, desktop: 20)),
         _PlaceCard(
           icon: Icons.directions_car_outlined,
-          title: AppStrings2.placeVoiture,
+          title: AppStrings.placeVoiture,
           subtitle: isAvailable
               ? '$availableSpots place${availableSpots > 1 ? 's' : ''} disponible${availableSpots > 1 ? 's' : ''}'
               : 'Complet',
@@ -43,8 +43,8 @@ class ChoosePlaceStep extends StatelessWidget {
         // const SizedBox(height: 12),
         // _PlaceCard(
         //   icon: Icons.two_wheeler_outlined,
-        //   title: AppStrings2.placeMoto,
-        //   subtitle: AppStrings2.complet,
+        //   title: AppStrings.placeMoto,
+        //   subtitle: AppStrings.complet,
         //   price: '55DT\npar mois',
         //   isSelected: state.selectedPlaceId == 'moto',
         //   onTap: () => context.read<ParkingBookingFlowCubit>().selectPlace('moto'),

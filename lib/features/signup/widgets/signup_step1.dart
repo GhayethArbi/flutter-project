@@ -7,7 +7,7 @@ import 'package:tunipark/features/signup/cubit/signup_cubit.dart';
 import 'package:tunipark/features/signup/widgets/signup_button.dart';
 import 'package:tunipark/features/signup/widgets/signup_header.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class SignUpStep1 extends StatefulWidget {
   const SignUpStep1({super.key});
@@ -132,7 +132,7 @@ class _SignUpStep1State extends State<SignUpStep1> {
               SizedBox(height: rs.clampSize(0.09, 36, 56)),
 
               SignUpButton(
-                label: AppStrings2.suivant,
+                label: AppStrings.suivant,
                 isLoading: false,
                 onTap: cubit.nextStep,
               ),
@@ -142,7 +142,7 @@ class _SignUpStep1State extends State<SignUpStep1> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(AppStrings2.vousAvezUnCompte,
+                  Text(AppStrings.vousAvezUnCompte,
                     style: TextStyle(
                       color: theme.colorScheme.onSurfaceVariant,
                       fontSize: rs.clampSize(0.035, 13, 15),

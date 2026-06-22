@@ -10,7 +10,7 @@ import '../cubit/announcement_flow_state.dart';
 import '../widgets/announcement_fixed_bottom_actions.dart';
 import '../widgets/announcement_flow_header.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class AnnouncementStepFourScreen extends StatelessWidget {
   const AnnouncementStepFourScreen({super.key});
@@ -169,7 +169,7 @@ class AnnouncementStepFourScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: _BottomButton(
-                              text: AppStrings2.retour,
+                              text: AppStrings.retour,
                               isPrimary: false,
                               onPressed: () => cubit.goToStep(3),
                             ),
@@ -177,7 +177,7 @@ class AnnouncementStepFourScreen extends StatelessWidget {
                           SizedBox(width: rs.adaptive(mobile: 14, tablet: 18, desktop: 20)),
                           Expanded(
                             child: _BottomButton(
-                              text: AppStrings2.suivant,
+                              text: AppStrings.suivant,
                               isPrimary: true,
                               onPressed: state.photos.length < 3
                                   ? null

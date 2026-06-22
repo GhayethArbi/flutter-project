@@ -4,7 +4,7 @@ import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/features/edit_profile/cubit/edit_profile_cubit.dart';
 import 'package:tunipark/features/edit_profile/cubit/edit_profile_state.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
@@ -68,26 +68,26 @@ class _EditProfileView extends StatelessWidget {
                                 ),
 
                                 _Field(
-                                  label: AppStrings2.nom,
+                                  label: AppStrings.nom,
                                   hint: 'Nom',
                                   onChanged: cubit.updateFirstName,
                                 ),
 
                                 _Field(
-                                  label: AppStrings2.prenom,
+                                  label: AppStrings.prenom,
                                   hint: 'Prénom',
                                   onChanged: cubit.updateLastName,
                                 ),
 
                                 _Field(
-                                  label: AppStrings2.adresseMail,
+                                  label: AppStrings.adresseMail,
                                   hint: 'E-mail',
                                   keyboardType: TextInputType.emailAddress,
                                   onChanged: cubit.updateEmail,
                                 ),
 
                                 _Field(
-                                  label: AppStrings2.numeroDeTelephone,
+                                  label: AppStrings.numeroDeTelephone,
                                   hint: 'Numéro de téléphone',
                                   keyboardType: TextInputType.phone,
                                   onChanged: cubit.updatePhone,
@@ -102,7 +102,7 @@ class _EditProfileView extends StatelessWidget {
                                 ),
 
                                 _Field(
-                                  label: AppStrings2.motDePasse,
+                                  label: AppStrings.motDePasse,
                                   hint: 'Mot de passe actuel',
                                   onChanged: cubit.updateCurrentPassword,
                                   obscure: true,

@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/features/parking_booking_flow/cubit/parking_booking_flow_cubit.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class OrderDetailsStep extends StatelessWidget {
   const OrderDetailsStep({super.key});
@@ -86,17 +86,17 @@ class OrderDetailsStep extends StatelessWidget {
           child: Column(
             children: [
               _TarifRow(
-                label: AppStrings2.mensualite,
+                label: AppStrings.mensualite,
                 value: '${state.monthlyPrice.toStringAsFixed(3)}DT',
               ),
               Divider(height: 1, color: Colors.grey.shade300),
               _TarifRow(
-                label: AppStrings2.fraisDeService,
+                label: AppStrings.fraisDeService,
                 value: '+${state.serviceFee.toStringAsFixed(3)}DT',
               ),
               Divider(height: 1, color: Colors.grey.shade300),
               _TarifRow(
-                label: AppStrings2.total,
+                label: AppStrings.total,
                 value: '${state.totalPrice.toStringAsFixed(3)}DT',
               ),
             ],

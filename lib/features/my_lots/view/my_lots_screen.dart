@@ -15,7 +15,7 @@ import '../models/my_lot_model.dart';
 import '../services/my_lots_service.dart';
 import '../widgets/my_lot_card.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class MyLotsScreen extends StatelessWidget {
   const MyLotsScreen({super.key, required this.sl});
@@ -375,7 +375,7 @@ class _StatsBanner extends StatelessWidget {
                   iconBg: const Color(0xFFEEF2FF),
                   iconColor: const Color(0xFF4F6FD8),
                   value: '$availablePlaces/$totalPlaces',
-                  label: AppStrings2.placesLibres,
+                  label: AppStrings.placesLibres,
                 ),
               ),
               SizedBox(width: rs.adaptive(mobile: 10.0, tablet: 12.0)),
@@ -388,7 +388,7 @@ class _StatsBanner extends StatelessWidget {
                   value: avgPrice != null
                       ? '${avgPrice.toStringAsFixed(0)} DT/j'
                       : '—',
-                  label: AppStrings2.prixMoyJour,
+                  label: AppStrings.prixMoyJour,
                   wide: true,
                 ),
               ),

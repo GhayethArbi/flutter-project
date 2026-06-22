@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
 
 class AppBottomNavBar extends StatelessWidget {
@@ -29,27 +30,27 @@ class AppBottomNavBar extends StatelessWidget {
         fontSize: 12,
         fontWeight: FontWeight.w400,
       ),
-      items: const [
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.location_pin),
-          label: 'Explore',
+          icon: const Icon(Icons.location_pin),
+          label: AppStrings.explore,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.calendar_month),
-          label: 'Reservations',
+          icon: const Icon(Icons.calendar_month),
+          label: AppStrings.reservations,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.add_circle),
-          label: 'Announce',
+          icon: const Icon(Icons.add_circle),
+          label: AppStrings.announce,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.notifications),
-          label: 'Notification',
+          icon: const Icon(Icons.notifications),
+          label: AppStrings.notifications,
         ),
         
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Mon Profil',
+          icon: const Icon(Icons.person),
+          label: AppStrings.monProfil,
         ),
       ],
     );

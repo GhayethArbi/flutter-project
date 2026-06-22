@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/core/auth/logout_handler.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 import 'package:tunipark/core/di/service_locator.dart';
 import 'package:tunipark/core/router/app_routes.dart';
 import 'package:tunipark/core/router/not_found_screen.dart';
@@ -33,7 +34,6 @@ import 'package:tunipark/features/signup/screens/sign_up_screen.dart';
 import 'package:tunipark/features/splash/cubit/splash_cubit.dart';
 import 'package:tunipark/features/splash/splash_screen.dart';
 import 'package:tunipark/features/vehicles/view/vehicles_screen.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
 
 /// Pure routing — no dependency construction here.
 /// All services come from [ServiceLocator] passed in the constructor.
@@ -52,15 +52,15 @@ class AppRouter {
       context: context,
       barrierDismissible: false,
       builder: (_) => AlertDialog(
-        title: Text(AppStrings2.sessionExpired),
-        content: Text(AppStrings2.yourSessionHasExpiredPleaseLogIn),
+        title: Text(AppStrings.sessionExpired),
+        content: Text(AppStrings.yourSessionHasExpiredPleaseLogIn),
         actions: [
           TextButton(
             onPressed: () => navigatorKey.currentState?.pushNamedAndRemoveUntil(
               AppRoutes.login,
               (route) => false,
             ),
-            child: Text(AppStrings2.logIn,
+            child: Text(AppStrings.logIn,
               style: TextStyle(color: AppColors.greentext),
             ),
           ),

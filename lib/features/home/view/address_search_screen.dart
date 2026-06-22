@@ -8,7 +8,7 @@ import '../cubit/address_search/address_search_state.dart';
 import '../../parking_map/models/selected_place.dart';
 import '../services/location_search_service.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class AddressSearchScreen extends StatelessWidget {
   const AddressSearchScreen({super.key});
@@ -127,7 +127,7 @@ class _AddressSearchViewState extends State<_AddressSearchView> {
                               color: const Color(0xFF000000),
                             ),
                             decoration: InputDecoration(
-                              labelText: AppStrings2.rechercher,
+                              labelText: AppStrings.rechercher,
                               hintStyle: TextStyle(
                                 color: const Color(0xFF8B8B8B),
                                 fontSize: textFontSize,

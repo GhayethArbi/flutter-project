@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class MyLotsEmptyState extends StatelessWidget {
   const MyLotsEmptyState({super.key, required this.onAddPressed});
@@ -33,7 +33,7 @@ class MyLotsEmptyState extends StatelessWidget {
             const SizedBox(height: 24),
 
             // ── Headline ─────────────────────────────────────────────
-            Text(AppStrings2.vousNAvezAucunParking,
+            Text(AppStrings.vousNAvezAucunParking,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20,

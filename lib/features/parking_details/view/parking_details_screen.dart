@@ -11,7 +11,7 @@ import 'package:tunipark/features/parking_details/widgets/parking_dimensions.dar
 import 'package:tunipark/features/parking_details/widgets/parking_extra_info.dart';
 import 'package:tunipark/features/parking_map/models/parking_place.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class ParkingDetailsScreen extends StatefulWidget {
   final ParkingPlace parking;
@@ -406,17 +406,17 @@ class _WhyRecommendedSection extends StatelessWidget {
 
           _AiExplanationRow(
             icon: Icons.near_me_outlined,
-            title: AppStrings2.distance,
+            title: AppStrings.distance,
             value: ai.distanceLabel,
           ),
           _AiExplanationRow(
             icon: Icons.local_parking,
-            title: AppStrings2.availability,
+            title: AppStrings.availability,
             value: ai.availabilityLabel,
           ),
           _AiExplanationRow(
             icon: Icons.trending_up,
-            title: AppStrings2.behavior,
+            title: AppStrings.behavior,
             value: ai.conversionRate > 0
                 ? 'Drivers often choose this parking'
                 : 'New parking with limited history',

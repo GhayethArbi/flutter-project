@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/features/language/cubit/language_cubit.dart';
 import 'package:tunipark/features/language/cubit/language_state.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class LanguageScreen extends StatelessWidget {
   const LanguageScreen({super.key});
@@ -32,7 +32,7 @@ class _LanguageView extends StatelessWidget {
                   child: Column(
                     children: [
                       _LanguageOptionTile(
-                        title: AppStrings2.francais,
+                        title: AppStrings.francais,
                         isSelected:
                             state.selectedLanguage == AppLanguage.french,
                         onTap: () => context
@@ -41,7 +41,7 @@ class _LanguageView extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       _LanguageOptionTile(
-                        title: AppStrings2.english,
+                        title: AppStrings.english,
                         isSelected:
                             state.selectedLanguage == AppLanguage.english,
                         onTap: () => context
@@ -50,7 +50,7 @@ class _LanguageView extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       _LanguageOptionTile(
-                        title: AppStrings2.text,
+                        title: AppStrings.text,
                         isSelected:
                             state.selectedLanguage == AppLanguage.arabic,
                         onTap: () => context

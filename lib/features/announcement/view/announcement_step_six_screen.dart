@@ -7,7 +7,7 @@ import '../cubit/announcement_flow_state.dart';
 import '../widgets/announcement_fixed_bottom_actions.dart';
 import '../widgets/announcement_flow_header.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class AnnouncementStepSixScreen extends StatelessWidget {
   const AnnouncementStepSixScreen({super.key});
@@ -75,31 +75,31 @@ class AnnouncementStepSixScreen extends StatelessWidget {
                                 SizedBox(height: rs.adaptive(mobile: 32, tablet: 40, desktop: 48)),
 
                                 // ── Prix par jour ──────────────────
-                                _PriceLabel(text: AppStrings2.prixParJour),
+                                _PriceLabel(text: AppStrings.prixParJour),
                                 SizedBox(height: rs.adaptive(mobile: 10, tablet: 12, desktop: 14)),
                                 _PriceFieldStateful(
                                   initialValue: state.pricePerDay,
                                   onChanged: cubit.updatePricePerDay,
                                 ),
                                 SizedBox(height: rs.adaptive(mobile: 6, tablet: 8, desktop: 10)),
-                                _HelperText(text: AppStrings2.pourLesVisiteursEtLesDeplacements),
+                                _HelperText(text: AppStrings.pourLesVisiteursEtLesDeplacements),
 
                                 SizedBox(height: rs.adaptive(mobile: 22, tablet: 28, desktop: 32)),
 
                                 // ── Prix par mois ──────────────────
-                                _PriceLabel(text: AppStrings2.prixParMois),
+                                _PriceLabel(text: AppStrings.prixParMois),
                                 SizedBox(height: rs.adaptive(mobile: 10, tablet: 12, desktop: 14)),
                                 _PriceFieldStateful(
                                   initialValue: state.pricePerMonth,
                                   onChanged: cubit.updatePricePerMonth,
                                 ),
                                 SizedBox(height: rs.adaptive(mobile: 6, tablet: 8, desktop: 10)),
-                                _HelperText(text: AppStrings2.abonnementLongueDuree),
+                                _HelperText(text: AppStrings.abonnementLongueDuree),
 
                                 SizedBox(height: rs.adaptive(mobile: 22, tablet: 28, desktop: 32)),
 
                                 // ── Prix par heure (optional, NEW) ─
-                                _PriceLabel(text: AppStrings2.prixParHeureOptionnel),
+                                _PriceLabel(text: AppStrings.prixParHeureOptionnel),
                                 SizedBox(height: rs.adaptive(mobile: 10, tablet: 12, desktop: 14)),
                                 _PriceFieldStateful(
                                   initialValue: state.pricePerUnit ?? 0,
@@ -107,7 +107,7 @@ class AnnouncementStepSixScreen extends StatelessWidget {
                                   allowZero: true,
                                 ),
                                 SizedBox(height: rs.adaptive(mobile: 6, tablet: 8, desktop: 10)),
-                                _HelperText(text: AppStrings2.laissezA0PourNePasProposer),
+                                _HelperText(text: AppStrings.laissezA0PourNePasProposer),
 
                                 // ── Error banner ───────────────────
                                 if (state.errorMessage.isNotEmpty) ...[
@@ -129,7 +129,7 @@ class AnnouncementStepSixScreen extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: _BottomButton(
-                                  text: AppStrings2.retour,
+                                  text: AppStrings.retour,
                                   isPrimary: false,
                                   onPressed: state.isLoading ? null : () => cubit.goToStep(6),
                                 ),
@@ -137,7 +137,7 @@ class AnnouncementStepSixScreen extends StatelessWidget {
                               SizedBox(width: rs.adaptive(mobile: 14, tablet: 18, desktop: 20)),
                               Expanded(
                                 child: _BottomButton(
-                                  text: AppStrings2.publier,
+                                  text: AppStrings.publier,
                                   isPrimary: true,
                                   onPressed: state.isLoading
                                       ? null

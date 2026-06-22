@@ -3,7 +3,7 @@ import 'package:tunipark/core/router/app_routes.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class LoginFooter extends StatelessWidget {
   const LoginFooter({super.key});
@@ -16,7 +16,7 @@ class LoginFooter extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(AppStrings2.vousNAvezPasDeCompte,
+        Text(AppStrings.vousNAvezPasDeCompte,
           style: TextStyle(
             color: colorScheme.onSurfaceVariant,
             fontSize: rs.adaptive(mobile: 13, tablet: 14, desktop: 15),

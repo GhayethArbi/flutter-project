@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/features/parking_booking_flow/cubit/parking_booking_flow_cubit.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class PaymentMethodStep extends StatelessWidget {
   const PaymentMethodStep({super.key});
@@ -24,7 +24,7 @@ class PaymentMethodStep extends StatelessWidget {
         ),
         SizedBox(height: rs.adaptive(mobile: 18, tablet: 20, desktop: 22)),
         _PaymentMethodCard(
-          title: AppStrings2.flouci,
+          title: AppStrings.flouci,
           trailing: ClipRRect(
             borderRadius: BorderRadius.circular(4),
             child: Image.asset(
@@ -43,7 +43,7 @@ class PaymentMethodStep extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         _PaymentMethodCard(
-          title: AppStrings2.carteBancaire,
+          title: AppStrings.carteBancaire,
           trailing: Image.asset(
             'assets/mastercard.png',
             width: 42,

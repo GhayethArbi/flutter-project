@@ -5,7 +5,7 @@ import 'package:tunipark/core/utils/responsive_extension.dart';
 
 import '../models/booking_model.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class BookingCard extends StatelessWidget {
   const BookingCard({
@@ -47,11 +47,11 @@ class BookingCard extends StatelessWidget {
             spacing: 22,
             runSpacing: 10,
             children: [
-              _Info(label: AppStrings2.duration, value: _durationText()),
-              _Info(label: AppStrings2.from, value: _date(booking.startedAt)),
-              _Info(label: AppStrings2.until, value: _date(booking.endedAt)),
+              _Info(label: AppStrings.duration, value: _durationText()),
+              _Info(label: AppStrings.from, value: _date(booking.startedAt)),
+              _Info(label: AppStrings.until, value: _date(booking.endedAt)),
               _Info(
-                label: AppStrings2.paid,
+                label: AppStrings.paid,
                 value: '${(booking.paymentAmount ?? 0).toStringAsFixed(0)} DT',
                 valueColor: AppColors.limeDark,
               ),
@@ -190,16 +190,16 @@ class _DesktopActions extends StatelessWidget {
     switch (booking.status) {
       case BookingStatus.active:
         return [
-          _PrimaryButton(label: AppStrings2.viewSession, onTap: () {}),
-          _OutlineButton(label: AppStrings2.extend, onTap: () {}),
-          _OutlineButton(label: AppStrings2.navigate, onTap: () {}),
+          _PrimaryButton(label: AppStrings.viewSession, onTap: () {}),
+          _OutlineButton(label: AppStrings.extend, onTap: () {}),
+          _OutlineButton(label: AppStrings.navigate, onTap: () {}),
         ];
       
       case BookingStatus.expired:
       case BookingStatus.cancelled:
         return [
-          _OutlineButton(label: AppStrings2.viewReceipt, onTap: () {}),
-          _OutlineButton(label: AppStrings2.bookAgain, onTap: () {}),
+          _OutlineButton(label: AppStrings.viewReceipt, onTap: () {}),
+          _OutlineButton(label: AppStrings.bookAgain, onTap: () {}),
         ];
     }
   }

@@ -5,7 +5,7 @@ import 'package:tunipark/core/utils/responsive_extension.dart';
 
 import '../../cubit/home_cubit.dart';
 import '../../cubit/home_state.dart';
-import 'package:tunipark/core/constants/app_strings2.dart';
+import 'package:tunipark/core/constants/app_strings.dart';
 
 class HomeModeToggle extends StatelessWidget {
   const HomeModeToggle({super.key});
@@ -38,7 +38,7 @@ class HomeModeToggle extends StatelessWidget {
             children: [
               Expanded(
                 child: _ModeItem(
-                  title: AppStrings2.parMois,
+                  title: AppStrings.parMois,
                   isSelected: state.selectedMode == HomeMode.monthly,
                   onTap: () {
                     context.read<HomeCubit>().changeMode(HomeMode.monthly);
@@ -47,7 +47,7 @@ class HomeModeToggle extends StatelessWidget {
               ),
               Expanded(
                 child: _ModeItem(
-                  title: AppStrings2.heureJour,
+                  title: AppStrings.heureJour,
                   isSelected: state.selectedMode == HomeMode.hourlyDaily,
                   onTap: () {
                     context.read<HomeCubit>().changeMode(HomeMode.hourlyDaily);
