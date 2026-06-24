@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
+import 'package:tunipark/features/bookings/utils/map_launcher.dart';
 
 import '../models/booking_model.dart';
-import 'package:tunipark/core/constants/app_strings.dart';
+import '../services/booking_service.dart';
+import '../view/session_detail_screen.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
 
 class BookingCard extends StatelessWidget {
@@ -13,11 +15,13 @@ class BookingCard extends StatelessWidget {
     required this.booking,
     required this.onCancel,
     required this.onRefresh,
+    required this.bookingService,
   });
 
   final BookingModel booking;
   final Future<void> Function() onCancel;
   final Future<void> Function() onRefresh;
+  final BookingService bookingService;
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +62,63 @@ class BookingCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          isMobile ? _MobileActions(booking: booking, onCancel: onCancel) : _DesktopActions(booking: booking, onCancel: onCancel),
+          isMobile
+              ? _MobileActions(
+                  booking: booking,
+                  onCancel: onCancel,
+                  onViewSession: () => _viewSession(context),
+                )
+              : _DesktopActions(
+                  booking: booking,
+                  onCancel: onCancel,
+                  onViewSession: () => _viewSession(context),
+                ),
         ],
       ),
     );
   }
+
+  /// "View session" and "Extend" both open the session detail screen —
+  /// extend lives there since it triggers a Flouci payment flow.
+  Future<void> _viewSession(BuildContext context) async {
+    await Navigator.of(context).push(
+      SessionDetailScreen.route(
+        booking: booking,
+        bookingService: bookingService,
+        onChanged: onRefresh,
+      ),
+    );
+  }
+
+  // Future<void> _navigate(BuildContext context) async {
+  //   final lat = booking.parking.latitude;
+  //   final lng = booking.parking.longitude;
+
+  //   if (lat == null || lng == null) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         content: Text(AppStrings.cantOpenMaps),
+  //         backgroundColor: AppColors.danger,
+  //       ),
+  //     );
+  //     return;
+  //   }
+
+  //   final opened = await MapsLauncher.openDirections(
+  //     latitude: lat,
+  //     longitude: lng,
+  //     label: booking.parking.title,
+  //   );
+
+  //   if (!opened && context.mounted) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         content: Text(AppStrings.cantOpenMaps),
+  //         backgroundColor: AppColors.danger,
+  //       ),
+  //     );
+  //   }
+  // }
 
   String _durationText() {
     if (booking.pricePerMonth != null) return 'By month';
@@ -120,11 +176,7 @@ class _Header extends StatelessWidget {
 }
 
 class _Info extends StatelessWidget {
-  const _Info({
-    required this.label,
-    required this.value,
-    this.valueColor,
-  });
+  const _Info({required this.label, required this.value, this.valueColor});
 
   final String label;
   final String value;
@@ -163,10 +215,12 @@ class _DesktopActions extends StatelessWidget {
   const _DesktopActions({
     required this.booking,
     required this.onCancel,
+    required this.onViewSession,
   });
 
   final BookingModel booking;
   final Future<void> Function() onCancel;
+  final VoidCallback onViewSession;
 
   @override
   Widget build(BuildContext context) {
@@ -190,58 +244,66 @@ class _DesktopActions extends StatelessWidget {
     switch (booking.status) {
       case BookingStatus.active:
         return [
-          _PrimaryButton(label: AppStrings.viewSession, onTap: () {}),
-          _OutlineButton(label: AppStrings.extend, onTap: () {}),
-          _OutlineButton(label: AppStrings.navigate, onTap: () {}),
+          _PrimaryButton(label: AppStrings.viewSession, onTap: onViewSession),
         ];
-      
+
       case BookingStatus.expired:
       case BookingStatus.cancelled:
         return [
-          _OutlineButton(label: AppStrings.viewReceipt, onTap: () {}),
-          _OutlineButton(label: AppStrings.bookAgain, onTap: () {}),
+          _OutlineButton(label: AppStrings.viewReceipt, onTap: onViewSession),
+          //_OutlineButton(label: AppStrings.bookAgain, onTap: () {}),
         ];
     }
   }
 
-  Future<void> _confirmCancel(BuildContext context) async {
-    final ok = await showDialog<bool>(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text(AppStrings.cancelReservation),
-        content: Text(AppStrings.areYouSureYouWantTo),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(AppStrings.no)),
-          TextButton(onPressed: () => Navigator.pop(context, true), child: Text(AppStrings.yes)),
-        ],
-      ),
-    );
+  // Future<void> _confirmCancel(BuildContext context) async {
+  //   final ok = await showDialog<bool>(
+  //     context: context,
+  //     builder: (_) => AlertDialog(
+  //       title: Text(AppStrings.cancelReservation),
+  //       content: Text(AppStrings.areYouSureYouWantTo),
+  //       actions: [
+  //         TextButton(
+  //           onPressed: () => Navigator.pop(context, false),
+  //           child: Text(AppStrings.no),
+  //         ),
+  //         TextButton(
+  //           onPressed: () => Navigator.pop(context, true),
+  //           child: Text(AppStrings.yes),
+  //         ),
+  //       ],
+  //     ),
+  //   );
 
-    if (ok == true) await onCancel();
-  }
+  //   if (ok == true) await onCancel();
+  // }
 }
 
 class _MobileActions extends StatelessWidget {
   const _MobileActions({
     required this.booking,
     required this.onCancel,
+    required this.onViewSession,
   });
 
   final BookingModel booking;
   final Future<void> Function() onCancel;
+  final VoidCallback onViewSession;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: _DesktopActions(
-        booking: booking,
-        onCancel: onCancel,
-      )._actions(context).map((e) {
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: SizedBox(width: double.infinity, child: e),
-        );
-      }).toList(),
+      children:
+          _DesktopActions(
+            booking: booking,
+            onCancel: onCancel,
+            onViewSession: onViewSession,
+          )._actions(context).map((e) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: SizedBox(width: double.infinity, child: e),
+            );
+          }).toList(),
     );
   }
 }
@@ -254,9 +316,21 @@ class _StatusChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = switch (status) {
-      BookingStatus.active => ('Active', AppColors.limeSubtle, AppColors.limeDark),
-      BookingStatus.cancelled => ('Cancelled', AppColors.dangerLight, AppColors.danger),
-      BookingStatus.expired => ('Past', AppColors.iconBackground, AppColors.grey),
+      BookingStatus.active => (
+        'Active',
+        AppColors.limeSubtle,
+        AppColors.limeDark,
+      ),
+      BookingStatus.cancelled => (
+        'Cancelled',
+        AppColors.dangerLight,
+        AppColors.danger,
+      ),
+      BookingStatus.expired => (
+        'Past',
+        AppColors.iconBackground,
+        AppColors.grey,
+      ),
     };
 
     return Container(
@@ -278,10 +352,7 @@ class _StatusChip extends StatelessWidget {
 }
 
 class _PrimaryButton extends StatelessWidget {
-  const _PrimaryButton({
-    required this.label,
-    required this.onTap,
-  });
+  const _PrimaryButton({required this.label, required this.onTap});
 
   final String label;
   final VoidCallback onTap;
@@ -301,10 +372,7 @@ class _PrimaryButton extends StatelessWidget {
 }
 
 class _OutlineButton extends StatelessWidget {
-  const _OutlineButton({
-    required this.label,
-    required this.onTap,
-  });
+  const _OutlineButton({required this.label, required this.onTap});
 
   final String label;
   final VoidCallback onTap;
@@ -323,25 +391,22 @@ class _OutlineButton extends StatelessWidget {
   }
 }
 
-class _DangerButton extends StatelessWidget {
-  const _DangerButton({
-    required this.label,
-    required this.onTap,
-  });
+// class _DangerButton extends StatelessWidget {
+//   const _DangerButton({required this.label, required this.onTap});
 
-  final String label;
-  final VoidCallback onTap;
+//   final String label;
+//   final VoidCallback onTap;
 
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: onTap,
-      style: OutlinedButton.styleFrom(
-        foregroundColor: AppColors.danger,
-        side: const BorderSide(color: AppColors.danger),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      ),
-      child: Text(label),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return OutlinedButton(
+//       onPressed: onTap,
+//       style: OutlinedButton.styleFrom(
+//         foregroundColor: AppColors.danger,
+//         side: const BorderSide(color: AppColors.danger),
+//         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+//       ),
+//       child: Text(label),
+//     );
+//   }
+// }

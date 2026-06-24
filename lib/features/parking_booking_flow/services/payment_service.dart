@@ -8,11 +8,13 @@ class PaymentService {
 
   Future<String> initFlouciPayment({
     required String sessionId,
+    required double amount,
   }) async {
     try {
+
       final response = await dio.post(
         ApiEndpoints.initFlouciPayment,
-        data: {'sessionId': sessionId},
+        data: {'sessionId': sessionId, 'amount': amount},
       );
 
       final data = response.data;

@@ -245,12 +245,6 @@ abstract class AppStrings {
       'envoyerLeLien': 'Envoyer le lien',
       'evaluerLApplication': 'Évaluer l\'application',
       'ex14RueDesJasminsElMenzah': 'Ex: 14 Rue des Jasmins, El Menzah 6',
-      'expiration': 'Expiration',
-      'explore': 'Explorer',
-      'extend': 'Prolonger',
-      'faqCentreDAide': 'FAQ & Centre d\'aide',
-      'fermeture': 'Fermeture',
-      'fermetureEx2200': 'Fermeture (ex: 22:00)',
       'fixezVosPrixEtPubliez': 'Fixez vos prix et publiez',
       'flouci': 'Flouci',
       'fraisDeService': 'Frais de service',
@@ -434,6 +428,26 @@ abstract class AppStrings {
       'yourDedicatedSpace': 'Votre\nespace\ndédié',
       'yourSessionHasExpiredPleaseLogIn':
           'Votre session a expiré. Veuillez vous reconnecter.',
+      'expiration': 'Expiration',
+      'explore': 'Explorer',
+      'extend': 'Prolonger',
+      'sessionDetails': 'Détails de la session',
+      'endSession': 'Terminer la session',
+      'confirmEndSession': 'Voulez-vous vraiment terminer cette session ?',
+      'vehicle': 'Véhicule',
+      'plate': 'Plaque',
+      'payAndExtend': 'Payer et prolonger',
+      'processingPayment': 'Traitement du paiement…',
+      'openingPaymentLink': 'Ouverture du lien de paiement…',
+      'extendSuccess': 'Session prolongée avec succès',
+      'paymentFailed': 'Paiement échoué. Veuillez réessayer.',
+      'sessionEnded': 'Session terminée',
+      'cantOpenMaps': 'Impossible d\'ouvrir l\'application de navigation',
+      'cantOpenPaymentLink': 'Impossible d\'ouvrir le lien de paiement',
+      'close': 'Fermer',
+      'faqCentreDAide': 'FAQ & Centre d\'aide',
+      'fermeture': 'Fermeture',
+      'fermetureEx2200': 'Fermeture (ex: 22:00)',
     },
 
     'en': {
@@ -844,6 +858,20 @@ abstract class AppStrings {
       'yourDedicatedSpace': 'Your\ndedicated\nspace',
       'yourSessionHasExpiredPleaseLogIn':
           'Your session has expired. Please log in again.',
+      'sessionDetails': 'Session details',
+      'endSession': 'End session',
+      'confirmEndSession': 'Are you sure you want to end this session?',
+      'vehicle': 'Vehicle',
+      'plate': 'Plate',
+      'payAndExtend': 'Pay and extend',
+      'processingPayment': 'Processing payment…',
+      'openingPaymentLink': 'Opening payment link…',
+      'extendSuccess': 'Session extended successfully',
+      'paymentFailed': 'Payment failed. Please try again.',
+      'sessionEnded': 'Session ended',
+      'cantOpenMaps': 'Could not open the navigation app',
+      'cantOpenPaymentLink': 'Could not open the payment link',
+      'close': 'Close',
     },
 
     'ar': {
@@ -1243,6 +1271,20 @@ abstract class AppStrings {
       'yourDedicatedSpace': 'مكانك\nالمخصص',
       'yourSessionHasExpiredPleaseLogIn':
           'انتهت صلاحية جلستك. يرجى تسجيل الدخول مرة أخرى.',
+      'sessionDetails': 'تفاصيل الجلسة',
+      'endSession': 'إنهاء الجلسة',
+      'confirmEndSession': 'هل أنت متأكد أنك تريد إنهاء هذه الجلسة؟',
+      'vehicle': 'المركبة',
+      'plate': 'رقم اللوحة',
+      'payAndExtend': 'الدفع والتمديد',
+      'processingPayment': 'جاري معالجة الدفع…',
+      'openingPaymentLink': 'جاري فتح رابط الدفع…',
+      'extendSuccess': 'تم تمديد الجلسة بنجاح',
+      'paymentFailed': 'فشلت عملية الدفع. حاول مرة أخرى.',
+      'sessionEnded': 'تم إنهاء الجلسة',
+      'cantOpenMaps': 'تعذر فتح تطبيق التنقل',
+      'cantOpenPaymentLink': 'تعذر فتح رابط الدفع',
+      'close': 'إغلاق',
     },
   };
 
@@ -1688,4 +1730,18 @@ abstract class AppStrings {
   static String get yourDedicatedSpace => _t('yourDedicatedSpace');
   static String get yourSessionHasExpiredPleaseLogIn =>
       _t('yourSessionHasExpiredPleaseLogIn');
+  static String get sessionDetails => _t('sessionDetails');
+  static String get endSession => _t('endSession');
+  static String get confirmEndSession => _t('confirmEndSession');
+  static String get vehicle => _t('vehicle');
+  static String get plate => _t('plate');
+  static String get payAndExtend => _t('payAndExtend');
+  static String get processingPayment => _t('processingPayment');
+  static String get openingPaymentLink => _t('openingPaymentLink');
+  static String get extendSuccess => _t('extendSuccess');
+  static String get paymentFailed => _t('paymentFailed');
+  static String get sessionEnded => _t('sessionEnded');
+  static String get cantOpenMaps => _t('cantOpenMaps');
+  static String get cantOpenPaymentLink => _t('cantOpenPaymentLink');
+  static String get close => _t('close');
 }

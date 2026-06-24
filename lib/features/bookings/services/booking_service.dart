@@ -11,7 +11,7 @@ class BookingService {
 
   Future<List<BookingModel>> fetchMySessions() async {
     try {
-      final response = await dio.get(ApiEndpoints.parkingSessions);
+      final response = await dio.get(ApiEndpoints.myparkingSessions);
       final list = response.data as List<dynamic>;
       return list
           .map((e) => BookingModel.fromJson(e as Map<String, dynamic>))

@@ -3,7 +3,6 @@ import 'package:tunipark/core/router/app_routes.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
 import 'package:tunipark/features/parking_map/models/parking_place.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings.dart';
 
 class BottomBar extends StatelessWidget {
   final ParkingPlace parking;
@@ -91,7 +90,8 @@ class BottomBar extends StatelessWidget {
               ),
               elevation: 0,
             ),
-            child: Text(AppStrings.voirLaDisponibilite,
+            child: Text(
+              AppStrings.voirLaDisponibilite,
               style: TextStyle(
                 fontSize: rs.adaptive(
                   mobile: 15.0,

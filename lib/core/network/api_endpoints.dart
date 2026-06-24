@@ -29,9 +29,11 @@ class ApiEndpoints {
       '$tariffs/by-parking/$parkingId';
   // ── Parking Sessions ─────────────────────────────────────────────
   static const parkingSessions = '$baseUrlNest/parking-sessions';
+  static const myparkingSessions = '$baseUrlNest/parking-sessions/me';
+
   // ── Payments ─────────────────────────────────────────────────────
   static const payments = '$baseUrlNest/payments';
-  static const initFlouciPayment = '$payments/init/flouci';
+  static const initFlouciPayment = '$baseUrlNest/payments/init/flouci';
   
   
 }

@@ -92,7 +92,7 @@ class ParkingBookingFlowState extends Equatable {
       startDate: now,
       endDate: end,
       monthlyPrice: monthlyPrice,
-      serviceFee: 10,
+      serviceFee: monthlyPrice * 0.1, // 10% service fee
       selectedPaymentMethodId: null,
       paymentLoading: false,
       paymentError: null,

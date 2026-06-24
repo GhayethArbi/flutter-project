@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
@@ -10,19 +11,16 @@ import '../cubit/bookings_state.dart';
 import '../services/booking_service.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
 
-
 class BookingsScreen extends StatelessWidget {
-  const BookingsScreen({
-    super.key,
-    required this.bookingService,
-  });
+  const BookingsScreen({super.key, required this.bookingService});
 
   final BookingService bookingService;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => BookingsCubit(bookingService: bookingService)..loadBookings(),
+      create: (_) =>
+          BookingsCubit(bookingService: bookingService)..loadBookings(),
       child: const _BookingsView(),
     );
   }
@@ -48,7 +46,8 @@ class _BookingsView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(AppStrings.mesReservations,
+                Text(
+                  AppStrings.mesReservations,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w800,
@@ -64,7 +63,9 @@ class _BookingsView extends StatelessWidget {
                       if (state.status == BookingsStatus.failure) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text(state.errorMessage ?? 'Something went wrong'),
+                            content: Text(
+                              state.errorMessage ?? 'Something went wrong',
+                            ),
                             backgroundColor: AppColors.danger,
                           ),
                         );
@@ -84,7 +85,8 @@ class _BookingsView extends StatelessWidget {
                         child: ListView.separated(
                           physics: const AlwaysScrollableScrollPhysics(),
                           itemCount: state.filteredBookings.length,
-                          separatorBuilder: (_, __) => const SizedBox(height: 12),
+                          separatorBuilder: (_, __) =>
+                              const SizedBox(height: 12),
                           itemBuilder: (context, index) {
                             final booking = state.filteredBookings[index];
 
@@ -96,6 +98,7 @@ class _BookingsView extends StatelessWidget {
                                     .cancelBooking(booking.sessionId);
                               },
                               onRefresh: context.read<BookingsCubit>().refresh,
+                              bookingService: BookingService(dio: Dio()),
                             );
                           },
                         ),
@@ -118,7 +121,8 @@ class _EmptyBookings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(AppStrings.noReservationsFound,
+      child: Text(
+        AppStrings.noReservationsFound,
         style: TextStyle(
           color: AppColors.textSecondary,
           fontWeight: FontWeight.w600,

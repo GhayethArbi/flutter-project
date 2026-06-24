@@ -4,7 +4,6 @@ import 'package:tunipark/core/di/service_locator.dart';
 import 'package:tunipark/features/bookings/view/bookings_screen.dart';
 import 'package:tunipark/features/my_lots/view/my_lots_screen.dart';
 
-import '../../history/view/history_screen.dart';
 import '../../home/view/home_screen.dart';
 import '../../notification/view/notification_screen.dart';
 import '../../profile/view/profile_screen.dart';

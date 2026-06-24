@@ -147,9 +147,10 @@ class ParkingBookingFlowCubit extends Cubit<ParkingBookingFlowState> {
         totalPrice: state.totalPrice,
         tariffId: tariff?.id,
       );  
-      
+      print(' 1101 Parking session created with ID: $sessionId amount == ${state.totalPrice}');
       final payLink = await paymentService.initFlouciPayment(
         sessionId: sessionId,
+        amount: state.totalPrice * 1000,
       );
 
       final launched = await launchUrl(

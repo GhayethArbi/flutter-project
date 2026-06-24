@@ -11,7 +11,6 @@ import 'package:tunipark/features/parking_details/widgets/parking_dimensions.dar
 import 'package:tunipark/features/parking_details/widgets/parking_extra_info.dart';
 import 'package:tunipark/features/parking_map/models/parking_place.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings.dart';
 
 class ParkingDetailsScreen extends StatefulWidget {
   final ParkingPlace parking;

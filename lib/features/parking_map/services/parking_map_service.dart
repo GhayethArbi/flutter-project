@@ -23,11 +23,10 @@ class ParkingMapService {
     return Future.wait(
       parkings.map((parking) async {
         final tariff = await getTariffByParkingId(parking.id);
-
-        return parking.copyWith(
-          tariff: tariff,
-          price: tariff?.pricePerMonth ?? 0,
+        print(
+          ' 1101 Parking ID: ${parking.id}, Tariff: ${tariff?.pricePerMonth}',
         );
+        return parking.copyWith(tariff: tariff, price: tariff?.pricePerMonth);
       }),
     );
   }
@@ -35,11 +34,13 @@ class ParkingMapService {
   Future<TariffModel?> getTariffByParkingId(String parkingId) async {
     try {
       final response = await dio.get(ApiEndpoints.tariffByParking(parkingId));
-
-      if (response.data == null) return null;
+      print(' 1101 Tariff data for parking ID: $parkingId: ${response.data.toString()}');
+      if (response.data == null)
+        print(' 1101 No tariff data found for parking ID: $parkingId');
 
       return TariffModel.fromJson(response.data as Map<String, dynamic>);
-    } catch (_) {
+    } catch (e) {
+      print('1011 Tariff error for parking $parkingId: $e');
       return null;
     }
   }
@@ -48,6 +49,8 @@ class ParkingMapService {
     required double lat,
     required double lng,
   }) async {
+    print('1000 getRecommendedParkings called');
+
     final response = await dio.get(
       ApiEndpoints.recommendedParkings,
       queryParameters: {'lat': lat, 'lng': lng},
@@ -61,6 +64,8 @@ class ParkingMapService {
 
     return Future.wait(
       parkings.map((parking) async {
+          print('1000 getTariffByParkingId called');
+
         final tariff = await getTariffByParkingId(parking.id);
 
         return parking.copyWith(

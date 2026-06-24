@@ -8,16 +8,16 @@ class BookingParking {
     required this.id,
     required this.title,
     required this.address,
-    this.latitude,
-    this.longitude,
+    required this.latitude,
+    required this.longitude,
     this.pictures = const [],
   });
 
   final String id;
   final String title;
   final String address;
-  final double? latitude;
-  final double? longitude;
+  final double latitude;
+  final double longitude;
   final List<String> pictures;
 
   factory BookingParking.fromJson(Map<String, dynamic> json) {
@@ -26,8 +26,8 @@ class BookingParking {
       id: json['id'] as String? ?? '',
       title: json['title'] as String? ?? 'Parking',
       address: location?['address'] as String? ?? '',
-      latitude: (location?['lat'] as num?)?.toDouble(),
-      longitude: (location?['lng'] as num?)?.toDouble(),
+      latitude: (location?['lat'] as num?)?.toDouble() ?? 0,
+      longitude: (location?['lng'] as num?)?.toDouble() ?? 0,
       pictures: List<String>.from(json['pictures'] ?? []),
     );
   }
@@ -93,7 +93,7 @@ class BookingModel {
       sessionId: json['id'] as String,
       parking: parkingJson != null
           ? BookingParking.fromJson(parkingJson)
-          : BookingParking(id: '', title: AppStrings.parking, address: ''),
+          : BookingParking(id: '', title: AppStrings.parking, address: '', latitude: 0, longitude: 0),
       vehiclePlate: json['vehiclePlate'] as String? ?? '',
       vehicleBrand: json['vehicleBrand'] as String? ?? '',
       vehicleModel: json['vehicleModel'] as String? ?? '',
