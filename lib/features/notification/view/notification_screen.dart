@@ -2,16 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/features/notification/cubit/notification_cubit.dart';
 import 'package:tunipark/features/notification/cubit/notification_state.dart';
+import 'package:tunipark/features/notification/services/notification_service.dart';
 import 'package:tunipark/features/notification/widgets/notification_card.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
 
 class NotificationScreen extends StatelessWidget {
-  const NotificationScreen({super.key});
+  const NotificationScreen({super.key, required this.notificationService});
+
+  final NotificationService notificationService;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => NotificationCubit()..loadNotifications(),
+      create: (_) =>
+          NotificationCubit(notificationService: notificationService)
+            ..loadNotifications(),
       child: const _NotificationView(),
     );
   }
@@ -35,49 +40,69 @@ class _NotificationView extends StatelessWidget {
                     return const Center(child: CircularProgressIndicator());
                   }
 
-                  if (state.items.isEmpty) {
+                  if (state.error != null && state.items.isEmpty) {
                     return Center(
-                      child: Text(AppStrings.aucuneNotification),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(state.error!),
+                          const SizedBox(height: 12),
+                          TextButton(
+                            onPressed: () => context
+                                .read<NotificationCubit>()
+                                .loadNotifications(),
+                            child: const Text('Réessayer'),
+                          ),
+                        ],
+                      ),
                     );
                   }
 
-                  return ListView.separated(
-                    padding: const EdgeInsets.fromLTRB(20, 18, 20, 24),
-                    itemCount: state.items.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 12),
-                    itemBuilder: (context, index) {
-                      final item = state.items[index];
+                  if (state.items.isEmpty) {
+                    return Center(child: Text(AppStrings.aucuneNotification));
+                  }
 
-                      return Dismissible(
-                        key: ValueKey(item.id),
-                        direction: DismissDirection.endToStart,
-                        background: Container(
-                          alignment: Alignment.centerRight,
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          decoration: BoxDecoration(
-                            color: Colors.redAccent,
-                            borderRadius: BorderRadius.circular(6),
+                  return RefreshIndicator(
+                    onRefresh: () =>
+                        context.read<NotificationCubit>().loadNotifications(),
+                    child: ListView.separated(
+                      padding: const EdgeInsets.fromLTRB(20, 18, 20, 24),
+                      itemCount: state.items.length,
+                      separatorBuilder: (_, __) => const SizedBox(height: 12),
+                      itemBuilder: (context, index) {
+                        final item = state.items[index];
+
+                        return Dismissible(
+                          key: ValueKey(item.id),
+                          direction: DismissDirection.endToStart,
+                          background: Container(
+                            alignment: Alignment.centerRight,
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            decoration: BoxDecoration(
+                              color: Colors.redAccent,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: const Icon(
+                              Icons.delete_outline,
+                              color: Colors.white,
+                            ),
                           ),
-                          child: const Icon(
-                            Icons.delete_outline,
-                            color: Colors.white,
-                          ),
-                        ),
-                        onDismissed: (_) {
-                          context.read<NotificationCubit>().deleteNotification(
-                            item.id,
-                          );
-                        },
-                        child: NotificationCard(
-                          item: item,
-                          onTap: () {
-                            context.read<NotificationCubit>().markAsRead(
+                          onDismissed: (_) {
+                            context.read<NotificationCubit>().removeLocally(
                               item.id,
                             );
                           },
-                        ),
-                      );
-                    },
+                          child: NotificationCard(
+                            item: item,
+                            onTap: () {
+                              context.read<NotificationCubit>().markAsRead(
+                                item.id,
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
                   );
                 },
               ),
@@ -103,11 +128,12 @@ class _Header extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                 Row(
+                Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(AppStrings.notifications,
-                      style: TextStyle(
+                    Text(
+                      AppStrings.notifications,
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
                       ),

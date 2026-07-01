@@ -67,7 +67,7 @@ class NotificationCard extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Text(
-                item.date,
+                item.formattedDate,
                 style: const TextStyle(
                   fontSize: 12.5,
                   color: Color(0xFF9A9A9A),
@@ -86,6 +86,8 @@ class NotificationCard extends StatelessWidget {
         return const Icon(Icons.check_circle, color: Colors.green, size: 20);
       case NotificationType.update:
         return const Icon(Icons.access_time, color: Colors.grey, size: 20);
+      case NotificationType.warning:
+        return const Icon(Icons.error_outline, color: Colors.redAccent, size: 20);
       case NotificationType.info:
         return const Icon(
           Icons.sentiment_satisfied,

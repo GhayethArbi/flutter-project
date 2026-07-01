@@ -24,16 +24,32 @@ class MainNavigationScreen extends StatelessWidget {
   }
 }
 
-class _MainNavigationBody extends StatelessWidget {
+class _MainNavigationBody extends StatefulWidget {
   const _MainNavigationBody({required this.sl});
   final ServiceLocator sl;
+
+  @override
+  State<_MainNavigationBody> createState() => _MainNavigationBodyState();
+}
+
+class _MainNavigationBodyState extends State<_MainNavigationBody> {
+  @override
+  void initState() {
+    super.initState();
+    // Reached only once the user is authenticated (post-login / post-splash),
+    // so this is a safe, natural place to grab/refresh the FCM token and
+    // register it against the now-authenticated Dio instance.
+    widget.sl.fcmService.initAndRegister();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final sl = widget.sl;
     final List<Widget> pages = [
       const HomeScreen(), //explore
       BookingsScreen(bookingService: sl.bookingService),
       MyLotsScreen(sl: sl),
-      const NotificationScreen(),
+      NotificationScreen(notificationService: sl.notificationService),
       const ProfileScreen(),
     ];
 

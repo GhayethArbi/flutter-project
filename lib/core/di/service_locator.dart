@@ -7,6 +7,8 @@ import 'package:tunipark/features/announcement/services/parking_service.dart';
 import 'package:tunipark/features/bookings/services/booking_service.dart';
 import 'package:tunipark/features/login/services/login_service.dart';
 import 'package:tunipark/features/my_lots/services/my_lots_service.dart';
+import 'package:tunipark/features/notification/services/fcm_service.dart';
+import 'package:tunipark/features/notification/services/notification_service.dart';
 import 'package:tunipark/features/parking_booking_flow/services/parking_session_service.dart';
 import 'package:tunipark/features/parking_booking_flow/services/payment_service.dart';
 import 'package:tunipark/features/parking_details/services/parking_interaction_api.dart';
@@ -28,9 +30,11 @@ class ServiceLocator {
 
     required this.parkingSessionService,
     required this.paymentService,
-    required this.myLotsService, // ← ADD
+    required this.myLotsService,
     required this.bookingService,
     required this.parkingInteractionApi,
+    required this.notificationService,
+    required this.fcmService,
   });
 
   factory ServiceLocator.create({void Function()? onSessionExpired}) {
@@ -43,7 +47,7 @@ class ServiceLocator {
       authStorageService: authStorageService,
       onSessionExpired: onSessionExpired,
     );
-
+    final notificationService = NotificationService(dio: dio);
     return ServiceLocator._(
       authStorageService: authStorageService,
       dio: dio,
@@ -58,6 +62,8 @@ class ServiceLocator {
       myLotsService: MyLotsService(dio: dio), // ← ADD
       bookingService: BookingService(dio: dio),
       parkingInteractionApi: ParkingInteractionApi(dio: dio),
+      notificationService: notificationService,
+      fcmService: FcmService(notificationService: notificationService),
     );
   }
 
@@ -74,5 +80,7 @@ class ServiceLocator {
   final PaymentService paymentService;
   final MyLotsService myLotsService;
   final BookingService bookingService;
-  final ParkingInteractionApi parkingInteractionApi; 
+  final ParkingInteractionApi parkingInteractionApi;
+  final NotificationService notificationService;
+  final FcmService fcmService;
 }

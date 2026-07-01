@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/core/di/service_locator.dart';
@@ -8,11 +10,19 @@ import 'package:tunipark/core/theme/app_tokens.dart';
 import 'package:tunipark/features/language/cubit/language_cubit.dart'
     show LanguageCubit;
 import 'package:tunipark/features/language/cubit/language_state.dart';
+import 'package:tunipark/features/notification/services/fcm_service.dart';
 import 'core/theme/core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+   // No firebase_options.dart / FlutterFire CLI needed: on Android the native
+  // Google Services Gradle plugin reads android/app/google-services.json,
+  // and on iOS the FirebaseCore pod reads ios/Runner/GoogleService-Info.plist
+  // automatically, as long as those two files are added to the project.
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+ 
   WidgetsBinding.instance.addPostFrameCallback((_) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   });

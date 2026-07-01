@@ -20,7 +20,6 @@ class ApiEndpoints {
   static const createParking = '$baseUrlNest/parkings';
   static const recommendedParkings = '$baseUrlNest/parkings/recommended';
 
-
   static const uploadParkingPictures = '$baseUrlNest/parkings/upload-pictures';
   static const createTariff = '$baseUrlNest/tariffs';
   static const tariffs = '$baseUrlNest/tariffs';
@@ -34,6 +33,10 @@ class ApiEndpoints {
   // ── Payments ─────────────────────────────────────────────────────
   static const payments = '$baseUrlNest/payments';
   static const initFlouciPayment = '$baseUrlNest/payments/init/flouci';
-  
-  
+
+  // ── Notifications ──────────────────────────────────────────────────
+  static const notifications = '$baseUrlNest/notifications';
+  static const registerFcmToken = '$baseUrlNest/notifications/fcm-token';
+  static String markNotificationAsRead(String id) =>
+      '$baseUrlNest/notifications/$id/read';
 }

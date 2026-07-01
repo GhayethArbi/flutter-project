@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "95075141003",
+    "project_id": "tunipark-d0630",
+    "storage_bucket": "tunipark-d0630.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95075141003:android:e820486098a25ee30c1b8e",
+        "android_client_info": {
+          "package_name": "com.example.tunipark"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASDve5EXjc8W6125rw7jTR1mhOuLGB3NI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

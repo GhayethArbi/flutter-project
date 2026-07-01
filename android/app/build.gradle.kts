@@ -3,6 +3,8 @@ plugins {
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+    // ── Push notifications: applies google-services.json to this module ─
+    id("com.google.gms.google-services")
 }
 
 android {
