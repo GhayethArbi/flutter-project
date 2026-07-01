@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings.dart';
 
 class AnnouncementSuccessScreen extends StatelessWidget {
   const AnnouncementSuccessScreen({super.key, required this.onFinish});

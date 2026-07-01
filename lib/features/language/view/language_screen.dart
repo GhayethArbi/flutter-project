@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/features/language/cubit/language_cubit.dart';
 import 'package:tunipark/features/language/cubit/language_state.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings.dart';
 
 class LanguageScreen extends StatelessWidget {
   const LanguageScreen({super.key});

@@ -15,7 +15,6 @@ import '../models/my_lot_model.dart';
 import '../services/my_lots_service.dart';
 import '../widgets/my_lot_card.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings.dart';
 
 class MyLotsScreen extends StatelessWidget {
   const MyLotsScreen({super.key, required this.sl});

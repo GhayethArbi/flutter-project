@@ -3,7 +3,6 @@ import 'package:tunipark/core/router/app_routes.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings.dart';
 
 class LoginFooter extends StatelessWidget {
   const LoginFooter({super.key});

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings.dart';
 
 class MyLotsEmptyState extends StatelessWidget {
   const MyLotsEmptyState({super.key, required this.onAddPressed});

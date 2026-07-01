@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:tunipark/features/bookings/cubit/session_state.dart';
 import 'package:tunipark/features/bookings/utils/map_launcher.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -187,7 +188,7 @@ class _SessionDetailViewState extends State<_SessionDetailView> {
 
   List<Widget> _activeActions(BuildContext context, SessionState state) {
     final isBusy = state.isBusy;
-
+    print('1011 _activeActions isBusy: $isBusy, state: ${state.booking.parking.id}, extendPayLink: ${state.extendPayLink}, extendPaymentId: ${state.extendPaymentId}');
     return [
       FilledButton(
         onPressed: isBusy ? null : () => _confirmExtend(context),
@@ -204,6 +205,7 @@ class _SessionDetailViewState extends State<_SessionDetailView> {
         onPressed: isBusy
             ? null
             : () async {
+              print('1011 Navigating to ${state.booking.parking.latitude}, ${state.booking.parking.longitude}');
                 final navigated = await MapsLauncher.openDirections(
                   latitude: state.booking.parking.latitude,
                   longitude: state.booking.parking.longitude,

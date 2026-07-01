@@ -16,11 +16,9 @@ class ParkingBookingFlowCubit extends Cubit<ParkingBookingFlowState> {
   final ParkingSessionService parkingSessionService;
   final PaymentService paymentService;
 
-
   void selectPlace(String placeId) {
     emit(state.copyWith(selectedPlaceId: placeId));
   }
-
 
   void selectPlateType(String plateType) {
     if (plateType == 'TN') {
@@ -53,11 +51,9 @@ class ParkingBookingFlowCubit extends Cubit<ParkingBookingFlowState> {
     emit(state.copyWith(rsText: value));
   }
 
-
   void selectPaymentMethod(String paymentMethodId) {
     emit(state.copyWith(selectedPaymentMethodId: paymentMethodId));
   }
-
 
   Future<void> nextStep() async {
     if (!state.canContinue) return;
@@ -136,18 +132,29 @@ class ParkingBookingFlowCubit extends Cubit<ParkingBookingFlowState> {
 
     try {
       final tariff = state.parking.tariff;
-
+      final endTime = DateTime(
+        state.startDate!.year,
+        state.startDate!.month + 1,
+        state.startDate!.day,
+        state.startDate!.hour,
+        state.startDate!.minute,
+        state.startDate!.second,
+        state.startDate!.millisecond,
+        state.startDate!.microsecond,
+      );
       final sessionId = await parkingSessionService.createSession(
         parkingId: state.parking.id,
         vehiclePlate: _vehiclePlate,
         startDate: state.startDate!,
-        endDate: state.endDate!,
+        endDate: endTime,
         pricePerMonth: tariff?.pricePerMonth ?? state.monthlyPrice,
         serviceFee: state.serviceFee,
         totalPrice: state.totalPrice,
         tariffId: tariff?.id,
-      );  
-      print(' 1101 Parking session created with ID: $sessionId amount == ${state.totalPrice}');
+      );
+      print(
+        ' 1101 Parking session created with ID: $sessionId amount == ${state.totalPrice}',
+      );
       final payLink = await paymentService.initFlouciPayment(
         sessionId: sessionId,
         amount: state.totalPrice * 1000,
@@ -170,14 +177,14 @@ class ParkingBookingFlowCubit extends Cubit<ParkingBookingFlowState> {
         ),
       );
     } catch (e) {
-  emit(
-    state.copyWith(
-      paymentLoading: false,
-      awaitingDeepLink: false,
-      paymentError: e.toString().replaceFirst('Exception: ', ''),
-    ),
-  );
-}
+      emit(
+        state.copyWith(
+          paymentLoading: false,
+          awaitingDeepLink: false,
+          paymentError: e.toString().replaceFirst('Exception: ', ''),
+        ),
+      );
+    }
   }
 
   String get _vehiclePlate {

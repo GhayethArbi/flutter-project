@@ -13,7 +13,6 @@ import 'package:tunipark/features/profile/widgets/menu_section.dart';
 import 'package:tunipark/features/profile/widgets/profile_header.dart';
 import 'package:tunipark/features/profile/widgets/section_label.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

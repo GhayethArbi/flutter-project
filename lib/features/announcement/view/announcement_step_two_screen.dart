@@ -15,7 +15,6 @@ import '../widgets/announcement_fixed_bottom_actions.dart';
 import '../widgets/announcement_flow_header.dart';
 import '../widgets/announcement_single_action_button.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings.dart';
 
 class AnnouncementStepTwoScreen extends StatefulWidget {
   const AnnouncementStepTwoScreen({super.key});

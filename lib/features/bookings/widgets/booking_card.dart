@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tunipark/core/theme/app_colors.dart';
 import 'package:tunipark/core/utils/responsive_extension.dart';
-import 'package:tunipark/features/bookings/utils/map_launcher.dart';
 
 import '../models/booking_model.dart';
 import '../services/booking_service.dart';

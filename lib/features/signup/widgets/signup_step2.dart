@@ -8,7 +8,6 @@ import 'package:tunipark/features/signup/cubit/signup_state.dart';
 import 'package:tunipark/features/signup/widgets/signup_button.dart';
 import 'package:tunipark/features/signup/widgets/signup_header.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings.dart';
 
 class SignUpStep2 extends StatefulWidget {
   const SignUpStep2({super.key});

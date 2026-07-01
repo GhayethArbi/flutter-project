@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/features/profile/cubit/profile_cubit.dart';
 import 'package:tunipark/features/profile/cubit/profile_state.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings.dart';
 
 class ModeScreen extends StatelessWidget {
   const ModeScreen({super.key});

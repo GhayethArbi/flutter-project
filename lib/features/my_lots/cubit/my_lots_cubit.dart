@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../models/my_lot_model.dart';
 import '../services/my_lots_service.dart';
 import 'my_lots_state.dart';
 

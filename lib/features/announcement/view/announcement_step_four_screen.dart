@@ -10,7 +10,6 @@ import '../cubit/announcement_flow_state.dart';
 import '../widgets/announcement_fixed_bottom_actions.dart';
 import '../widgets/announcement_flow_header.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings.dart';
 
 class AnnouncementStepFourScreen extends StatelessWidget {
   const AnnouncementStepFourScreen({super.key});

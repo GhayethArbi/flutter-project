@@ -4,7 +4,6 @@ import 'package:tunipark/core/utils/responsive_extension.dart';
 import 'package:tunipark/features/edit_profile/cubit/edit_profile_cubit.dart';
 import 'package:tunipark/features/edit_profile/cubit/edit_profile_state.dart';
 import 'package:tunipark/core/constants/app_strings.dart';
-import 'package:tunipark/core/constants/app_strings.dart';
 
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
