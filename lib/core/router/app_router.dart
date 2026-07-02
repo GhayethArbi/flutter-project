@@ -60,7 +60,8 @@ class AppRouter {
               AppRoutes.login,
               (route) => false,
             ),
-            child: Text(AppStrings.logIn,
+            child: Text(
+              AppStrings.logIn,
               style: TextStyle(color: AppColors.greentext),
             ),
           ),
@@ -79,6 +80,7 @@ class AppRouter {
             create: (_) => LoginCubit(
               loginService: sl.loginService,
               authStorageService: sl.authStorageService,
+              fcmService: sl.fcmService,
             ),
             child: LoginScreen(
               onSuccess: (context) =>

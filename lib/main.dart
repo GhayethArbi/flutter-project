@@ -16,13 +16,14 @@ import 'core/theme/core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-   // No firebase_options.dart / FlutterFire CLI needed: on Android the native
+  // No firebase_options.dart / FlutterFire CLI needed: on Android the native
   // Google Services Gradle plugin reads android/app/google-services.json,
   // and on iOS the FirebaseCore pod reads ios/Runner/GoogleService-Info.plist
   // automatically, as long as those two files are added to the project.
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
- 
+
+  //language and theme should be loaded before the app starts to avoid flickering
   WidgetsBinding.instance.addPostFrameCallback((_) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   });
@@ -35,7 +36,7 @@ void main() async {
       onSessionExpired: () => router.showSessionExpiredDialog(),
     ),
   );
-
+  
   runApp(
     BlocProvider.value(
       value: languageCubit,
@@ -77,7 +78,7 @@ class TuniParkApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           initialRoute: AppRoutes.splash,
           onGenerateRoute: router.onGenerateRoute,
-           builder: (context, child) {
+          builder: (context, child) {
             return Directionality(
               textDirection: state.selectedLanguage.isRTL
                   ? TextDirection.rtl

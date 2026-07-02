@@ -2,16 +2,18 @@ import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tunipark/features/login/services/login_service.dart';
+import 'package:tunipark/features/notification/services/fcm_service.dart';
 import 'login_state.dart';
 import 'package:tunipark/core/storage/auth_storage_service.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final LoginService loginService;
   final AuthStorageService authStorageService;
-
+  final FcmService fcmService;
   LoginCubit({
     required this.loginService,
     required this.authStorageService,
+    required this.fcmService,
   }) : super(const LoginState());
 
   void identifierChanged(String value) {
@@ -54,13 +56,14 @@ class LoginCubit extends Cubit<LoginState> {
       return;
     }
 
-  //   if (!state.isValid) return;
+    //   if (!state.isValid) return;
 
     emit(state.copyWith(status: LoginStatus.loading, clearErrorMessage: true));
 
     try {
       final response = await loginService.login(
-        identifier: state.identifier.trim(), password: state.password,
+        identifier: state.identifier.trim(),
+        password: state.password,
       );
 
       final accessToken = response['accessToken']?.toString();
@@ -70,6 +73,8 @@ class LoginCubit extends Cubit<LoginState> {
       if (accessToken != null && accessToken.isNotEmpty) {
         await authStorageService.saveAccessToken(accessToken);
         await authStorageService.setOnboardingSeen(true);
+        print('CALLING FCM INIT');
+        await fcmService.initAndRegister();
       }
 
       if (refreshToken != null && refreshToken.isNotEmpty) {
@@ -96,7 +101,6 @@ class LoginCubit extends Cubit<LoginState> {
         ),
       );
     }
- 
 
     // try {
     //   // Fake login for development

@@ -1,18 +1,15 @@
+// TODO: handle errors
+
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:tunipark/features/notification/services/notification_service.dart';
 
-/// Must stay a top-level (or static) function — Firebase requires this for
-/// background message handling on Android. Firebase.initializeApp() runs
-/// again here because this handler executes in its own isolate.
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // Nothing to do here for now: the backend already persisted the
-  // notification (SendNotificationUseCase creates the row before pushing),
-  // so the app just needs to have a token registered. If you later want to
-  // e.g. update a local badge count while the app is killed/backgrounded,
-  // do it here — but keep it fast and side-effect light.
+  // Backend already saves notification in DB.
 }
 
 class FcmService {
@@ -21,39 +18,119 @@ class FcmService {
   final NotificationService notificationService;
   final FirebaseMessaging _messaging = FirebaseMessaging.instance;
 
-  /// Call once the user is authenticated (Dio already carries the auth
-  /// token at that point) — e.g. right after login, or on app start if a
-  /// session already exists. Safe to call multiple times.
+  final FlutterLocalNotificationsPlugin _localNotifications =
+      FlutterLocalNotificationsPlugin();
+
+  bool _isListening = false;
+
+  static const AndroidNotificationChannel _channel = AndroidNotificationChannel(
+    'tunipark_notifications',
+    'TuniPark Notifications',
+    description: 'Notifications for parking and sessions',
+    importance: Importance.high,
+  );
+
   Future<void> initAndRegister() async {
-    await _messaging.requestPermission(
+    final permission = await _messaging.requestPermission(
       alert: true,
       badge: true,
       sound: true,
     );
 
-    // iOS needs the APNs token to be available before getToken() resolves
-    // reliably; this is a no-op on Android.
-    if (Platform.isIOS) {
-      await _messaging.getAPNSToken();
-    }
+    print('FCM permission: ${permission.authorizationStatus}');
+
+    await _initLocalNotifications();
+
+    // await _localNotifications.show(
+    //   id: 999,
+    //   title: 'Test TuniPark',
+    //   body: 'Local notification works',
+    //   notificationDetails: const NotificationDetails(
+    //     android: AndroidNotificationDetails(
+    //       'tunipark_notifications',
+    //       'TuniPark Notifications',
+    //       channelDescription: 'Notifications for parking and sessions',
+    //       importance: Importance.high,
+    //       priority: Priority.high,
+    //       playSound: true,
+    //     ),
+    //   ),
+    // );
 
     final token = await _messaging.getToken();
+    print('FCM TOKEN: $token');
+
     if (token != null) {
       await _safeRegister(token);
     }
 
     _messaging.onTokenRefresh.listen(_safeRegister);
+    _listenToForegroundMessages();
+  }
+
+  Future<void> _initLocalNotifications() async {
+    const androidSettings = AndroidInitializationSettings(
+      '@mipmap/ic_launcher',
+    );
+
+    const settings = InitializationSettings(android: androidSettings);
+
+    await _localNotifications.initialize(settings: settings);
+
+    await _localNotifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.createNotificationChannel(_channel);
+
+    await _localNotifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.requestNotificationsPermission();
+  }
+
+  void _listenToForegroundMessages() {
+    if (_isListening) return;
+    _isListening = true;
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+      final notification = message.notification;
+
+      await _localNotifications.show(
+        id: DateTime.now().millisecondsSinceEpoch ~/ 1000,
+        title: notification?.title ?? message.data['title'] ?? 'TuniPark',
+        body: notification?.body ?? message.data['body'] ?? '',
+        notificationDetails: const NotificationDetails(
+          android: AndroidNotificationDetails(
+            'tunipark_notifications',
+            'TuniPark Notifications',
+            channelDescription: 'Notifications for parking and sessions',
+            importance: Importance.high,
+            priority: Priority.high,
+            playSound: true,
+          ),
+        ),
+      );
+    });
   }
 
   Future<void> _safeRegister(String token) async {
     try {
-      await notificationService.registerFcmToken(
+      print('FCM TOKEN: $token');
+      print('REGISTERING FCM TOKEN...');
+
+      final result = await notificationService.registerFcmToken(
         token,
         platform: Platform.isIOS ? 'ios' : 'android',
       );
-    } catch (_) {
-      // Best-effort: don't block app usage on this. It'll retry on the next
-      // initAndRegister() call (e.g. next login) or the next token refresh.
+
+      print('FCM TOKEN REGISTERED OK: $result');
+    } on DioException catch (e) {
+      print('FCM TOKEN REGISTER STATUS: ${e.response?.statusCode}');
+      print('FCM TOKEN REGISTER DATA: ${e.response?.data}');
+    } catch (e) {
+      print('FCM TOKEN REGISTER ERROR: $e');
     }
   }
 }
